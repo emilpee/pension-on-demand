@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Source+Sans+Pro&display=swap');
+@import 'colors';
+
+h1 {
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-size: 3.125rem;
+    color: $green;
+} 
+
+.logotext {
+    font-family: 'Avenir Next';
+
+    > h1 {
+        color: $green;
+        font-size: 3.5rem;
+        letter-spacing: -1.25px;
+    }
+
+    > p {
+        color: $green;
+        font-size: 1.5625rem;
+        font-weight: bold;
+        letter-spacing: .25px;
+        text-transform: uppercase;
+    }
+}
