@@ -12,4 +12,4 @@ $black: #121212;
 // Gradients
 $darkGradient: linear-gradient($gray, $black);
 $greenGradient: linear-gradient($lightGreen, #3B6027);
-$darkGreenGradient: linear-gradient($mediumGreen, #1E4B2A);
+$bodyGradient: linear-gradient(to left, $mediumGreen, #1E4B2A);

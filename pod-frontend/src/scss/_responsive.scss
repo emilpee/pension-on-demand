@@ -1,0 +1,20 @@
+// Mixin for different screen sizes
+@mixin breakpoints($screen) {
+    @if $screen == small {
+      @media (max-width: 480px) { 
+          @content; 
+      }
+    }
+   
+    @else if $screen == medium {
+      @media (min-width: 481px) and (max-width: 800px) { 
+          @content; 
+      }
+    }
+   
+    @else if $screen == large {
+      @media (min-width: 801px) { 
+          @content; 
+      }
+    }
+}
