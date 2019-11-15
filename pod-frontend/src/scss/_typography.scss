@@ -17,16 +17,17 @@ p {
 .login {
 
     &__logo {
-      font-family: 'Avenir Next';
 
         > h1 {
             color: $green;
             font-size: 3.5em;
+            font-family: 'Avenir Next';
             letter-spacing: -$letterSpacing * 5;
         }
 
         > p {
             color: $green;
+            font-family: 'Avenir Next';
             font-size: 1em;
             font-weight: bold;
             letter-spacing: $letterSpacing;
