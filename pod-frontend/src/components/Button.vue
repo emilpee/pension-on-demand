@@ -1,5 +1,5 @@
 <template>
-  <a class="btn" v-text="this.msg" href="#"></a>
+  <a class="btn" v-text="this.msg"></a>
 </template>
 
 <script>
@@ -15,7 +15,7 @@ export default {
     background: $mediumGreen;
     border-radius: $borderRadius * 4;
     color: $white;
-    font-family: 'Source Sans Pro';
+    font-family: $btnText;
     font-size: 1.125em;
     margin-top: 4rem;
     padding: .75rem 3.5rem;

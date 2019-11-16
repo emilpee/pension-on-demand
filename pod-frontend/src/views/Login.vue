@@ -7,27 +7,59 @@
     <div class="login__text">
       <p>Välkommen tillbaka! Vänligen logga in med dina uppgifter.</p>
     </div>
+
+    <div class="login__tabs">
+      <Tabs 
+        v-for="tab in tabs" 
+        :key="tab.id" 
+        :tab="tab"
+      />
+    </div>
+
     <div class="login__form">
       <input type="text" placeholder="Personnummer" />
-      <Button msg="Logga in" />
+      <Button msg="Logga in" @click.native="signIn" />
     </div>
   </div>
 </template>
 
 <script>
-import Button from '@/components/Button.vue';
-
+import { Button, Tabs } from '@/components/';
 
 export default {
   name: 'Login',
   
-  components: {
-    Button
+
+  data() {
+    return {
+      tabs: [
+        {
+          id: 1,
+          title: 'På den här enheten',
+          isActive: true
+        },
+        {
+          id: 2,
+          title: 'På annan enhet',
+          isActive: false
+        }
+      ],
+
+    }
   },
 
   methods: {
 
-  }
+    signIn() {
+      this.$router.push('/');
+    },
+    
+  },
+  
+  components: {
+    Button, Tabs
+  },
+
 
 }
 </script>
@@ -57,24 +89,38 @@ export default {
     }
   }
 
+  &__tabs {
+    display: flex;
+    margin-top: 1rem;
+  }
+
 
   &__form {
-    border: 1px solid rgba(112, 112, 112, .08);
+    border: 1px solid $borderColor;
+    border-top: none;
     @extend %center-content;
     flex-direction: column;
     padding: 4rem 2.5rem;
 
     > input {
-      background: #efefef url('../assets/img/bankid.png') no-repeat right;
-      background-size: 2.75rem;
+      background: #efefef url('../assets/img/bankid.png') no-repeat top 4px right 1rem;
+      background-size: 2.5rem;
       border-radius: $borderRadius;
-      border: 1px solid rgba(112, 112, 112, .08);
-      padding: 1rem;
+      border: 1px solid $borderColor;
+      padding: 1rem; 
       max-width: 400px;
       width: 100%;
+
+      &::placeholder {
+        font-family: $btnText;
+        font-size: 15px;
+        color: #43425D;
+      }
+
     }
 
   }
+
 }
 
 </style>

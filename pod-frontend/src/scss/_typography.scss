@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Source+Sans+Pro&display=swap');
 @import 'colors';
 
+$mainText: 'Roboto', sans-serif;
+$logoText: 'Avenir Next', sans-serif; 
+
+$btnText: 'Source Sans Pro', 'Roboto', sans-serif;
+
 h1 {
-    font-family: 'Roboto';
+    font-family: $mainText;
     font-weight: bold;
     font-size: 3.125em;
     color: $green;
@@ -10,7 +15,7 @@ h1 {
 
 p {
     color: $gray;
-    font-family: 'Roboto', sans-serif;
+    font-family: $mainText;
     font-size: 1.25em;
 }
 
@@ -21,13 +26,13 @@ p {
         > h1 {
             color: $green;
             font-size: 3.5em;
-            font-family: 'Avenir Next';
+            font-family: $logoText;
             letter-spacing: -$letterSpacing * 5;
         }
 
         > p {
             color: $green;
-            font-family: 'Avenir Next';
+            font-family: $logoText;
             font-size: 1em;
             font-weight: bold;
             letter-spacing: $letterSpacing;
@@ -38,7 +43,7 @@ p {
     &__text {
 
         > p {
-            font-family: 'Source Sans Pro', sans-serif;
+            font-family: $btnText;
             font-size: 1.125em;
         }
     }
