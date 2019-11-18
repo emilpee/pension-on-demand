@@ -28,6 +28,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.login__form {
+    border-top: none;
+}
 
 </style>

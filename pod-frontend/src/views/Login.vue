@@ -20,7 +20,7 @@
     <LoginForm :tabs="tabs" v-show="!choosedDevice" />
 
     <div class="login__form" v-show="choosedDevice">
-      <input type="text" placeholder="Personnummer" />
+      <input type="text" placeholder="Personnummer" v-model="personNr" />
       <Button msg="Logga in" @click.native="signIn" />
     </div>
 
@@ -46,6 +46,7 @@ export default {
           isActive: false
         }
       ], 
+      personNr: ''
     }
   },
 
@@ -91,7 +92,7 @@ export default {
     > p {
       text-align: right;
       position: absolute;
-      top: 4.3rem;
+      top: 5rem;
       right: 0;
     }
   }
@@ -104,7 +105,6 @@ export default {
 
   &__form {
     border: 1px solid $borderColor;
-    border-top: none;
     @extend %center-content;
     flex-direction: column;
     padding: 4rem 2.5rem;
