@@ -24,7 +24,7 @@ export default {
             this.$store.commit('setChoosedDevice', true);
         }
     }
-
+    
 }
 </script>
 

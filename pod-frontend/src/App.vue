@@ -14,6 +14,7 @@
 
 body {
   background: $bodyGradient;
+  margin: 0;
 }
 
 #app {

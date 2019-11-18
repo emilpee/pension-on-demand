@@ -13,10 +13,18 @@ h1 {
     color: $green;
 } 
 
+h3 {
+    font-family: $mainText;
+    font-weight: normal;
+    font-size: 1.875em;
+    color: $gray;
+}
+
 p {
     color: $gray;
+    font-weight: 300;
     font-family: $mainText;
-    font-size: 1.25em;
+    font-size: 1.25em; 
 }
 
 .login {

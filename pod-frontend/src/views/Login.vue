@@ -1,4 +1,5 @@
 <template>
+<main class="container">
   <div class="login">
     <div class="login__logo">
         <h1>Pension</h1>
@@ -21,10 +22,14 @@
 
     <div class="login__form" v-show="choosedDevice">
       <input type="text" placeholder="Personnummer" v-model="personNr" />
-      <Button msg="Logga in" @click.native="signIn" />
+      <Button msg="Logga in" @click.native="signIn" /> 
+      <div class="login__text">
+        <p @click="$store.commit('setChoosedDevice', false)" :style="{ textDecoration: 'underline' }">Avbryt</p>
+      </div>
     </div>
 
   </div>
+</main>
 </template>
 
 <script>
@@ -75,6 +80,16 @@ export default {
 <style lang="scss"> 
 @import '../scss/';
 
+.container {
+
+  @include breakpoints(large) {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+  }
+
+}
+
 .login {
   background: $white;
   border-radius: $borderRadius;
@@ -82,6 +97,8 @@ export default {
   flex-direction: column;
   margin: 0 auto;
   max-width: 570px;
+  height: 100%;
+  max-height: 620px;
   padding: 1rem 2rem;
 
   &__logo {
@@ -107,7 +124,9 @@ export default {
     border: 1px solid $borderColor;
     @extend %center-content;
     flex-direction: column;
-    padding: 4rem 2.5rem;
+    padding: .5rem 2.5rem 2.5rem 2.5rem;
+    margin-bottom: 1rem;
+    height: 100%;
 
     > input {
       background: #efefef url('../assets/img/bankid.png') no-repeat top 4px right 1rem;
