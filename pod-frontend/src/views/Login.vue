@@ -13,38 +13,45 @@
         v-for="tab in tabs" 
         :key="tab.id" 
         :tab="tab"
+        v-show="!choosedDevice"
       />
     </div>
 
-    <div class="login__form">
+    <LoginForm :tabs="tabs" v-show="!choosedDevice" />
+
+    <div class="login__form" v-show="choosedDevice">
       <input type="text" placeholder="Personnummer" />
       <Button msg="Logga in" @click.native="signIn" />
     </div>
+
   </div>
 </template>
 
 <script>
-import { Button, Tabs } from '@/components/';
+import { Tabs, Button } from '@/components/'; 
+import LoginForm from './LoginForm.vue';
 
 export default {
   name: 'Login',
-  
 
   data() {
     return {
       tabs: [
         {
-          id: 1,
           title: 'På den här enheten',
           isActive: true
         },
         {
-          id: 2,
           title: 'På annan enhet',
           isActive: false
         }
-      ],
+      ], 
+    }
+  },
 
+  computed: {
+    choosedDevice() {
+      return this.$store.state.choosedDevice;
     }
   },
 
@@ -57,7 +64,7 @@ export default {
   },
   
   components: {
-    Button, Tabs
+    Tabs, Button, LoginForm
   },
 
 
@@ -84,7 +91,7 @@ export default {
     > p {
       text-align: right;
       position: absolute;
-      top: 5.3rem;
+      top: 4.3rem;
       right: 0;
     }
   }
