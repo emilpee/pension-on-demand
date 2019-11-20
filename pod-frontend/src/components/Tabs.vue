@@ -17,6 +17,7 @@ export default {
     changeView() {
       let tabs = this.$parent.tabs;
       
+      // TODO - snygga till.
       if (!this.tab.isActive) {
         tabs[0].isActive = !tabs[0].isActive;
         tabs[1].isActive = !tabs[1].isActive;
@@ -39,6 +40,7 @@ export default {
       border-bottom: none;
       color: $gray;
       cursor: pointer;
+      @extend %center-content;
       font-family: $btnText;
       font-size: 1.125rem;
       flex: 1;

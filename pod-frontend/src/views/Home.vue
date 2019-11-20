@@ -11,7 +11,7 @@
 
       <div class="symbols">
         <div class="symbols__header">
-          <i :style="{ fontSize: '2rem' }" class="fas fa-info-circle"></i>
+          <i :style="{ fontSize: '3em' }" class="fas fa-info-circle"></i>
           <h3>Symbolförteckning</h3> 
         </div>
         <div class="symbols__body">
@@ -35,42 +35,57 @@
 
     <div class="home__slider">
       <div class="title">
-        <i class="fas fa-laugh-beam"></i> 
-        <h3>Översikt</h3>
+        <i class="far fa-laugh-beam"></i>
+        <h3>Målbild</h3>
       </div>
     </div>
 
     <div class="home__charts">
 
-      <div class="doughnut" v-for="data in chartsData" :key="data.id">
-        <div class="doughnut__header">
-          <h3>{{ data.title }}</h3>
+      <div class="doughnut">
+        <div class="doughnut__header title">
+          <i class="far fa-laugh-beam"></i>
+          <h3>Översikt</h3>
         </div>
         <div class="doughnut__chart">
-          <doughnut-chart :chartsData="data" />
+          <div class="doughnut__chart--text">
+            <p v-text="chartsData.labels[0]"></p>
+            <p v-text="chartsData.data[0]"></p>
+          </div>
+          <doughnut-chart :chartsData="chartsData" /> 
+          <div class="doughnut__chart--text">
+            <p v-text="chartsData.labels[1]"></p>
+            <p v-text="chartsData.data[1]"></p>
+          </div>
         </div>
       </div>      
 
     </div>
 
-    <div v-for="(info, index) in chartsData" class="home__chartsinfo" :key="index">
-      <p>{{ info.labels }}</p>  
-    </div>
   </div>
   </main>
 </template>
 
 <script>
 import { DoughnutChart } from '../components/';
-import chartsdata from '../data/doughnutdata.json';
+
+let labels = ["Skulder", "Tillgångar"];
+let data = [999999, 9999999];
+let colors = ["#C04D4D", "#0F7354"];
 
 export default {
   name: 'home',
   data() {
     return {
-      chartsData: chartsdata,
+      chartsData: {
+        labels: labels,
+        data: data,
+        colors: colors
+      },
+
     }
   },
+
   components: {
     DoughnutChart, 
   },
@@ -88,6 +103,11 @@ export default {
     background: $white;
     max-width: 64rem;
     margin: 0 auto;
+
+    .title {
+      display: flex;
+      align-items: center;
+    }
 
     &__intro {
       padding-top: 2rem;
@@ -130,7 +150,6 @@ export default {
 
           }
           
-          
         }
 
         &__colors {
@@ -165,6 +184,17 @@ export default {
         &__chart {
           background: $light;
           padding: 2rem;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          align-items: center;
+          width: 100%;
+
+          &--text {
+            display: flex;
+            flex-direction: column;
+          }
+
         }
 
       }

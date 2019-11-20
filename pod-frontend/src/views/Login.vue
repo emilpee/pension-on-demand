@@ -14,7 +14,6 @@
         v-for="tab in tabs" 
         :key="tab.id" 
         :tab="tab"
-        v-show="!choosedDevice"
       />
     </div>
 
@@ -73,9 +72,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  max-width: 570px;
-  height: 100%;
-  max-height: 620px;
+  height: 75vh;
   padding: 1rem 2rem;
 
   &__logo {

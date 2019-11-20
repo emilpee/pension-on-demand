@@ -22,14 +22,13 @@ export default {
             },
             options: {
                 cutoutPercentage: 80,   
+                rotation: 0.5 * Math.PI,
                 responsive: true,
                 maintainAspectRatio: false,
                 legend: {
                     labels: {
-                        // This more specific font property overrides the global property
-                        boxWidth: 0,
                         fontSize: 0,
-                        padding: 0
+                        boxWidth: 0,
                     }
                 }
             }
@@ -38,7 +37,7 @@ export default {
 
     mounted() {
         this.renderChart(this.chartData, this.options)
-    }
+    },
 
 }
 

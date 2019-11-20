@@ -16,12 +16,13 @@
 
 <script>
 import { Button } from '../components/';
-
+import axios from 'axios';
+ 
 export default {
 
     data() {
         return {
-            personNr: ''
+            personNr: '197512165668'
         }
     },
     
@@ -34,15 +35,16 @@ export default {
     },
 
     methods: {
-        // chooseDevice() {
-        //     this.$store.commit('setChoosedDevice', true);
-        // },
-        signIn() {
+        async signIn() {
             if (this.tabs[0].isActive) {
                 let link = "bankid://redirect=" + document.location;
                 document.location = link;
             } else {
-                this.$router.push('/');
+                // this.$router.push('/');
+                await axios.post('https://hfzn51rqf2.execute-api.eu-west-1.amazonaws.com/Prod/bankid', { ssn: this.personNr }).then(res => {
+                    console.log(res);
+                    // orderRef == kolla status.
+                })
             }
         },
     }
