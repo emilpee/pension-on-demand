@@ -46,6 +46,7 @@ p {
             font-size: 3.5em;
             font-family: $logoText;
             letter-spacing: -$letterSpacing * 5;
+            padding: 1rem 0;
         }
 
         > p {
@@ -63,6 +64,7 @@ p {
         > p {
             font-family: $btnText;
             font-size: 1.125em;
+            padding: 1rem;
         }
     }
 }

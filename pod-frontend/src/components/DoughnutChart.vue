@@ -21,9 +21,17 @@ export default {
                 ],
             },
             options: {
-                cutoutPercentage: 75,
+                cutoutPercentage: 80,   
                 responsive: true,
                 maintainAspectRatio: false,
+                legend: {
+                    labels: {
+                        // This more specific font property overrides the global property
+                        boxWidth: 0,
+                        fontSize: 0,
+                        padding: 0
+                    }
+                }
             }
         }
     },

@@ -18,22 +18,14 @@
       />
     </div>
 
-    <LoginForm :tabs="tabs" v-show="!choosedDevice" />
-
-    <div class="login__form" v-show="choosedDevice">
-      <input type="text" placeholder="Personnummer" v-model="personNr" />
-      <Button msg="Logga in" @click.native="signIn" /> 
-      <div class="login__text">
-        <p @click="$store.commit('setChoosedDevice', false)" :style="{ textDecoration: 'underline' }">Avbryt</p>
-      </div>
-    </div>
+    <LoginForm :tabs="tabs" />
 
   </div>
 </main>
 </template>
 
 <script>
-import { Tabs, Button } from '@/components/'; 
+import { Tabs } from '@/components/'; 
 import LoginForm from './LoginForm.vue';
 
 export default {
@@ -51,13 +43,6 @@ export default {
           isActive: false
         }
       ], 
-      personNr: ''
-    }
-  },
-
-  computed: {
-    choosedDevice() {
-      return this.$store.state.choosedDevice;
     }
   },
 
@@ -70,7 +55,7 @@ export default {
   },
   
   components: {
-    Tabs, Button, LoginForm
+    Tabs, LoginForm
   },
 
 
@@ -109,7 +94,7 @@ export default {
     > p {
       text-align: right;
       position: absolute;
-      top: 5rem;
+      top: 3.75rem;
       right: 0;
     }
   }
@@ -124,25 +109,30 @@ export default {
     border: 1px solid $borderColor;
     @extend %center-content;
     flex-direction: column;
-    padding: .5rem 2.5rem 2.5rem 2.5rem;
+    padding: .5rem 2.5rem 0 2.5rem;
     margin-bottom: 1rem;
-    height: 100%;
+    min-height: 18rem;
+    flex: 1; 
+    
+    &input {
+      flex: 1;
 
-    > input {
-      background: #efefef url('../assets/img/bankid.png') no-repeat top 4px right 1rem;
-      background-size: 2.5rem;
-      border-radius: $borderRadius;
-      border: 1px solid $borderColor;
-      padding: 1rem; 
-      max-width: 400px;
-      width: 100%;
-
-      &::placeholder {
-        font-family: $btnText;
-        font-size: 15px;
-        color: #43425D;
+      > input {
+        background: #efefef url('../assets/img/bankid.png') no-repeat top 4px right 1rem;
+        background-size: 2.5rem;
+        border-radius: $borderRadius;
+        border: 1px solid $borderColor;
+        padding: 1rem; 
+        min-width: 350px;
+        margin-top: 2rem;
+  
+        &::placeholder {
+          font-family: $btnText;
+          font-size: 15px;
+          color: #43425D;
+        }
+  
       }
-
     }
 
   }

@@ -17,7 +17,6 @@ export default {
     color: $white;
     font-family: $btnText;
     font-size: 1.125em;
-    margin-top: 4rem;
     padding: .75rem 3.5rem;
     text-decoration: none;
 }
