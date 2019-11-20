@@ -38,7 +38,12 @@ export default {
         //     this.$store.commit('setChoosedDevice', true);
         // },
         signIn() {
-            this.$router.push('/');
+            if (this.tabs[0].isActive) {
+                let link = "bankid://redirect=" + document.location;
+                document.location = link;
+            } else {
+                this.$router.push('/');
+            }
         },
     }
     

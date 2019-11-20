@@ -1,5 +1,5 @@
 <template>
-<main class="container">
+<main class="login-container">
   <div class="login">
     <div class="login__logo">
         <h1>Pension</h1>
@@ -45,14 +45,6 @@ export default {
       ], 
     }
   },
-
-  methods: {
-
-    signIn() {
-      this.$router.push('/');
-    },
-    
-  },
   
   components: {
     Tabs, LoginForm
@@ -65,7 +57,7 @@ export default {
 <style lang="scss"> 
 @import '../scss/';
 
-.container {
+.login-container {
 
   @include breakpoints(large) {
     display: flex;

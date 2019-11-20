@@ -3,7 +3,6 @@
 
 $mainText: 'Roboto', sans-serif;
 $logoText: 'Avenir Next', sans-serif; 
-
 $btnText: 'Source Sans Pro', 'Roboto', sans-serif;
 
 
@@ -30,11 +29,16 @@ h3 {
     text-transform: uppercase;
 }
 
-p {
+p, span {
     color: $gray;
     font-weight: 300;
     font-family: $mainText;
     font-size: 1.25em; 
+}
+
+span {
+    font-family: 'Helvetica Neue';
+    font-weight: 400;
 }
 
 .login {

@@ -15,6 +15,7 @@ export default {
     background: $mediumGreen;
     border-radius: $borderRadius * 4;
     color: $white;
+    cursor: pointer;
     font-family: $btnText;
     font-size: 1.125em;
     padding: .75rem 3.5rem;
