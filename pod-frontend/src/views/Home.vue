@@ -71,7 +71,7 @@ import { DoughnutChart } from '../components/';
 
 let labels = ["Skulder", "Tillgångar"];
 let data = [999999, 9999999];
-let colors = ["#C04D4D", "#0F7354"];
+let colors = ["#C04D4D", "#0F7354"]; 
 
 export default {
   name: 'home',

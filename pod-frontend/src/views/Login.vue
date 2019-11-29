@@ -72,7 +72,6 @@ export default {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  height: 75vh;
   padding: 1rem 2rem;
 
   &__logo {

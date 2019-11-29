@@ -1,5 +1,39 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Source+Sans+Pro&display=swap');
 @import 'colors';
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('/src/assets/fonts/Roboto-Regular.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('/src/assets/fonts/Roboto-Bold.ttf') format('ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('/src/assets/fonts/Roboto-Light.ttf') format('ttf');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('/src/assets/fonts/Roboto-Medium.ttf') format('ttf');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('/src/assets/fonts/SourceSansPro-Light.ttf') format('ttf');
+    font-weight: 300;
+    font-style: normal;
+}
 
 $mainText: 'Roboto', sans-serif;
 $logoText: 'Avenir Next', sans-serif; 

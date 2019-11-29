@@ -9,7 +9,7 @@
 
       <Button msg="Öppna BankID-applikationen" @click.native="signIn" />
       <div class="login__text">
-        <p @click="$store.commit('setChoosedDevice', false)" :style="{ textDecoration: 'underline' }">Avbryt</p>
+        <p :style="{ textDecoration: 'underline' }">Avbryt</p>
       </div>
     </div>
 </template>
@@ -22,7 +22,8 @@ export default {
 
     data() {
         return {
-            personNr: '197512165668'
+            personNr: '197512165668',
+            orderRef: ''
         }
     },
     
@@ -43,7 +44,7 @@ export default {
                 // this.$router.push('/');
                 await axios.post('https://hfzn51rqf2.execute-api.eu-west-1.amazonaws.com/Prod/bankid', { ssn: this.personNr }).then(res => {
                     console.log(res);
-                    // orderRef == kolla status.
+                    res.Authenticate({subjectIdentifier: this.personNr, rpDisplayName: 'test'});
                 })
             }
         },
