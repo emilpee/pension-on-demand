@@ -1,0 +1,27 @@
+// Reset styles of input type range in different browers in order to add custom styles.
+// Cred: https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%; 
+    background: transparent; 
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+    }
+
+    &:focus {
+      outline: none; 
+    }
+    
+    &::-ms-track {
+      width: 100%;
+      cursor: pointer;
+      background: transparent; 
+      border-color: transparent;
+      color: transparent;
+    }
+    
+  }
+  
+
+  

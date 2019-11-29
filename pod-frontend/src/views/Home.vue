@@ -33,10 +33,13 @@
       </div>
     </div>
 
-    <div class="home__slider">
+    <div class="home__sliders">
       <div class="title">
         <i class="far fa-laugh-beam"></i>
         <h3>Målbild</h3>
+      </div>
+      <div class="slider">
+        <slider v-for="(title, index) in slideTitles" :title="title" :key="index" />
       </div>
     </div>
 
@@ -67,7 +70,7 @@
 </template>
 
 <script>
-import { DoughnutChart } from '../components/';
+import { DoughnutChart, Slider } from '../components/';
 
 let labels = ["Skulder", "Tillgångar"];
 let data = [999999, 9999999];
@@ -82,12 +85,12 @@ export default {
         data: data,
         colors: colors
       },
-
+      slideTitles: ['Önskad pension', 'Jag vill gå i pension vid', 'Utrymme för privat sparande', 'Riskprofil']
     }
   },
 
   components: {
-    DoughnutChart, 
+    DoughnutChart, Slider
   },
 }
 </script>
@@ -164,6 +167,16 @@ export default {
 
     }
 
+    &__sliders {
+      display: flex;
+      flex-direction: column;
+
+      > .slider {
+        padding: 3rem 5rem;
+      }
+
+    }
+
     &__charts {
       display: flex;
       flex-direction: column;
@@ -201,14 +214,6 @@ export default {
 
       @include breakpoints(large) {
         flex-direction: row;
-      }
-
-    }
-
-    &__chartsinfo {
-
-      > p {
-        flex-direction: column;
       }
 
     }
