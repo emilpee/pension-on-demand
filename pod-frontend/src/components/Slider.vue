@@ -58,11 +58,13 @@ export default {
     display: flex;
     flex-direction: column;
     background: $light;
-    margin: .75rem 0;
+    margin: .8rem 0;
 
     &__text {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        margin-bottom: -.5rem;
 
         > span {
             font-family: $mainText;

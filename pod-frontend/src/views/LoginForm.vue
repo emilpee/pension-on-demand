@@ -16,7 +16,6 @@
 
 <script>
 import { Button } from '../components/';
-import axios from 'axios';
  
 export default {
 
@@ -36,16 +35,15 @@ export default {
     },
 
     methods: {
-        async signIn() {
+        signIn() {
             if (this.tabs[0].isActive) {
                 let link = "bankid://redirect=" + document.location;
                 document.location = link;
             } else {
-                // this.$router.push('/');
-                await axios.post('https://hfzn51rqf2.execute-api.eu-west-1.amazonaws.com/Prod/bankid', { ssn: this.personNr }).then(res => {
-                    console.log(res);
-                    res.Authenticate({subjectIdentifier: this.personNr, rpDisplayName: 'test'});
-                })
+               this.$store.dispatch('signInOnMobile', { ssn: this.personNr }).then(res => {
+                   let url = `https://app.bankid.com/?autostarttoken=${res.autoStartToken}&redirect=null`;
+                   console.log(url);
+               })
             }
         },
     }

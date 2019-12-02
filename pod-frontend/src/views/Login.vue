@@ -57,13 +57,8 @@ export default {
 @import '../scss/';
 
 .login-container {
-
-  @include breakpoints(large) {
-    display: flex;
-    align-items: center;
-    height: 100vh;
-  }
-
+  @extend %center-content;
+  height: 100vh;
 }
 
 .login {
@@ -72,7 +67,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 0 1rem;
 
   &__logo {
     margin: 0 auto;
@@ -123,6 +118,10 @@ export default {
       }
     }
 
+  }
+
+  @include breakpoints(large) {
+    padding: 0 2rem;
   }
 
 }

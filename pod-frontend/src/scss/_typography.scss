@@ -76,7 +76,7 @@ span {
 
 .login {
 
-    &__logo {
+    .login__logo {
 
         > h1 {
             color: $green;
@@ -103,5 +103,25 @@ span {
             font-size: 1.125em;
             padding: 1rem;
         }
+    }
+}
+
+
+.header__logo {
+    > h1 {
+        color: $white;
+        font-size: 3.5em;
+        font-family: $logoText;
+        letter-spacing: -$letterSpacing * 5;
+        padding: 1rem 0;
+    }
+
+    > p {
+        color: $white;
+        font-family: $logoText;
+        font-size: 1.25em;
+        font-weight: bold;
+        letter-spacing: $letterSpacing;
+        text-transform: uppercase;
     }
 }

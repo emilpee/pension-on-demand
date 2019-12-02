@@ -1,6 +1,6 @@
 <template>
   <main class="container">
-
+  <Header />
     <div class="home">
 
     <div class="home__intro">
@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { DoughnutChart, Slider } from '../components/';
+import { DoughnutChart, Slider, Header } from '../components/';
 
 let labels = ["Skulder", "Tillgångar"];
 let data = [999999, 9999999];
@@ -90,7 +90,7 @@ export default {
   },
 
   components: {
-    DoughnutChart, Slider
+    DoughnutChart, Header, Slider
   },
 }
 </script>
@@ -100,12 +100,14 @@ export default {
 
 .container {
   background: $white;
+  overflow: hidden;
 }
 
   .home {
     background: $white;
     max-width: 64rem;
     margin: 0 auto;
+    padding: 0 1rem;
 
     .title {
       display: flex;
@@ -113,9 +115,13 @@ export default {
     }
 
     &__intro {
-      padding-top: 2rem;
-      flex-direction: row;
+      padding-top: 5rem;
+      flex-direction: column;
       display: flex;
+
+      @include breakpoints(large) {
+        flex-direction: row;
+      }
 
       > div {
         flex: 1;
@@ -196,7 +202,6 @@ export default {
 
         &__chart {
           background: $light;
-          padding: 2rem;
           display: flex;
           flex-direction: row;
           justify-content: space-around;
