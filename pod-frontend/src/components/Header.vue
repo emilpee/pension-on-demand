@@ -8,7 +8,7 @@
           <router-link to="/">Om tjänsten</router-link>
           <router-link to="/login">Kom igång</router-link>
       </div>
-      <div class="header__profile">
+      <div @click="signOut" class="header__profile">
           <p>header__profile</p>
       </div>
       
@@ -17,6 +17,13 @@
 
 <script>
 export default {
+
+    methods: {
+        signOut() {
+            sessionStorage.removeItem('user');
+            this.$router.push('/login');
+        }
+    }
 
 }
 </script>

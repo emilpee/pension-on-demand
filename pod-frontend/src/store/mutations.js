@@ -1,5 +1,5 @@
 export default {
-    setChoosedDevice(state, choosedDevice) {
-        state.choosedDevice = choosedDevice;
+    hasSignedIn(state, signedIn) {
+        state.signedIn = signedIn;
     }
 }

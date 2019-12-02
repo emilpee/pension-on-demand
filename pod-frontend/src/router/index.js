@@ -9,14 +9,23 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: Home,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+  },
+  {
+    path: '*',
+    redirect: '/'
   }
 ]
+
+
 
 const router = new VueRouter({
   mode: 'history',
@@ -24,4 +33,21 @@ const router = new VueRouter({
   routes
 })
 
-export default router
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (sessionStorage.getItem('user')) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next({
+        query: { redirect: '/' }
+      })
+    }
+  } else {
+    next()
+  }
+})
+
+export default router;

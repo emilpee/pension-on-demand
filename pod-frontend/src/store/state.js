@@ -1,3 +1,3 @@
 export default {
-    choosedDevice: false
+    signedIn: false
 }
