@@ -23,4 +23,23 @@ input[type=range] {
     
   }
   
-  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    font-family: $mainText;
+
+    span {
+        color: $white;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        font-weight: normal;
+        font-family: $mainText;
+        letter-spacing: $letterSpacing;
+    }
+
+    li {
+        color: rgba($light, .6);
+        font-size: 1.5em;
+        font-weight: normal;
+    }
+}

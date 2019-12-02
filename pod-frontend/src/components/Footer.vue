@@ -1,0 +1,70 @@
+<template>
+  <footer class="footer">
+      <div class="footer__item">
+        <ul>
+            <span>Om oss</span>
+            <li>Om Pension on Demand</li>
+            <li>Allt om Pension on Demand</li>
+            <li>Kom igång</li>
+            <li>Mina sidor</li>
+            <li>Behandling av personuppgifter</li>
+        </ul>
+      </div>
+      <div class="footer__item">
+        <ul>
+            <span>Hitta snabbt</span>
+            <li>Vanliga frågor</li>
+            <li>Ordlista</li>
+            <li>Press</li>
+            <li>Webbkarta</li>
+            <li>Cookies</li>
+        </ul>
+      </div>
+      <div class="footer__item">
+        <ul>
+            <span>Följ oss</span>
+            <li>Vår blogg</li>
+            <li>PD-podden</li>
+            <li>Facebook</li>
+            <li>Instagram</li>
+            <li>Snapchat</li>
+        </ul>
+      </div>
+      <div class="footer__item">
+        <ul>
+            <span>Kontakta oss</span>
+            <li>Kundservice</li>
+            <li>Företagsservice</li>
+        </ul>
+      </div>
+  </footer>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style lang="scss">
+@import '@/scss/';
+
+.footer {
+    background: $gray;
+    display: flex;
+    flex-direction: column;
+
+    &__item {
+        display: flex;
+        justify-content: center;
+        margin: 0 1rem;
+    }
+
+    @include breakpoints(large) {
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding: 5rem;
+    }
+}
+
+</style>

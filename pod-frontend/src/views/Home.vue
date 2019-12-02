@@ -66,11 +66,12 @@
     </div>
 
   </div>
+  <Footer />
   </main>
 </template>
 
 <script>
-import { DoughnutChart, Slider, Header } from '../components/';
+import { DoughnutChart, Slider, Header, Footer } from '../components/';
 
 let labels = ["Skulder", "Tillgångar"];
 let data = [999999, 9999999];
@@ -90,7 +91,7 @@ export default {
   },
 
   components: {
-    DoughnutChart, Header, Slider
+    DoughnutChart, Header, Slider, Footer
   },
 }
 </script>

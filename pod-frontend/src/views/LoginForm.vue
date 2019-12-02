@@ -54,7 +54,7 @@ export default {
                     let url = `https://app.bankid.com/?autostarttoken=${res.data.autoStartToken}&redirect=null`;
                     console.log(url);
 
-                    sessionStorage.setItem('user', null);
+                    sessionStorage.setItem('user', res.data.orderRef);
 
                     if (sessionStorage.getItem('user') !== null) {
                         this.$store.commit('hasSignedIn', true) 
