@@ -9,3 +9,4 @@ export { default as TrafficLights } from './TrafficLights.vue';
 export { default as LoadingSpinner } from './LoadingSpinner.vue';
 export { default as Profile } from './Profile.vue';
 export { default as Symbols } from './Symbols.vue';
+export { default as SettingsItem } from './SettingsItem.vue';

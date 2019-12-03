@@ -43,3 +43,20 @@ input[type=range] {
         font-weight: normal;
     }
 }
+
+input[type=number] {
+  padding: 1rem;
+  border: 1px solid black;
+
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  
+}
+
+label {
+  font-family: $mainText;
+  font-size: 1.5em;
+  color: $gray;
+  font-weight: lighter;
+}

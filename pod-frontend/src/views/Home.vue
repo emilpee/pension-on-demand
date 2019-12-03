@@ -130,7 +130,7 @@ export default {
 
     .title {
       display: flex;
-      align-items: center;
+      align-items: center; 
     }
 
 
@@ -145,6 +145,7 @@ export default {
 
       > div {
         flex: 1;
+        padding: .25rem;
       }
 
       .symbols {

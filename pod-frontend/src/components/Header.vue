@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-      <div class="header__logo">
+      <div class="header__logo" @click="$router.push('/')">
         <h1>Pension</h1>
         <p>on demand</p>
       </div>
@@ -41,6 +41,7 @@ export default {
 
     &__logo {
         display: flex;
+        cursor: pointer;
         align-items: center;
         justify-content: flex-end;
         position: relative;

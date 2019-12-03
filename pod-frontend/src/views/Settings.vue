@@ -8,19 +8,30 @@
     </section>
 
     <section class="settings__item">
-        
+        <SettingsItem v-for="data in settingsData" :key="data.id" :setting="data" />
     </section>
     </div>
   </main>
 </template>
 
 <script>
+import { SettingsItem } from '../components/';
+import { settingsData } from '../data/';
 
 export default {
 
+    data() {
+        return {
+            settingsData: settingsData
+        }
+    },
 
+    components: {
+        SettingsItem
+    }
 
 }
+
 </script>
 
 <style lang="scss">
