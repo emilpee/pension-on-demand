@@ -14,7 +14,7 @@
           <i :style="{ fontSize: '3em' }" class="fas fa-info-circle"></i>
           <h3>Symbolförteckning</h3> 
         </div>
-        <Symbols />
+        <symbols />
       </div>
     </div>
 
@@ -24,7 +24,8 @@
         <h3>Målbild</h3>
       </div>
       <div class="slider">
-        <slider v-for="(title, index) in slideTitles" :title="title" :key="index" />
+        <slider v-for="(title, index) in slideTitles" :title="title" :key="index" /> 
+        <Button class="slider__button" msg="Bygg min portfölj" />
       </div>
     </div>
 
@@ -46,9 +47,15 @@
             <p v-text="chartsData.data[1]"></p>
           </div>
         </div>
+
+        <div class="doughnut__labels">
+          <Labels  />
+        </div>
+        
       </div>      
 
     </div>
+
 
   </div>
   <Footer />
@@ -56,7 +63,15 @@
 </template>
 
 <script>
-import { DoughnutChart, Slider, Header, Footer, Symbols } from '../components/';
+import { 
+  DoughnutChart, 
+  Slider, 
+  Header, 
+  Button, 
+  Footer, 
+  Symbols,
+  Labels
+} from '../components/';
 
 let labels = ["Skulder", "Tillgångar"];
 let data = [999999, 9999999];
@@ -76,7 +91,7 @@ export default {
   },
 
   components: {
-    DoughnutChart, Header, Slider, Footer, Symbols
+    DoughnutChart, Header, Slider, Footer, Symbols, Button, Labels
   },
 
   computed: {
@@ -90,10 +105,10 @@ export default {
 <style lang="scss">
 @import '../scss/';
 
-.container {
-  background: $white;
-  overflow: hidden;
-}
+  .container {
+    background: $white;
+    overflow: hidden;
+  }
 
   .home {
     background: $white;
@@ -165,24 +180,17 @@ export default {
 
     }
 
-    &__sliders {
-      display: flex;
-      flex-direction: column;
-
-      > .slider {
-        padding: 3rem 5rem;
-      }
-
-    }
-
     &__charts {
-      display: flex;
-      flex-direction: column;
+      @extend %column;
 
       .doughnut {
         width: 100%; 
-        display: flex;
-        flex-direction: column; 
+
+        &__labels {
+          display: flex;
+          width: inherit;
+          margin-top: .5rem;
+        }
 
         &:nth-child(1) {
           margin-right: 1rem;
@@ -198,7 +206,8 @@ export default {
           flex-direction: row;
           justify-content: space-around;
           align-items: center;
-          width: 100%;
+          width: inherit;
+          padding-bottom: 1rem;
 
           &--text {
             display: flex;

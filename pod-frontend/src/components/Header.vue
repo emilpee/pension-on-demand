@@ -9,7 +9,7 @@
           <router-link to="/login">Kom igång</router-link>
       </div>
       <div class="header__profile">
-          <Profile />
+          <Profile /> 
       </div>
       
   </header>

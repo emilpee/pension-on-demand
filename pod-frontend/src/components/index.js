@@ -1,5 +1,6 @@
 export { default as Button } from './Button.vue';
 export { default as Tabs } from './Tabs.vue';
+export { default as Labels } from './Labels.vue';
 export { default as Slider } from './Slider.vue';
 export { default as Header } from './Header.vue';
 export { default as Footer } from './Footer.vue';

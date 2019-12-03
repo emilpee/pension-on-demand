@@ -5,7 +5,7 @@
         <label for="item">{{ inputValue }}</label>
       </div>
       <div class="slider__input">
-        <input ref="input" @input="updateColor(); updateValue()" class="slider__item" type="range" min="0" max="10" name="item" value="5"/> 
+        <input ref="input" @input="updateSlider()" class="slider__item" type="range" min="0" max="20" name="item" value="10"/> 
       </div>
   </div>
 </template>
@@ -20,20 +20,18 @@ export default {
     },
 
     mounted() {
-        this.updateColor();
-        this.updateValue();
+        this.updateSlider();
     },
 
     props: ['title', 'value'],
 
     methods: {
-        updateValue() {
-            this.inputValue = this.$refs.input.value;
-        },
-
-        updateColor() {
+        updateSlider() {
             let input = this.$refs.input;
             let value = (input.value - input.min)/(input.max - input.min);
+
+            this.inputValue = this.$refs.input.value;
+
             input.style.backgroundImage = [
                 '-webkit-gradient(',
                 'linear, ',
@@ -58,14 +56,17 @@ export default {
     display: flex;
     flex-direction: column;
     background: $light;
-    margin: .8rem 0;
+    margin: .75rem 0;
+
+    &__button {
+        margin: 1rem auto;
+    }
 
     &__text {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: -.5rem;
-
+        
         > span {
             font-family: $mainText;
             font-weight: 300;
@@ -74,8 +75,7 @@ export default {
 
     input[type=range] {
       -webkit-appearance: none;
-      margin: 1rem 0;
-      width: 100%;
+      margin: .5rem 0;
 
         &::-webkit-slider-thumb {
             -webkit-appearance: none;
@@ -95,7 +95,6 @@ export default {
             border-radius: 9999rem;
             background: $green;
             cursor: pointer;
-            margin-top: -.8rem;
         }
 
         &::-webkit-slider-runnable-track  {
@@ -104,7 +103,6 @@ export default {
             cursor: pointer;
             height: .5rem;
             padding: .5rem;
-            width: 100%;
         }
 
     }

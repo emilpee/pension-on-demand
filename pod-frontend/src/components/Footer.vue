@@ -2,7 +2,7 @@
   <footer class="footer">
       <div class="footer__item">
         <ul>
-            <span>Om oss</span>
+            <p>Om oss</p>
             <li>Om Pension on Demand</li>
             <li>Allt om Pension on Demand</li>
             <li>Kom igång</li>
@@ -12,7 +12,7 @@
       </div>
       <div class="footer__item">
         <ul>
-            <span>Hitta snabbt</span>
+            <p>Hitta snabbt</p>
             <li>Vanliga frågor</li>
             <li>Ordlista</li>
             <li>Press</li>
@@ -22,7 +22,7 @@
       </div>
       <div class="footer__item">
         <ul>
-            <span>Följ oss</span>
+            <p>Följ oss</p>
             <li>Vår blogg</li>
             <li>PD-podden</li>
             <li>Facebook</li>
@@ -32,7 +32,7 @@
       </div>
       <div class="footer__item">
         <ul>
-            <span>Kontakta oss</span>
+            <p>Kontakta oss</p>
             <li>Kundservice</li>
             <li>Företagsservice</li>
         </ul>
