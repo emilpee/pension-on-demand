@@ -14,22 +14,7 @@
           <i :style="{ fontSize: '3em' }" class="fas fa-info-circle"></i>
           <h3>Symbolförteckning</h3> 
         </div>
-        <div class="symbols__body">
-
-            <div class="symbols__body--item"> 
-              <div class="light lights__red"></div> 
-              <span>Något behöver åtgärdas snarast</span>
-            </div>
-            <div class="symbols__body--item"> 
-              <div class="light lights__yellow"></div> 
-              <span>Något kan behöva ses över</span>
-            </div>
-            <div class="symbols__body--item"> 
-              <div class="light lights__green"></div> 
-              <span>Allt ser bra ut</span>
-            </div>
-       
-        </div>
+        <Symbols />
       </div>
     </div>
 
@@ -71,7 +56,7 @@
 </template>
 
 <script>
-import { DoughnutChart, Slider, Header, Footer } from '../components/';
+import { DoughnutChart, Slider, Header, Footer, Symbols } from '../components/';
 
 let labels = ["Skulder", "Tillgångar"];
 let data = [999999, 9999999];
@@ -91,7 +76,7 @@ export default {
   },
 
   components: {
-    DoughnutChart, Header, Slider, Footer
+    DoughnutChart, Header, Slider, Footer, Symbols
   },
 
   computed: {
