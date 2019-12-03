@@ -102,15 +102,6 @@ export default {
     }
   },
 
-  mounted() {
-    if (sessionStorage.getItem('user') !== null) {
-        const token = sessionStorage.getItem('user');
-        let user = atob(token.split('.')[1]);
-        this.$store.commit('updateUser', JSON.parse(user));
-        this.$store.commit('hasSignedIn', true) 
-    }
-  },
-
   components: {
     DoughnutChart, Slider, Symbols, Button, Labels
   },
