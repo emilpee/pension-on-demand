@@ -6,3 +6,4 @@ export { default as Footer } from './Footer.vue';
 export { default as DoughnutChart } from './DoughnutChart.vue';
 export { default as TrafficLights } from './TrafficLights.vue';
 export { default as LoadingSpinner } from './LoadingSpinner.vue';
+export { default as Profile } from './Profile.vue';

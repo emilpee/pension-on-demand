@@ -74,6 +74,11 @@ span {
     font-weight: 400;
 }
 
+a {
+    text-decoration: none;
+    font-family: $mainText;
+}
+
 .login {
 
     .login__logo {

@@ -1,3 +1,4 @@
 export default {
-    signedIn: false
+    signedIn: false,
+    user: {}
 }

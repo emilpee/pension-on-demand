@@ -5,7 +5,7 @@
 
     <div class="home__intro">
       <div class="text">
-        <h1>Välkommen NAMN</h1> 
+        <h1>Välkommen {{ user.givenName }}</h1> 
         <h2>Alla kan få en bra pension, hur mycket vill du ha i pension?</h2> 
       </div>
 
@@ -93,6 +93,12 @@ export default {
   components: {
     DoughnutChart, Header, Slider, Footer
   },
+
+  computed: {
+    user() {
+      return this.$store.state.user;
+    }
+  }
 }
 </script>
 

@@ -8,23 +8,21 @@
           <router-link to="/">Om tjänsten</router-link>
           <router-link to="/login">Kom igång</router-link>
       </div>
-      <div @click="signOut" class="header__profile">
-          <p>header__profile</p>
+      <div class="header__profile">
+          <Profile />
       </div>
       
   </header>
 </template>
 
 <script>
+import Profile from './Profile.vue';
+
 export default {
 
-    methods: {
-        signOut() {
-            sessionStorage.removeItem('user');
-            this.$router.push('/login');
-        }
-    }
-
+    components: {
+        Profile
+    },
 }
 </script>
 
@@ -63,7 +61,7 @@ export default {
             color: $light;
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: $letterSpacing * 10;
+            letter-spacing: $letterSpacing * 8;
             font-family: $mainText;
             font-size: 1.375em;
             font-weight: 500;
@@ -73,6 +71,7 @@ export default {
 
     &__profile {
         flex: 1;
+        margin-right: 1rem;
     }
 
     @include breakpoints(large) {

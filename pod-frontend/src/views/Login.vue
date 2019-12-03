@@ -98,7 +98,9 @@ export default {
     flex: 1; 
     
     &input {
+      display: flex;
       flex: 1;
+      flex-direction: column;
 
       > input {
         background: #efefef url('../assets/img/bankid.png') no-repeat top 4px right 1rem;
@@ -107,7 +109,7 @@ export default {
         border: 1px solid $borderColor;
         padding: 1rem; 
         min-width: 350px;
-        margin-top: 2rem;
+        margin: 1rem 0;
   
         &::placeholder {
           font-family: $btnText;
