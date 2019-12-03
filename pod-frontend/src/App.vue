@@ -1,8 +1,20 @@
 <template>
   <div id="app">
+    <Header v-if="$route.path !== '/login'" />
     <router-view/>
+    <Footer v-if="$route.path !== '/login'" />
   </div>
 </template>
+
+<script>
+import { Header, Footer } from './components/';
+
+export default {
+  components: {
+    Header, Footer
+  }
+}
+</script>
 
 <style lang="scss">
 @import '@/scss/';

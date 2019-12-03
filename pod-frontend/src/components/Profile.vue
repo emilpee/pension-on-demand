@@ -4,7 +4,7 @@
       <span>{{ user.name }}</span>
       <i class="fas fa-chevron-circle-down"></i>
       <div class="user__dropdown">
-        <router-link to="/">Mina tillgångar</router-link>
+        <router-link to="/settings">Mina tillgångar</router-link>
         <router-link to="/login" @click.native="signOut">Logga ut</router-link>
       </div>
   </aside>

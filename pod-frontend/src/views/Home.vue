@@ -1,9 +1,8 @@
 <template>
   <main class="container">
-  <Header />
     <div class="home">
 
-    <div class="home__intro">
+    <section class="home__intro">
       <div class="text">
         <h1>Välkommen {{ user.givenName }}</h1> 
         <h2>Alla kan få en bra pension, hur mycket vill du ha i pension?</h2> 
@@ -16,9 +15,9 @@
         </div>
         <symbols />
       </div>
-    </div>
+    </section>
 
-    <div class="home__sliders">
+    <section class="home__sliders">
       <div class="title">
         <i class="far fa-laugh-beam"></i>
         <h3>Målbild</h3>
@@ -27,9 +26,9 @@
         <slider v-for="(title, index) in slideTitles" :title="title" :key="index" /> 
         <Button class="slider__button" msg="Bygg min portfölj" />
       </div>
-    </div>
+    </section>
 
-    <div class="home__charts">
+    <section class="home__doughnut">
 
       <div class="doughnut">
         <div class="doughnut__header title">
@@ -51,14 +50,29 @@
         <div class="doughnut__labels">
           <Labels  />
         </div>
-        
       </div>      
 
+    </section>
+
+    <section class="home__bar">
+      <h3>Nuvarande pensionslösning</h3>
+      <span>Prognosen ser ut som följande ifall du behåller din nuvarande strategi.</span>
+    </section>
+
+    <section class="home__bar">
+      <h3>Pension on demand</h3>
+      <span>Baserat på analysen finns följande potential att uppnå.</span>
+    </section>
+
+
+    <section class="home__optimize">
+      <h2>Önskad pensionsmål på 32 330 kr/mån uppnåelig.</h2>
+      <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span>
+      <Button msg="Optimera med POD" />
+    </section>
+
+
     </div>
-
-
-  </div>
-  <Footer />
   </main>
 </template>
 
@@ -66,9 +80,7 @@
 import { 
   DoughnutChart, 
   Slider, 
-  Header, 
   Button, 
-  Footer, 
   Symbols,
   Labels
 } from '../components/';
@@ -90,14 +102,23 @@ export default {
     }
   },
 
+  mounted() {
+    if (sessionStorage.getItem('user') !== null) {
+        const token = sessionStorage.getItem('user');
+        let user = atob(token.split('.')[1]);
+        this.$store.commit('updateUser', JSON.parse(user));
+        this.$store.commit('hasSignedIn', true) 
+    }
+  },
+
   components: {
-    DoughnutChart, Header, Slider, Footer, Symbols, Button, Labels
+    DoughnutChart, Slider, Symbols, Button, Labels
   },
 
   computed: {
     user() {
       return this.$store.state.user;
-    }
+    },
   }
 }
 </script>
@@ -120,6 +141,7 @@ export default {
       display: flex;
       align-items: center;
     }
+
 
     &__intro {
       padding-top: 5rem;
@@ -180,7 +202,7 @@ export default {
 
     }
 
-    &__charts {
+    &__doughnut {
       @extend %column;
 
       .doughnut {

@@ -97,10 +97,10 @@ export default {
                                         else {
                                             this.error = "Något gick fel. Var god försök igen.";
                                         }
-
+                                        
+                                        clearInterval(interval);
                                         this.cancelSignIn();
                                     }
-
 
                                 })
                             }, this.interval)

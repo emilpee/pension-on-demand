@@ -8,7 +8,7 @@
 }
 
 @font-face {
-    font-family: 'Roboto-Bold';
+    font-family: 'Roboto';
     src: url('/src/assets/fonts/Roboto-Bold.ttf') format('ttf');
     font-weight: bold;
     font-style: normal;
@@ -22,7 +22,7 @@
 }
 
 @font-face {
-    font-family: 'Roboto';
+    font-family: 'Roboto-Medium';
     src: url('/src/assets/fonts/Roboto-Medium.ttf') format('ttf');
     font-weight: 500;
     font-style: normal;
@@ -54,6 +54,7 @@ h1 {
 h2, label {
     font-family: $mainText;
     font-size: 1.875em;
+    font-weight: 500;
     color: $gray;
 }
 

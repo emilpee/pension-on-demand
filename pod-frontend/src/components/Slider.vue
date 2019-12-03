@@ -56,10 +56,11 @@ export default {
     display: flex;
     flex-direction: column;
     background: $light;
-    margin: .75rem 0;
+    margin: .5rem 0;
+    padding: 1rem 3rem;
 
     &__button {
-        margin: 1rem auto;
+        margin: 1.5rem auto;
     }
 
     &__text {
