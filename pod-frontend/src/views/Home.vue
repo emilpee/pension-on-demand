@@ -36,14 +36,14 @@
           <h3>Översikt</h3>
         </div>
         <div class="doughnut__chart">
-          <div class="doughnut__chart--text">
-            <p v-text="chartsData.labels[0]"></p>
-            <p v-text="chartsData.data[0]"></p>
+          <div class="doughnut__charttext">
+            <p v-text="doughnutData.labels[0]"></p>
+            <p v-text="doughnutData.data[0]"></p>
           </div>
-          <doughnut-chart :chartsData="chartsData" /> 
-          <div class="doughnut__chart--text">
-            <p v-text="chartsData.labels[1]"></p>
-            <p v-text="chartsData.data[1]"></p>
+          <doughnut-chart :chartsData="doughnutData" /> 
+          <div class="doughnut__charttext">
+            <p v-text="doughnutData.labels[1]"></p>
+            <p v-text="doughnutData.data[1]"></p>
           </div>
         </div>
 
@@ -55,15 +55,27 @@
     </section>
 
     <section class="home__bar">
-      <h3>Nuvarande pensionslösning</h3>
-      <span>Prognosen ser ut som följande ifall du behåller din nuvarande strategi.</span>
-    </section>
+      <div class="bar">
+        <div class="bar__header title">
+          <h3>Nuvarande pensionslösning</h3>
+          <span>Prognosen ser ut som följande ifall du behåller din nuvarande strategi.</span>
+        </div>
+        <div class="bar__chart">
+          <bar-chart :chartsData="barData" />
+        </div>
+      </div>
 
-    <section class="home__bar">
-      <h3>Pension on demand</h3>
-      <span>Baserat på analysen finns följande potential att uppnå.</span>
-    </section>
+      <div class="bar">
+        <div class="bar__header title">
+          <h3>Pension on demand</h3>
+          <span>Baserat på analysen finns följande potential att uppnå.</span>
+        </div>
+        <div class="bar__chart">
+          <bar-chart :chartsData="barData" />
+        </div>
+      </div>
 
+    </section>
 
     <section class="home__optimize">
       <h2>Önskad pensionsmål på 32 330 kr/mån uppnåelig.</h2>
@@ -79,31 +91,36 @@
 <script>
 import { 
   DoughnutChart, 
+  BarChart,
   Slider, 
   Button, 
   Symbols,
   Labels
 } from '../components/';
 
-let labels = ["Skulder", "Tillgångar"];
-let data = [999999, 9999999];
-let colors = ["#C04D4D", "#0F7354"]; 
+import { doughnutData } from '../data/';
+import { barData } from '../data/';
 
 export default {
   name: 'home',
   data() {
     return {
-      chartsData: {
-        labels: labels,
-        data: data,
-        colors: colors
+      doughnutData: {
+        labels: doughnutData.labels,
+        data: doughnutData.data,
+        colors: doughnutData.colors
+      },
+       barData: {
+        labels: barData.labels,
+        data: barData.data,
+        colors: barData.colors
       },
       slideTitles: ['Önskad pension', 'Jag vill gå i pension vid', 'Utrymme för privat sparande', 'Riskprofil']
     }
   },
 
   components: {
-    DoughnutChart, Slider, Symbols, Button, Labels
+    DoughnutChart, BarChart, Slider, Symbols, Button, Labels
   },
 
   computed: {
@@ -172,7 +189,7 @@ export default {
             .light {
               width: 1rem;
               height: 1rem; 
-              border-radius: 9999px;
+              border-radius: $rounded;
               margin-right: .75rem;
             }
 
@@ -235,7 +252,7 @@ export default {
           width: inherit;
           padding-bottom: 1rem;
 
-          &--text {
+          &text {
             @extend %column;
           }
 
@@ -243,9 +260,20 @@ export default {
 
       }
 
+
       @include breakpoints(large) {
         flex-direction: row;
       }
+
+    }
+
+    .bar {
+        @extend %column;
+
+        &__header {
+          @extend %column;
+          align-items: flex-start;
+        }
 
     }
 

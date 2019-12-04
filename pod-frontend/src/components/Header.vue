@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Profile from './elements/Profile.vue';
+import Profile from './Profile.vue';
 
 export default {
 
@@ -70,7 +70,7 @@ export default {
     }
 
     &__profile {
-        flex: 3.5;
+        flex: 4;
     }
 
     @include breakpoints(large) {

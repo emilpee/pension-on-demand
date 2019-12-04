@@ -30,17 +30,16 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../scss/';
+@import '../scss/';
 
 .user {
     align-items: center;
     background: $white;   
-    border-radius: 9999rem;
+    border-radius: $rounded;
     display: flex;
     justify-content: space-between;
     padding: 1rem;
     position: relative;
-    max-width: 20rem;
 
     > span {
         font-family: $mainText;
@@ -61,7 +60,7 @@ export default {
         
         a {
             color: $green;
-            font-size: 1.25rem;
+            font-size: 1.25em;
             font-family: $mainText;
             display: flex;
             margin: .75rem 0;
@@ -85,7 +84,7 @@ export default {
     }
 
     @include breakpoints(large) {
-        margin-right: 1rem;
+        margin-right: 2rem;
     }
 
 }

@@ -71,3 +71,16 @@ export const settingsData = [
         labelTwo: 'Beräknad årlig värdeförändring'
     }
 ]
+
+
+export const doughnutData = {
+    labels: ['Skulder', 'Tillgångar'],
+    data: [999999, 9999999],
+    colors: ["#C04D4D", "#0F7354"]
+}
+
+export const barData = {
+    labels: ['Månadslön', 'Tillgångar', 'Privat pension', 'Tjänstepension', 'Allmän pension'],
+    data: [42000, 999, 9999, 9999, 999],
+    colors: ["#C04D4D", "#0F7354", "#C04D4D", "#0F7354", "#0F7354"]
+}

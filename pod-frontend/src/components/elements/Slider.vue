@@ -83,7 +83,7 @@ export default {
             border: 2px solid $white;
             width: 2rem;
             height: 2rem;
-            border-radius: 9999rem;
+            border-radius: $rounded;
             background: $green;
             cursor: pointer;
             margin-top: -1rem;
@@ -93,14 +93,14 @@ export default {
             -webkit-appearance: none;
             border: 2px solid $white;
             width: 2rem;
-            border-radius: 9999rem;
+            border-radius: $rounded;
             background: $green;
             cursor: pointer;
         }
 
         &::-webkit-slider-runnable-track  {
             background: $borderColor;
-            border-radius: 9999rem;
+            border-radius: $rounded;
             cursor: pointer;
             height: .5rem;
             padding: .5rem;
