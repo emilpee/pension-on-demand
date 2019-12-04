@@ -54,10 +54,11 @@ export default {
         background: inherit;
         display: none;
         position: absolute;
-        margin-top: 4rem;
+        margin-top: 6rem;
         right: 1rem;    
         z-index: 1;
-
+        box-shadow: 3px 2px 5px $borderColor;
+        
         a {
             color: $green;
             font-size: 1.25rem;

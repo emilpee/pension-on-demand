@@ -1,24 +1,29 @@
 <template>
-<main class="doughnut__labels">
-    <div class="label">
-        <div v-for="label in assetsLabels" :key="label.id" class="label__asset">
-            <span class="asset__item">{{ label.name }}</span>
-            <p class="asset__data"> {{ label.data }}</p> 
-            <div class="asset__lights">!</div>
+    <main class="doughnut__labels">
+        <div class="label">
+            <div v-for="label in assetsLabels" :key="label.id" class="label__asset">
+                <span class="asset__item">{{ label.name }}</span>
+                <p class="asset__data"> {{ label.data }}</p> 
+                <div class="debt__lights">
+                    <traffic-lights />
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="label">
-        <div v-for="label in debtsLabels" :key="label.id" class="label__debt">
-            <span class="debt__item">{{ label.name }}</span>
-            <p class="debt__data"> {{ label.data }}</p> 
-            <div class="debt__lights">!</div>
+        <div class="label">
+            <div v-for="label in debtsLabels" :key="label.id" class="label__debt">
+                <span class="debt__item">{{ label.name }}</span>
+                <p class="debt__data"> {{ label.data }}</p> 
+                <div class="debt__lights">
+                    <traffic-lights :data="label.data" />
+                </div>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
 </template>
 
 <script>
+import TrafficLights from './TrafficLights.vue';
 import { assetsLabels, debtsLabels } from '../data/';
 
 export default {
@@ -27,6 +32,9 @@ export default {
             assetsLabels: assetsLabels,
             debtsLabels: debtsLabels
         }
+    },
+    components: {
+        TrafficLights
     }
 }
 </script>
@@ -57,18 +65,19 @@ export default {
     }
 
     .debt__item, .asset__item {
-        flex: 3;
+        flex: 6;
         margin: 0 .75rem;
 
         ~ p {
-            flex: 1;
-            text-align: right;
+            flex: 3;
+            text-align: center;
         }
 
         ~ div {
             flex: 1;
-            text-align: center;
+            @extend %center-content;
         }
+    
     }
     
 }

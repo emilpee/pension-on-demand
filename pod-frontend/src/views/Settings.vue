@@ -9,13 +9,18 @@
 
     <section class="settings__item">
         <SettingsItem v-for="data in settingsData" :key="data.id" :setting="data" />
+    </section> 
+
+    <section class="settings__button">
+        <Button msg="Spara" />
     </section>
+
     </div>
   </main>
 </template>
 
 <script>
-import { SettingsItem } from '../components/';
+import { SettingsItem, Button } from '../components/';
 import { settingsData } from '../data/';
 
 export default {
@@ -27,7 +32,7 @@ export default {
     },
 
     components: {
-        SettingsItem
+        SettingsItem, Button
     }
 
 }
@@ -52,6 +57,11 @@ export default {
             padding-top: 1rem;
             margin: .25rem 0;
         }
+    }
+
+    &__button {
+        @extend %center-content;    
+        padding: 0 1rem 2rem 1rem;
     }
 }
 

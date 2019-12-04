@@ -1,14 +1,17 @@
 <template>
-<main class="lights">
-  <div class="light lights__red"></div>
-  <div class="light lights__yellow"></div>
-  <div class="light lights__green"></div>
-</main>
+    <main class="lights">
+    <div class="light lights__red"></div>
+    <div class="light lights__yellow"></div>
+    <div class="light lights__green"></div>
+    </main>
 </template>
 
 <script>
 export default {
 
+    props: {
+        data: Number
+    }
 }
 </script>
 

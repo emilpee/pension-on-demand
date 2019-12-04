@@ -37,7 +37,6 @@ export default {
     flex-direction: column;
     min-height: 200px;
     position: relative;
-    overflow: hidden;
 
     &__logo {
         display: flex;
