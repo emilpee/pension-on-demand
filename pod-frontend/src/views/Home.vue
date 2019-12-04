@@ -19,7 +19,7 @@
 
     <section class="home__sliders">
       <div class="title">
-        <i class="far fa-laugh-beam"></i>
+        <i :style="{ fontSize: '1.5em', marginRight: '.25rem' }" class="far fa-laugh-beam"></i>
         <h3>Målbild</h3>
       </div>
       <div class="slider">
@@ -32,7 +32,7 @@
 
       <div class="doughnut">
         <div class="doughnut__header title">
-          <i class="far fa-laugh-beam"></i>
+          <i :style="{ fontSize: '1.5em', marginRight: '.25rem' }" class="far fa-laugh-beam"></i>
           <h3>Översikt</h3>
         </div>
         <div class="doughnut__chart">
@@ -78,11 +78,12 @@
     </section>
 
     <section class="home__optimize">
-      <h2>Önskad pensionsmål på 32 330 kr/mån uppnåelig.</h2>
-      <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span>
+      <div class="optimize title">
+        <h2>Önskad pensionsmål på 32 330 kr/mån uppnåelig.</h2>
+        <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span>
+      </div>
       <Button msg="Optimera med POD" />
     </section>
-
 
     </div>
   </main>
@@ -150,9 +151,22 @@ export default {
     max-width: 1200px;
     margin: 0 auto;
 
+    > section:not(:first-child) {
+      padding-top: 2rem;
+    }
+
     .title {
-      display: flex;
       align-items: center; 
+      display: flex;
+      padding-bottom: 1rem;
+
+      > h2 {
+        margin: .5rem 0;
+      }
+      
+      > h3 {
+        margin: .5rem 0;
+      }
     }
 
     &__intro {
@@ -175,6 +189,7 @@ export default {
 
         &__header {
           @extend %column;
+          align-items: center;
           padding-top: 1rem;
         }
 
@@ -214,11 +229,15 @@ export default {
       padding: 1rem;
       text-align: center;
 
+      .optimize {
+        @extend %column;
+      }
+
       > a {
         font-weight: 700;
         font-family: $mainText;
         letter-spacing: $letterSpacing * 4;
-        margin: 1rem auto;
+        margin: 2rem auto;
         text-transform: uppercase; 
       }
 
@@ -238,10 +257,6 @@ export default {
 
         &:nth-child(1) {
           margin-right: 1rem;
-        }
-
-        &__header {
-          background: $white; 
         }
 
         &__chart {
@@ -269,6 +284,7 @@ export default {
 
     .bar {
         @extend %column;
+        margin-top: 2rem;
 
         &__header {
           @extend %column;

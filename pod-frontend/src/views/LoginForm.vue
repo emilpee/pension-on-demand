@@ -46,77 +46,28 @@ export default {
     methods: {
         signIn() {
             if (this.tabs[0].isActive) {
-                let link = "bankid://redirect=" + document.location;
-                document.location = link;
-
-                // if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-                //     // Sign in iOS
-                //     let url = `https://app.bankid.com/?autostarttoken=${res.data.autoStartToken}&redirect=null`;
-                //     console.log(url);
-                // } else if (navigator.userAgent.match(/Android/i)) {
-                //     let url = `bankid:///?autostarttoken=${res.data.autoStartToken}&redirect=null`;
-                //     console.log(url);
-                //     console.log('Android');
-                // }
-
+                
+                // TODO - ta bort hårdkodat personnummer.
+                this.$store.dispatch('signInWithBankID', { ssn: '199309246214' }).then(res => {
+                    let url = `bankid://?autostarttoken=${res.data.autoStartToken}&redirect=null`;
+                    document.location = url;
+                    this.orderRef = res.data.orderRef;
+                    this.checkStatus();
+                })
                 
             } else {
-                this.$store.dispatch('signInOnMobile', { ssn: this.personNr }).then(res => {
+                this.$store.dispatch('signInWithBankID', { ssn: this.personNr }).then(res => {
                     this.loading = true;
 
                     let url = `https://app.bankid.com/?autostarttoken=${res.data.autoStartToken}&redirect=null`;
                     console.log(url);
-                    
                     this.orderRef = res.data.orderRef;
-
-                    this.$store.dispatch('checkStatus', { status: this.orderRef }).then(response => {
-                        this.interval = 2000;
-                        let status = response.data.status;
-
-                        if (status === "pending") {
-                            this.msg = "Väntar på svar från BankID...";
-
-                            let interval = setInterval(() => {
-                                this.$store.dispatch('checkStatus', { status: this.orderRef }).then(resp => {
-                                    let status = resp.data.status;
-                                    console.log(resp);
-
-                                    if (status === "complete") {
-                                        clearInterval(interval);
-                                        this.$store.commit('updateUser', resp.data.user);
-                                        sessionStorage.setItem('user', resp.data.token); 
-                                        this.navigateUser();
-                                    }
-
-                                    if (status === "failed") {
-
-                                        if (resp.data.hintCode === "userCancel") {
-                                            this.error = "Du har avbrutit signeringen.";
-                                        }
-
-                                        else if (resp.data.hintCode === "expiredTransaction") {
-                                            this.error = "Inget svar från BankID-appen. Var god försök igen.";
-                                        }
-
-                                        else {
-                                            this.error = "Något gick fel. Var god försök igen.";
-                                        }
-                                        
-                                        clearInterval(interval);
-                                        this.cancelSignIn();
-                                    }
-
-                                })
-                            }, this.interval)
-
-                        }
-                        
-                    });
-
-                });
+                    this.checkStatus();
+                })
             }
-        },
 
+            },
+         
         cancelSignIn() {
             this.loading = false;
             this.interval = '';
@@ -127,6 +78,53 @@ export default {
                 this.$store.commit('hasSignedIn', true) 
                 this.$router.push('/');
             }
+        },
+
+        checkStatus() {
+            this.$store.dispatch('checkStatus', { status: this.orderRef }).then(response => {
+            // Check status every 2 seconds
+            this.interval = 2000;
+            let status = response.data.status;
+
+            if (status === "pending") {
+                this.msg = "Väntar på svar från BankID...";
+
+                let interval = setInterval(() => {
+                    this.$store.dispatch('checkStatus', { status: this.orderRef }).then(resp => {
+                        let status = resp.data.status;
+                        console.log(resp);
+
+                        if (status === "complete") {
+                            clearInterval(interval);
+                            this.$store.commit('updateUser', resp.data.user);
+                            sessionStorage.setItem('user', resp.data.token); 
+                            this.navigateUser();
+                        }
+
+                        if (status === "failed") {
+
+                            if (resp.data.hintCode === "userCancel") {
+                                this.error = "Du har avbrutit signeringen.";
+                            }
+
+                            else if (resp.data.hintCode === "expiredTransaction") {
+                                this.error = "Inget svar från BankID-appen. Var god försök igen.";
+                            }
+
+                            else {
+                                this.error = "Något gick fel. Var god försök igen.";
+                            }
+                            
+                            clearInterval(interval);
+                            this.cancelSignIn();
+                        }
+
+                    })
+                }, this.interval)
+
+            }
+            
+        });
         }
 
     },
