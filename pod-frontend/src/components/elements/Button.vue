@@ -9,7 +9,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/scss/';
+@import '../../scss/';
 
 .btn {
     background: $mediumGreen;

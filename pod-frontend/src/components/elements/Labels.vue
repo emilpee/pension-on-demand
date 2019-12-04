@@ -24,7 +24,7 @@
 
 <script>
 import TrafficLights from './TrafficLights.vue';
-import { assetsLabels, debtsLabels } from '../data/';
+import { assetsLabels, debtsLabels } from '../../data/';
 
 export default {
     data() {
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/scss/';
+@import '../../scss/';
 
 .label {
     @extend %column;

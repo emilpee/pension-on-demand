@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/scss/';
+@import '../../scss/';
 
 .slider {
     display: flex;

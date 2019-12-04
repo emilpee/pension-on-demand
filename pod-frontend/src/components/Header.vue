@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Profile from './Profile.vue';
+import Profile from './elements/Profile.vue';
 
 export default {
 
@@ -35,7 +35,7 @@ export default {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    min-height: 200px;
+    min-height: 12.5rem;
     position: relative;
 
     &__logo {
@@ -44,7 +44,7 @@ export default {
         align-items: center;
         justify-content: flex-end;
         position: relative;
-        flex: 1;
+        flex: 3;
 
         > p {
             position: absolute;
@@ -54,7 +54,7 @@ export default {
     }
 
     &__nav {
-        flex: 2;
+        flex: 8;
         @extend %center-content;
 
         > a {
@@ -70,8 +70,7 @@ export default {
     }
 
     &__profile {
-        flex: 1;
-        margin-right: 1rem;
+        flex: 3.5;
     }
 
     @include breakpoints(large) {

@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../scss/';
+@import '../../scss/';
 
 .settings__item {
     @extend %column;

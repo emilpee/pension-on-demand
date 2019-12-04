@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/scss/';
+@import '../../scss/';
 
 .user {
     align-items: center;

@@ -3,7 +3,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import '../scss/';
+@import '../../scss/';
 
     .lds-dual-ring {
         display: inline-block;

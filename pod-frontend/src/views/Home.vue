@@ -120,24 +120,27 @@ export default {
   .container {
     background: $white;
     overflow: hidden;
+    padding: 0 1rem;
+
+    @include breakpoints(large) {
+      padding: 0 8rem;
+    }
+
   }
 
   .home {
     background: $white;
-    max-width: 64rem;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
 
     .title {
       display: flex;
       align-items: center; 
     }
 
-
     &__intro {
       padding-top: 5rem;
-      flex-direction: column;
-      display: flex;
+      @extend %column;
 
       @include breakpoints(large) {
         flex-direction: row;
@@ -149,27 +152,22 @@ export default {
       }
 
       .symbols {
-        flex-direction: column;
         background: $light;
-        display: flex;
+        @extend %column;
         align-items: center;
 
         &__header {
-          flex-direction: column;
-          align-items: center;
-          display: flex;
+          @extend %column;
           padding-top: 1rem;
         }
 
         &__body {
-          display: flex;
-          flex-direction: column;
+          @extend %column;
           padding-bottom: 1rem;
 
           &--item {
-            display: flex;
+            @extend %row;
             align-items: center;
-            flex-direction: row;
 
             .light {
               width: 1rem;
@@ -190,6 +188,21 @@ export default {
           margin: 0;
         }
 
+      }
+
+    }
+
+    &__optimize {
+      @extend %column;
+      padding: 1rem;
+      text-align: center;
+
+      > a {
+        font-weight: 700;
+        font-family: $mainText;
+        letter-spacing: $letterSpacing * 4;
+        margin: 1rem auto;
+        text-transform: uppercase; 
       }
 
     }
@@ -216,16 +229,14 @@ export default {
 
         &__chart {
           background: $light;
-          display: flex;
-          flex-direction: row;
+          @extend %row;
           justify-content: space-around;
           align-items: center;
           width: inherit;
           padding-bottom: 1rem;
 
           &--text {
-            display: flex;
-            flex-direction: column;
+            @extend %column;
           }
 
         }

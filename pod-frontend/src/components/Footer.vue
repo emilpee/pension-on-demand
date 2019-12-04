@@ -51,8 +51,7 @@ export default {
 
 .footer {
     background: $gray;
-    display: flex;
-    flex-direction: column;
+    @extend %column;
 
     &__item {
         display: flex;
@@ -62,7 +61,7 @@ export default {
 
     @include breakpoints(large) {
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: space-between;
         padding: 5rem;
     }
 }

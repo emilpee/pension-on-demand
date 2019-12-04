@@ -17,7 +17,7 @@ export default {
 
 <style lang="scss">
 
-@import '../scss/';
+@import '../../scss/';
 
 .lights {
     display: flex;
