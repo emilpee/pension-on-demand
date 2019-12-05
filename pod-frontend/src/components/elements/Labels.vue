@@ -1,40 +1,64 @@
 <template>
     <main class="doughnut__labels">
-        <div class="label">
+        <div class="label" @click="showDetails">
             <div v-for="label in assetsLabels" :key="label.id" class="label__asset">
-                <span class="asset__item">{{ label.name }}</span>
-                <p class="asset__data"> {{ label.data }}</p> 
-                <div class="debt__lights">
-                    <traffic-lights />
+                 <div>
+                    <span class="debt__item">{{ label.name }}</span>
+                    <p class="debt__data"> {{ label.data }}</p> 
+                    <div class="debt__lights">
+                        <traffic-lights :data="label.data" />
+                    </div>
+                </div>
+                <div> 
+                    <div class="label__details" v-show="display">
+                        <label-details :detail="label.detail" /> 
+                    </div>
                 </div>
             </div>
+
         </div>
 
-        <div class="label">
+        <div class="label" @click="showDetails">
             <div v-for="label in debtsLabels" :key="label.id" class="label__debt">
-                <span class="debt__item">{{ label.name }}</span>
-                <p class="debt__data"> {{ label.data }}</p> 
-                <div class="debt__lights">
-                    <traffic-lights :data="label.data" />
+                <div>
+                    <span class="debt__item">{{ label.name }}</span>
+                    <p class="debt__data"> {{ label.data }}</p> 
+                    <div class="debt__lights">
+                        <traffic-lights :data="label.data" />
+                    </div>
+                </div>
+                <div> 
+                    <div class="label__details" v-show="display">
+                        <label-details />
+                    </div>
                 </div>
             </div>
+
         </div>
     </main>
 </template>
 
 <script>
 import TrafficLights from './TrafficLights.vue';
+import LabelDetails from './LabelDetails.vue';
 import { assetsLabels, debtsLabels } from '../../data/';
 
 export default {
     data() {
         return {
             assetsLabels: assetsLabels,
-            debtsLabels: debtsLabels
+            debtsLabels: debtsLabels,
+            display: false
         }
     },
     components: {
-        TrafficLights
+        TrafficLights, LabelDetails
+    },
+    methods: {
+        showDetails() {
+            console.log('hej');
+            this.display = !this.display;
+        }
     }
 }
 </script>
@@ -44,6 +68,7 @@ export default {
 
 .label {
     @extend %column;
+    cursor: pointer;
     flex: 1;
 
     &:first-child {
@@ -58,10 +83,16 @@ export default {
         background: $light;
         border: 4px solid rgba($gray, .04);
         display: flex;
+        flex-direction: column;
         align-items: center;
-        flex-direction: row;
         margin: .5rem 0;
         width: 100%;
+
+        & div {
+            @extend %center-content;
+            width: inherit;
+        }
+        
     }
 
     .debt__item, .asset__item {

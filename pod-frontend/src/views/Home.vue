@@ -24,8 +24,16 @@
       </div>
       <div class="sliders">
         <slider v-for="(data, index) in slideData" :data="data" :key="index" /> 
-        <Button class="sliders__button" msg="Bygg min portfölj" />
       </div>
+    </section>
+
+
+    <section class="home__optimize">
+      <div class="optimize title">
+        <h2>Önskad pensionsmål på {{ pensionGoal }} kr/mån uppnåelig.</h2>
+        <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span>
+      </div>
+      <Button msg="Optimera med PD" />
     </section>
 
     <section class="home__doughnut">
@@ -77,14 +85,6 @@
 
     </section>
 
-    <section class="home__optimize">
-      <div class="optimize title">
-        <h2>Önskad pensionsmål på 32 330 kr/mån uppnåelig.</h2>
-        <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span>
-      </div>
-      <Button msg="Optimera med POD" />
-    </section>
-
     </div>
   </main>
 </template>
@@ -100,7 +100,7 @@ import {
 } from '../components/';
 
 import { doughnutData } from '../data/';
-import { barData, slideData } from '../data/';
+import { barData } from '../data/';
 
 export default {
   name: 'home',
@@ -115,8 +115,7 @@ export default {
         labels: barData.labels,
         data: barData.data,
         colors: barData.colors
-      },
-      slideData: slideData
+      }
     }
   },
 
@@ -127,7 +126,13 @@ export default {
   computed: {
     user() {
       return this.$store.state.user;
+    }, 
+    pensionGoal() {
+      return this.$store.state.pensionGoal;
     },
+    slideData() {
+      return this.$store.state.slideData;
+    }
   }
 }
 </script>
@@ -255,7 +260,7 @@ export default {
         width: 100%; 
 
         &__labels {
-          display: flex;
+          display: flex; 
           width: inherit;
           margin-top: .5rem;
         }

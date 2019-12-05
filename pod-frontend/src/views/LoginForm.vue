@@ -95,7 +95,7 @@ export default {
 
                         if (status === "complete") {
                             clearInterval(interval);
-                            this.$store.commit('updateUser', resp.data.user);
+                            this.$store.commit('setUser', resp.data.user);
                             sessionStorage.setItem('user', resp.data.token); 
                             this.navigateUser();
                         }

@@ -33,12 +33,14 @@ export default {
 
             this.inputValue = input.value;
 
+            input.id === "1" ? this.$store.commit('setGoal', input.value) : null;
+
             switch (input.value) {
                 case "0":
                     this.inputValue = "Låg";
                     break;
                 case "1": 
-                    this.inputValue = "Mellan";
+                    this.inputValue = "Medel";
                     break;
                 case "2": 
                     this.inputValue = "Hög"; 

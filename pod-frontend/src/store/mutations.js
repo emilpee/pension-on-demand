@@ -2,7 +2,10 @@ export default {
     hasSignedIn(state, signedIn) {
         state.signedIn = signedIn;
     },
-    updateUser(state, user) {
+    setUser(state, user) {
         state.user = user;
+    },
+    setGoal(state, goal) {
+        state.pensionGoal = goal;
     }
 }
