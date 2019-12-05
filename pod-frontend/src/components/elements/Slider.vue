@@ -1,11 +1,11 @@
 <template>
   <div class="slider">
       <div class="slider__text">
-        <span>{{ title }}</span>
+        <span>{{ data.title }}</span>
         <label for="item">{{ inputValue }}</label>
       </div>
       <div class="slider__input">
-        <input ref="input" @input="updateSlider()" class="slider__item" type="range" min="0" max="20" name="item" value="10"/> 
+        <input ref="input" @input="updateSlider()" class="slider__item" type="range" :id="data.id" :min="data.minValue" :max="data.maxValue" name="item"/> 
       </div>
   </div>
 </template>
@@ -23,14 +23,29 @@ export default {
         this.updateSlider();
     },
 
-    props: ['title', 'value'],
+
+    props: ['data', 'value'],
 
     methods: {
         updateSlider() {
             let input = this.$refs.input;
-            let value = (input.value - input.min)/(input.max - input.min);
+            let value = (input.value - input.min) / (input.max - input.min);
 
-            this.inputValue = this.$refs.input.value;
+            this.inputValue = input.value;
+
+            switch (input.value) {
+                case "0":
+                    this.inputValue = "Låg";
+                    break;
+                case "1": 
+                    this.inputValue = "Mellan";
+                    break;
+                case "2": 
+                    this.inputValue = "Hög"; 
+                    break;
+                default: 
+                    this.inputValue;
+            }
 
             input.style.backgroundImage = [
                 '-webkit-gradient(',
@@ -42,7 +57,7 @@ export default {
                 ')'
             ].join(''),
             input.style.borderRadius = '9999rem';
-        }
+        },
     },
     
 }
@@ -52,61 +67,58 @@ export default {
 <style lang="scss">
 @import '../../scss/';
 
-.slider {
-    display: flex;
-    flex-direction: column;
+.sliders {
+    @extend %column;
     background: $light;
-    margin: .5rem 0;
-    padding: 1rem 3rem;
+
+    .slider {
+        padding: 1rem 3rem; 
+        margin: .5rem 0;
+
+        &__text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            > span {
+                font-family: $mainText;
+                font-weight: 300;
+            }
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+        &:nth-child(odd) {
+
+            label {
+
+                &::after {
+                    content: " kr/mån";
+                }
+
+            }
+        }
+
+        &:nth-child(2) {
+
+            label {
+
+                &::after {
+                    content: " år";
+                }
+            }
+
+        }
+
+    }
+        
 
     &__button {
         margin: 1.5rem auto;
     }
 
-    &__text {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        
-        > span {
-            font-family: $mainText;
-            font-weight: 300;
-        }
-    }
-
-    input[type=range] {
-      -webkit-appearance: none;
-      margin: .5rem 0;
-
-        &::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            border: 2px solid $white;
-            width: 2rem;
-            height: 2rem;
-            border-radius: $rounded;
-            background: $green;
-            cursor: pointer;
-            margin-top: -1rem;
-        }
-
-        &::-moz-range-track {
-            -webkit-appearance: none;
-            border: 2px solid $white;
-            width: 2rem;
-            border-radius: $rounded;
-            background: $green;
-            cursor: pointer;
-        }
-
-        &::-webkit-slider-runnable-track  {
-            background: $borderColor;
-            border-radius: $rounded;
-            cursor: pointer;
-            height: .5rem;
-            padding: .5rem;
-        }
-
-    }
 }
 
 </style>

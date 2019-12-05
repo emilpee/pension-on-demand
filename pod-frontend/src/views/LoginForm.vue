@@ -46,7 +46,6 @@ export default {
     methods: {
         signIn() {
             if (this.tabs[0].isActive) {
-                
                 // TODO - ta bort hårdkodat personnummer.
                 this.$store.dispatch('signInWithBankID', { ssn: '199309246214' }).then(res => {
                     let url = `bankid://?autostarttoken=${res.data.autoStartToken}&redirect=null`;

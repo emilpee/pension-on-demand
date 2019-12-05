@@ -60,3 +60,39 @@ label {
   color: $gray;
   font-weight: lighter;
 }
+
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: .5rem 0;
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border: 2px solid $white;
+        width: 2rem;
+        height: 2rem;
+        border-radius: $rounded;
+        background: $green;
+        cursor: pointer;
+        margin-top: -1rem;
+    }
+
+    &::-moz-range-track {
+        -webkit-appearance: none;
+        border: 2px solid $white;
+        width: 2rem;
+        border-radius: $rounded;
+        background: $green;
+        cursor: pointer;
+    }
+
+    &::-webkit-slider-runnable-track  {
+        -webkit-appearance: none;
+        background: $borderColor;
+        border-radius: $rounded;
+        cursor: pointer;
+        height: .5rem;
+        padding: .5rem 0;
+    }
+
+}

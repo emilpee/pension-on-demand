@@ -64,8 +64,7 @@ export default {
 .login {
   background: $white;
   border-radius: $borderRadius;
-  display: flex;
-  flex-direction: column;
+  @extend %column;
   margin: 0 auto;
   padding: 0 1rem;
 
@@ -108,7 +107,7 @@ export default {
         border-radius: $borderRadius;
         border: 1px solid $borderColor;
         padding: 1rem; 
-        min-width: 350px;
+        min-width: 20rem;
         margin: 1rem 0;
   
         &::placeholder {

@@ -19,12 +19,12 @@
 
     <section class="home__sliders">
       <div class="title">
-        <i :style="{ fontSize: '1.5em', marginRight: '.25rem' }" class="far fa-laugh-beam"></i>
+        <i class="far icons fa-laugh-beam"></i>
         <h3>Målbild</h3>
       </div>
-      <div class="slider">
-        <slider v-for="(title, index) in slideTitles" :title="title" :key="index" /> 
-        <Button class="slider__button" msg="Bygg min portfölj" />
+      <div class="sliders">
+        <slider v-for="(data, index) in slideData" :data="data" :key="index" /> 
+        <Button class="sliders__button" msg="Bygg min portfölj" />
       </div>
     </section>
 
@@ -32,7 +32,7 @@
 
       <div class="doughnut">
         <div class="doughnut__header title">
-          <i :style="{ fontSize: '1.5em', marginRight: '.25rem' }" class="far fa-laugh-beam"></i>
+          <i class="far icons fa-laugh-beam"></i>
           <h3>Översikt</h3>
         </div>
         <div class="doughnut__chart">
@@ -100,7 +100,7 @@ import {
 } from '../components/';
 
 import { doughnutData } from '../data/';
-import { barData } from '../data/';
+import { barData, slideData } from '../data/';
 
 export default {
   name: 'home',
@@ -116,7 +116,7 @@ export default {
         data: barData.data,
         colors: barData.colors
       },
-      slideTitles: ['Önskad pension', 'Jag vill gå i pension vid', 'Utrymme för privat sparande', 'Riskprofil']
+      slideData: slideData
     }
   },
 
@@ -144,6 +144,11 @@ export default {
       padding: 0 8rem;
     }
 
+  }
+
+  .icons {
+    font-size: 1.5em;
+    margin-right: .25rem;
   }
 
   .home {
@@ -255,17 +260,12 @@ export default {
           margin-top: .5rem;
         }
 
-        &:nth-child(1) {
-          margin-right: 1rem;
-        }
-
         &__chart {
           background: $light;
           @extend %row;
           justify-content: space-around;
           align-items: center;
-          width: inherit;
-          padding-bottom: 1rem;
+          padding: 1rem 0; 
 
           &text {
             @extend %column;

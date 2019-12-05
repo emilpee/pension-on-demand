@@ -26,10 +26,7 @@ export default {
                 responsive: true,
                 maintainAspectRatio: false,
                 legend: {
-                    labels: {
-                        fontSize: 0,
-                        boxWidth: 0,
-                    }
+                    display: false
                 }
             }
         }

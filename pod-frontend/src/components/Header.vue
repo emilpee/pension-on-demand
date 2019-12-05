@@ -19,11 +19,11 @@
 import Profile from './Profile.vue';
 
 export default {
-
     components: {
         Profile
     },
 }
+
 </script>
 
 <style lang="scss">
