@@ -18,12 +18,18 @@ export const assetsLabels = [
     {
         id: 3,
         name: "Villa",
-        data: 4200000
+        data: 4200000,
+        details: [
+            'SEB', 'Swedbank', 'Handelsbanken'
+        ]
     },
     {
         id: 4,
         name: "Båt",
-        data: 350000
+        data: 350000,
+        details: [
+            'SEB', 'Swedbank', 'Handelsbanken'
+        ]
     }
 ]
 

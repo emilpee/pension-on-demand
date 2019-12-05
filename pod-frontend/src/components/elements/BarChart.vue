@@ -1,5 +1,9 @@
 <script>
 import { Bar } from 'vue-chartjs';
+import Chart from 'chart.js';
+
+Chart.defaults.scale.gridLines.drawOnChartArea = false;
+Chart.defaults.scale.gridLines.color = '#000';
 
 export default {
     extends: Bar,
@@ -16,7 +20,7 @@ export default {
                 datasets: [
                     {
                         data: this.chartsData.data,
-                        backgroundColor: this.chartsData.colors
+                        backgroundColor: this.chartsData.colors,
                     }
                 ],
             },
@@ -25,7 +29,7 @@ export default {
                 maintainAspectRatio: false,
                 legend: {
                     display: false
-                }
+                },
             }
         }
     },

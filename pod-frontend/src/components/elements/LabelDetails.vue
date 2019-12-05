@@ -1,11 +1,16 @@
 <template>
   <div class="details">
-      <p  v-for="detail in $attrs.detail" :key="detail.id">{{ detail }}</p>
+    <bar-chart :chartsData="$attrs.label" />
   </div>
 </template>
 
 <script>
+import BarChart from './BarChart';
+
 export default {
+  components: {
+    BarChart
+  },
 
 }
 </script>

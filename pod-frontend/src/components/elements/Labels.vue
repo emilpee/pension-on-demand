@@ -10,8 +10,9 @@
                     </div>
                 </div>
                 <div> 
-                    <div class="label__details" v-show="display">
-                        <label-details :detail="label.detail" /> 
+                    <!-- // TODO - fråga om v-show -->
+                    <div class="label__details" v-if="display">
+                        <bar-chart :chartsData="barData" />
                     </div>
                 </div>
             </div>
@@ -28,8 +29,8 @@
                     </div>
                 </div>
                 <div> 
-                    <div class="label__details" v-show="display">
-                        <label-details />
+                    <div class="label__details" v-if="display">
+                        <bar-chart :chartsData="barData" />
                     </div>
                 </div>
             </div>
@@ -40,25 +41,29 @@
 
 <script>
 import TrafficLights from './TrafficLights.vue';
-import LabelDetails from './LabelDetails.vue';
-import { assetsLabels, debtsLabels } from '../../data/';
+import BarChart from './BarChart.vue';
+import { assetsLabels, debtsLabels, barData } from '../../data/';
 
 export default {
     data() {
         return {
             assetsLabels: assetsLabels,
             debtsLabels: debtsLabels,
+            barData: barData,
             display: false
         }
     },
     components: {
-        TrafficLights, LabelDetails
+        TrafficLights, BarChart
     },
     methods: {
         showDetails() {
-            console.log('hej');
+            console.log(this.display);
             this.display = !this.display;
         }
+    },
+    mounted() {
+        console.log(this.barData.colors);
     }
 }
 </script>
@@ -77,6 +82,10 @@ export default {
 
     &:nth-child(2) {
         margin-left: 1rem;
+    }
+
+    &__details {
+        width: 100%;
     }
 
     &__asset, &__debt {

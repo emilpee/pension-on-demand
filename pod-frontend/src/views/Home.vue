@@ -291,6 +291,11 @@ export default {
         @extend %column;
         margin-top: 2rem;
 
+        &__chart {
+          background: $light;
+          padding: 1rem 0;
+        }
+
         &__header {
           @extend %column;
           align-items: flex-start;
