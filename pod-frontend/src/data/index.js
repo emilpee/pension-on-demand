@@ -1,54 +1,63 @@
-export const assetsLabels = [
+export const labelData = [
     {
+        title: 'Tillgångar',
         id: 1,
-        name: "Allmän pension",
-        data: 1200000, 
-        details: [
-            'SEB', 'Swedbank', 'Handelsbanken'
+        data: [
+            {
+                id: 1,
+                name: "Allmän pension",
+                data: 1200000, 
+                details: [
+                    'SEB', 'Swedbank', 'Handelsbanken'
+                ]
+            },
+            {
+                id: 2,
+                name: "Tjänstepension",
+                data: 950000,
+                details: [
+                    'SEB', 'Swedbank', 'Handelsbanken'
+                ]
+            },
+            {
+                id: 3,
+                name: "Villa",
+                data: 4200000,
+                details: [
+                    'SEB', 'Swedbank', 'Handelsbanken'
+                ]
+            },
+            {
+                id: 4,
+                name: "Båt",
+                data: 350000,
+                details: [
+                    'SEB', 'Swedbank', 'Handelsbanken'
+                ]
+            }
         ]
     },
     {
+        title: 'Skulder', 
         id: 2,
-        name: "Tjänstepension",
-        data: 950000,
-        details: [
-            'SEB', 'Swedbank', 'Handelsbanken'
+        data: [
+            {
+                id: 1,
+                name: "Bottenlån",
+                data: 2550000
+            },
+            {
+                id: 2,
+                name: "Blancolån",
+                data: 255655
+            },
+            {
+                id: 3,
+                name: "Billån",
+                data: 175000
+            }
         ]
     },
-    {
-        id: 3,
-        name: "Villa",
-        data: 4200000,
-        details: [
-            'SEB', 'Swedbank', 'Handelsbanken'
-        ]
-    },
-    {
-        id: 4,
-        name: "Båt",
-        data: 350000,
-        details: [
-            'SEB', 'Swedbank', 'Handelsbanken'
-        ]
-    }
-]
-
-export const debtsLabels = [
-    {
-        id: 1,
-        name: "Bottenlån",
-        data: 2550000
-    },
-    {
-        id: 2,
-        name: "Blancolån",
-        data: 255655
-    },
-    {
-        id: 3,
-        name: "Billån",
-        data: 175000
-    }
 ]
 
 export const settingsData = [

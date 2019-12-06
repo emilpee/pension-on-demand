@@ -1,10 +1,10 @@
 <template>
     <main class="doughnut__labels">
-        <div class="label" @click="showDetails">
-            <div v-for="label in assetsLabels" :key="label.id" class="label__asset">
+        <div class="label" v-for="label in labelData" :key="label.id" @click="showDetails">
+            <div class="label__asset" v-for="item in label.data" :key="item.id">
                  <div>
-                    <span class="debt__item">{{ label.name }}</span>
-                    <p class="debt__data"> {{ label.data }}</p> 
+                    <span class="debt__item">{{ item.name }}</span>
+                    <p class="debt__data"> {{ item.data }}</p> 
                     <div class="debt__lights">
                         <traffic-lights :data="label.data" />
                     </div>
@@ -19,38 +19,20 @@
 
         </div>
 
-        <div class="label" @click="showDetails">
-            <div v-for="label in debtsLabels" :key="label.id" class="label__debt">
-                <div>
-                    <span class="debt__item">{{ label.name }}</span>
-                    <p class="debt__data"> {{ label.data }}</p> 
-                    <div class="debt__lights">
-                        <traffic-lights :data="label.data" />
-                    </div>
-                </div>
-                <div> 
-                    <div class="label__details" v-if="display">
-                        <bar-chart :chartsData="barData" />
-                    </div>
-                </div>
-            </div>
-
-        </div>
     </main>
 </template>
 
 <script>
 import TrafficLights from './TrafficLights.vue';
 import BarChart from './BarChart.vue';
-import { assetsLabels, debtsLabels, barData } from '../../data/';
+import { barData, labelData } from '../../data/';
 
 export default {
     data() {
         return {
-            assetsLabels: assetsLabels,
-            debtsLabels: debtsLabels,
             barData: barData,
-            display: false
+            display: false,
+            labelData: labelData
         }
     },
     components: {
@@ -58,13 +40,10 @@ export default {
     },
     methods: {
         showDetails() {
-            console.log(this.display);
             this.display = !this.display;
         }
     },
-    mounted() {
-        console.log(this.barData.colors);
-    }
+
 }
 </script>
 
