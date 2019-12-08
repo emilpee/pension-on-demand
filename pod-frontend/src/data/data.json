@@ -1,0 +1,110 @@
+[
+    {
+        "user": {
+            "age": 44,
+            "personalNr": 197512165668,
+            "name": "Sylvia Johnsson"
+        }, 
+        "pension": [
+            {
+                "type": "Allmän pension", 
+                "value": 2500
+            },
+            {
+                "type": "Tjänstepension",
+                "value": 2500
+            }
+
+        ],
+        "holdings": [
+            {
+                "assets": {
+                    "type": "Fastigheter",
+                    "value": 4200000,
+                    "annualInc": 0.04
+                },
+                "debts": {
+                    "loan": "Bostadslån",
+                    "value": 2550000,
+                    "interest": 0.02
+                }
+            },
+            {
+                "assets": {
+                    "type": "Fordon",
+                    "value": 150000,
+                    "annualInc": -0.05
+                },
+                "debts": {
+                    "loan": "Billån",
+                    "value": 1000,
+                    "interest": 0.01
+                }
+            },
+            {
+                "assets": {
+                    "type": "Båt",
+                    "value": 150000,
+                    "annualInc": 0.02
+                },
+                "debts": {
+                    "loan": "Båtlån",
+                    "value": 1500,
+                    "interest": 0.02
+                }
+            },
+            {
+                "assets": {
+                    "type": "Övrigt",
+                    "value": 1250,
+                    "annualInc": 0
+                },
+                "debts": {
+                    "loan": "Blancolån",
+                    "value": 25000,
+                    "interest": 0.01
+                }
+            }
+        ],
+        "salary": {
+            "title": "Lön",
+            "value": 25000,
+            "annualInc": 0.021
+        },
+        "savings": {
+            "title": "Sparande", 
+            "value": 50000
+        },
+        "goals": {
+            "title": "Mål",
+            "label": [
+                {
+                    "id": 1,
+                    "title": "Önskad pension",
+                    "value": 5000,
+                    "minValue": 5000,
+                    "maxValue": 50000
+                },
+                {
+                    "id": 2,
+                    "title": "Jag vill gå i pension vid",
+                    "value": 50,
+                    "minValue": 40,
+                    "maxValue": 70
+                },
+                {
+                    "id": 3,
+                    "title": "Riskprofil",
+                    "value": 1,
+                    "minValue": 0,
+                    "maxValue": 2
+                }
+            ],
+            "response": 0
+        },
+        "inflation": 0.02,
+        "risks": [0.04, 0.08, 0.1],
+        "totalAssets": 950000,
+        "totalDebts": 95000 
+    }
+]

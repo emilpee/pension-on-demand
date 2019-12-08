@@ -6,6 +6,6 @@ export default {
         state.user = user;
     },
     setGoal(state, goal) {
-        state.pensionGoal = goal;
+        state.wantedPension = goal;
     }
 }

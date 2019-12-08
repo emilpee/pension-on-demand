@@ -9,9 +9,7 @@
 <script>
 export default {
 
-    props: {
-        data: Number
-    }
+    props: ['data']
 }
 </script>
 

@@ -1,69 +1,11 @@
-export const labelData = [
-    {
-        title: 'Tillgångar',
-        id: 1,
-        data: [
-            {
-                id: 1,
-                name: "Allmän pension",
-                data: 1200000, 
-                details: [
-                    'SEB', 'Swedbank', 'Handelsbanken'
-                ]
-            },
-            {
-                id: 2,
-                name: "Tjänstepension",
-                data: 950000,
-                details: [
-                    'SEB', 'Swedbank', 'Handelsbanken'
-                ]
-            },
-            {
-                id: 3,
-                name: "Villa",
-                data: 4200000,
-                details: [
-                    'SEB', 'Swedbank', 'Handelsbanken'
-                ]
-            },
-            {
-                id: 4,
-                name: "Båt",
-                data: 350000,
-                details: [
-                    'SEB', 'Swedbank', 'Handelsbanken'
-                ]
-            }
-        ]
-    },
-    {
-        title: 'Skulder', 
-        id: 2,
-        data: [
-            {
-                id: 1,
-                name: "Bottenlån",
-                data: 2550000
-            },
-            {
-                id: 2,
-                name: "Blancolån",
-                data: 255655
-            },
-            {
-                id: 3,
-                name: "Billån",
-                data: 175000
-            }
-        ]
-    },
-]
+import pensionData from './data.json';
 
 export const settingsData = [
     {
         id: 1,
         title: 'Inkomster',
+        value: pensionData[0].salary.value,
+        procent: pensionData[0].salary.annualInc * 100,
         labelOne: 'Månadslön',
         labelTwo: 'Beräknad årlig löneökning'
     },
@@ -71,24 +13,32 @@ export const settingsData = [
         id: 2,
         title: 'Fastigheter',
         labelOne: 'Fastighetsvärdering',
+        value: pensionData[0].holdings[0].assets.value,
+        procent: pensionData[0].holdings[0].assets.annualInc * 100,
         labelTwo: 'Beräknad årlig värdeökning'
     },
     {
         id: 3,
         title: 'Båt',
         labelOne: 'Sjöfordon',
+        value: pensionData[0].holdings[1].assets.value,
+        procent: pensionData[0].holdings[1].assets.annualInc * 100,
         labelTwo: 'Beräknad årlig värdeförändring'
     },
     {
         id: 4,
         title: 'Fordon',
         labelOne: 'Bilar och motorcyklar',
+        value: pensionData[0].holdings[2].assets.value,
+        procent: pensionData[0].holdings[2].assets.annualInc * 100,
         labelTwo: 'Beräknad årlig värdeförändring'
     },
     {
         id: 5,
         title: 'Övrigt',
         labelOne: 'Konst och värdeföremål',
+        value: pensionData[0].holdings[3].assets.value,
+        procent: pensionData[0].holdings[3].assets.annualInc * 100,
         labelTwo: 'Beräknad årlig värdeförändring'
     }
 ]
@@ -96,7 +46,6 @@ export const settingsData = [
 
 export const doughnutData = {
     labels: ['Skulder', 'Tillgångar'],
-    data: [999999, 9999999],
     colors: ["#C04D4D", "#0F7354"]
 }
 

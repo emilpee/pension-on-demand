@@ -4,21 +4,30 @@
     <div class="form">
         <div class="form__item">
             <label> {{ setting.labelOne }} </label>
-            <input type="number" placeholder="kr/mån">
+            <input type="number" v-model="setting.value" placeholder="kr/mån">
         </div>
         <div class="form__item">
             <label> {{ setting.labelTwo }} </label>
-            <input type="number" placeholder="procent"> 
+            <input type="number" v-model="setting.procent" placeholder="procent"> 
         </div>
     </div>
   </section>
 </template>
 
 <script>
+import pensionData from '../../data/data.json'; 
+
 export default {
+    data() {
+        return {
+            pensionData: pensionData[0],
+            values: []
+        }
+    },
     props: {
         setting: Object
     }
+
 }
 </script>
 

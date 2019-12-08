@@ -1,10 +1,44 @@
 <template>
     <main class="doughnut__labels">
-        <div class="label" v-for="label in labelData" :key="label.id" @click="showDetails">
-            <div class="label__asset" v-for="item in label.data" :key="item.id">
+        <div class="label" @click="showDetails">
+            <div class="label__asset" v-for="label in labelData.pension" :key="label.id" >
                  <div>
-                    <span class="debt__item">{{ item.name }}</span>
-                    <p class="debt__data"> {{ item.data }}</p> 
+                    <span class="debt__item">{{ label.type }}</span>
+                    <p class="debt__data"> {{ label.value }}</p> 
+                    <div class="debt__lights">
+                        <traffic-lights :data="label.data" />
+                    </div>
+                </div>
+                <div> 
+                    <div class="label__details" v-if="display">
+                        <bar-chart :chartsData="barData" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="label__asset" v-for="label in labelData.holdings" :key="label.id" >
+                 <div>
+                    <span class="debt__item">{{ label.assets.type }}</span>
+                    <p class="debt__data"> {{ label.assets.value }}</p> 
+                    <div class="debt__lights">
+                        <traffic-lights :data="label.data" />
+                    </div>
+                </div>
+                <div> 
+                    <!-- // TODO - fråga om v-show -->
+                    <div class="label__details" v-if="display">
+                        <bar-chart :chartsData="barData" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="label" @click="showDetails">
+            <div class="label__debt"  v-for="label in labelData.holdings" :key="label.id">
+                 <div v-if="label.debts.value > 0">
+                    <span class="debt__item">{{ label.debts.loan }}</span>
+                    <p class="debt__data"> {{ label.debts.value }}</p> 
                     <div class="debt__lights">
                         <traffic-lights :data="label.data" />
                     </div>
@@ -25,18 +59,22 @@
 <script>
 import TrafficLights from './TrafficLights.vue';
 import BarChart from './BarChart.vue';
-import { barData, labelData } from '../../data/';
+import { barData } from '../../data/';
+import pensionData from '../../data/data.json';
 
 export default {
     data() {
         return {
             barData: barData,
             display: false,
-            labelData: labelData
+            labelData: pensionData[0]
         }
     },
     components: {
         TrafficLights, BarChart
+    },
+    mounted() {
+        console.log(this.labelData);
     },
     methods: {
         showDetails() {

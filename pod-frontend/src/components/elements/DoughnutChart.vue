@@ -7,6 +7,10 @@ export default {
         chartsData: {
             type: Object,
             default: null
+        },
+        pensionData: {
+            type: Array,
+            default: null
         }
     },
     data() {
@@ -15,7 +19,7 @@ export default {
                 labels: this.chartsData.labels,
                 datasets: [
                     {
-                        data: this.chartsData.data,
+                        data: this.pensionData,
                         backgroundColor: this.chartsData.colors
                     }
                 ],

@@ -23,14 +23,14 @@
         <h3>Målbild</h3>
       </div>
       <div class="sliders">
-        <slider v-for="(data, index) in slideData" :data="data" :key="index" /> 
+        <slider v-for="(data, index) in pensionData.goals.label" :data="data" :key="index" /> 
       </div>
     </section>
 
 
     <section class="home__optimize">
       <div class="optimize title">
-        <h2>Önskad pensionsmål på {{ pensionGoal }} kr/mån uppnåelig.</h2>
+        <h2>Önskad pensionsmål på {{ wantedPension }} kr/mån uppnåelig.</h2>
         <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span>
       </div>
       <Button msg="Optimera med PD" />
@@ -45,13 +45,13 @@
         </div>
         <div class="doughnut__chart">
           <div class="doughnut__charttext">
-            <p v-text="doughnutData.labels[0]"></p>
-            <p v-text="doughnutData.data[0]"></p>
+            <p>Tillgångar</p>
+            <p v-text="pensionData.totalAssets"></p>
           </div>
-          <doughnut-chart :chartsData="doughnutData" /> 
+          <doughnut-chart :chartsData="doughnutData" :pensionData="[pensionData.totalDebts, pensionData.totalAssets]" /> 
           <div class="doughnut__charttext">
-            <p v-text="doughnutData.labels[1]"></p>
-            <p v-text="doughnutData.data[1]"></p>
+            <p>Skulder</p>
+            <p v-text="pensionData.totalDebts"></p>
           </div>
         </div>
 
@@ -101,6 +101,7 @@ import {
 
 import { doughnutData } from '../data/';
 import { barData } from '../data/';
+import pensionData from '../data/data.json';
 
 export default {
   name: 'home',
@@ -115,7 +116,8 @@ export default {
         labels: barData.labels,
         data: barData.data,
         colors: barData.colors
-      }
+      },
+      pensionData: pensionData[0]
     }
   },
 
@@ -127,8 +129,8 @@ export default {
     user() {
       return this.$store.state.user;
     }, 
-    pensionGoal() {
-      return this.$store.state.pensionGoal;
+    wantedPension() {
+      return this.$store.state.wantedPension;
     },
     slideData() {
       return this.$store.state.slideData;

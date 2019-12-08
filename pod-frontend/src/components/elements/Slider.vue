@@ -11,6 +11,7 @@
 </template>
 
 <script>
+
 export default {
 
     data() {
@@ -21,6 +22,7 @@ export default {
 
     mounted() {
         this.updateSlider();
+        console.log(this.data);
     },
 
 
@@ -92,7 +94,7 @@ export default {
             font-weight: 500;
         }
 
-        &:nth-child(odd) {
+        &:first-child {
 
             label {
 
