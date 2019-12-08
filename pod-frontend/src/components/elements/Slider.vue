@@ -22,7 +22,6 @@ export default {
 
     mounted() {
         this.updateSlider();
-        console.log(this.data);
     },
 
 

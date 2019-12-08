@@ -101,6 +101,7 @@ import {
 
 import { doughnutData } from '../data/';
 import { barData } from '../data/';
+import { db } from '../../firebase-config';
 import pensionData from '../data/data.json';
 
 export default {
@@ -135,6 +136,24 @@ export default {
     slideData() {
       return this.$store.state.slideData;
     }
+  },
+
+  mounted() {
+
+    let pensionData = db.collection("pensiondata").doc("NF0ADjddicp3p4xnnEQn");
+
+    pensionData.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("Document data:", doc.data()); 
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+
+
   }
 }
 </script>
