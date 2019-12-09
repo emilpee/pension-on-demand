@@ -10,5 +10,8 @@ export default {
     }, 
     setPensionData(state, data) {
         state.pensionData = data;
+    },
+    setUserData(state, assets) {
+        state.userAssets = assets;
     }
 }

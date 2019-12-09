@@ -23,7 +23,7 @@
         <h3>Målbild</h3>
       </div>
       <div class="sliders">
-        <slider v-for="(data, index) in jsonData.goals.label" :data="data" :key="index" /> 
+        <slider v-for="(data, index) in goals.label" :data="data" :key="index" /> 
       </div>
     </section>
 
@@ -46,17 +46,17 @@
         <div class="doughnut__chart">
           <div class="doughnut__charttext">
             <p>Tillgångar</p>
-            <p v-text="pensionData.totalAssets"></p>
+            <p v-text="totalAssets"></p>
           </div>
-          <doughnut-chart :chartsData="doughnutData" :pensionData="[pensionData.totalDebts, pensionData.totalAssets]" /> 
+          <doughnut-chart :chartsData="doughnutData" :pensionData="[totalAssets, totalDebts]" /> 
           <div class="doughnut__charttext">
             <p>Skulder</p>
-            <p v-text="pensionData.totalDebts"></p>
+            <p v-text="totalDebts"></p>
           </div>
         </div>
 
         <div class="doughnut__labels">
-          <Labels  />
+          <Labels :holdings="holdings" :pension="pension"  />
         </div>
       </div>      
 
@@ -99,8 +99,6 @@ import {
   Labels
 } from '../components/';
 
-import { doughnutData } from '../data/';
-import { barData } from '../data/';
 import { db } from '../../firebase-config';
 import jsonData from '../data/data.json';
 
@@ -108,18 +106,19 @@ export default {
   name: 'home',
   data() {
     return {
-      doughnutData: {
-        labels: doughnutData.labels,
-        data: doughnutData.data,
-        colors: doughnutData.colors
-      },
-       barData: {
-        labels: barData.labels,
-        data: barData.data,
-        colors: barData.colors
+        doughnutData: {
+          labels: ['Tillgångar', 'Skulder'],
+          colors: [ "#0F7354", "#C04D4D"]
+        },
+        barData: {
+          labels: ['Månadslön', 'Tillgångar', 'Privat pension', 'Tjänstepension', 'Allmän pension'],
+          data: [42000, 999, 9999, 9999, 999],
+          colors: ["#C04D4D", "#0F7354", "#C04D4D", "#0F7354", "#0F7354"]
       },
       jsonData: jsonData[0],
-      firebaseData: []
+      goals: jsonData[0].goals,
+      holdings: jsonData[0].holdings,
+      pension: jsonData[0].pension
     }
   },
 
@@ -134,12 +133,22 @@ export default {
     wantedPension() {
       return this.$store.state.wantedPension;
     },
-    slideData() {
-      return this.$store.state.slideData;
-    },
     pensionData() {
       return this.$store.state.pensionData[0];
+    },
+    totalAssets() {
+      return this.$store.state.totalAssets;
+    },
+    totalDebts() {
+      return this.$store.state.totalDebts;
+    },
+    getTotalAssets() {
+      return this.$store.getters.getTotalAssets;
+    },
+    getTotalDebts() {
+      return this.$store.getters.getTotalDebts;
     }
+
   },
 
   mounted() {

@@ -107,7 +107,7 @@ export default {
                             currentDate < 10 ? currentDate = '0' + currentDate : currentDate;
                             
                             let date = today.getFullYear()+''+(today.getMonth()+1)+''+currentDate;
-                            
+
                             let currentAge = date - personalNr;
 
                             fbData.set({
@@ -118,7 +118,6 @@ export default {
                                 }
                             });
 
-                            this.$store.commit('setUser', resp.data.user);
                             sessionStorage.setItem('user', resp.data.token); 
                             this.navigateUser();
                         }

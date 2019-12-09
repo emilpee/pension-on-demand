@@ -7,12 +7,10 @@
       <span>Nu kan du hantera din framtid själv, inga fler besök hos pensionsrådgivare.</span>
     </section>
 
-    <section class="settings__item">
-        <SettingsItem v-for="data in settingsData" :key="data.id" :setting="data" />
-    </section> 
+    <SettingsItem v-for="data in settingsData" :key="data.id" :setting="data" />
 
     <section class="settings__button">
-        <Button msg="Spara" />
+        <Button msg="Spara" @click.native="updateSettingsData" />
     </section>
 
     </div>
@@ -21,20 +19,128 @@
 
 <script>
 import { SettingsItem, Button } from '../components/';
-import { settingsData } from '../data/';
+import data from '../data/data.json';
 
 export default {
 
     data() {
         return {
-            settingsData: settingsData
+            test: [],
+            settingsData: data[0].settingsData
         }
+    },
+
+    computed: {
+        personalNr() {
+            return this.$store.state.user.personalNumber;
+        }
+    },
+
+    mounted() {
+        this.getUserInfo();
     },
 
     components: {
         SettingsItem, Button
-    }
+    },
+    methods: {
+        getUserInfo() {
+            this.$store.dispatch('getUserData', this.personalNr).then(res => {
+                res.get().then(doc => {
+                    if (doc.data().income) {  
+                        // If exist, show data stored in db
+                        for (let i = 0; i < this.settingsData.length; i++) {
+                            this.settingsData[i].value = doc.data().income[i].value;
+                            this.settingsData[i].procent = doc.data().income[i].procent;
+                        }
 
+                    } else {
+                        res.set({
+                            income: [
+                                {
+                                    type: "lön",
+                                    value: 0,
+                                    procent: 0
+                                },
+                                {
+                                    type: "fastighet",
+                                    value: 0,
+                                    procent: 0
+                                },
+                                {
+                                    type: "båt",
+                                    value: 0,
+                                    procent: 0
+                                },
+                                {
+                                    type: "fordon",
+                                    value: 0,
+                                    procent: 0
+                                },
+                                {
+                                    type: "övrigt",
+                                    value: 0,
+                                    procent: 0
+                                }
+                            ]
+                        }, { merge: true })
+                    }
+                    this.test = doc.data().income;
+                    this.$store.commit('setUserData', this.test);
+                })
+            })
+        },
+
+        updateSettingsData() {
+            this.$store.dispatch('getUserData', this.personalNr).then(res => {
+                // TODO - make dynamic
+                let test = [];
+                for (let i = 0; i < this.test.length; i++) {
+                    test.push(this.settingsData[i].value);
+               
+                    res.set({
+                            income: [
+                            {
+                                type: "lön",
+                                value: this.settingsData[0].value,
+                                procent: 0
+                            },
+                            {
+                                type: "fastighet",
+                                value: this.settingsData[1].value,
+                                procent: 0
+                            },
+                            {
+                                type: "båt",
+                                value: this.settingsData[2].value,
+                                procent: 0
+                            },
+                            {
+                                type: "fordon",
+                                value: this.settingsData[3].value,
+                                procent: 0
+                            },
+                            {
+                                type: "övrigt",
+                                value: this.settingsData[4].value,
+                                procent: 0
+                            }
+                        ]
+                    }, { merge: true }).then(() => {
+                        console.log('Uppdaterat!');
+                    })
+                }
+                this.test = test;
+            })       
+        }
+
+    },
+
+    watch: {
+        settingsData: function() {
+            this.getUserInfo();
+        }
+    }
 }
 
 </script>

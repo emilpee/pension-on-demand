@@ -15,18 +15,12 @@
 </template>
 
 <script>
-import pensionData from '../../data/data.json'; 
 
 export default {
-    data() {
-        return {
-            pensionData: pensionData[0],
-            values: []
-        }
-    },
+
     props: {
         setting: Object
-    }
+    },
 
 }
 </script>

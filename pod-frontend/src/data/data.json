@@ -1,5 +1,47 @@
 [
     {
+        "settingsData": [
+            {
+                "id": 1,
+                "title": "Inkomster",
+                "value": 0,
+                "procent": 0,
+                "labelOne": "Månadslön",
+                "labelTwo": "Beräknad årlig löneökning"
+            },
+            {
+                "id": 2,
+                "title": "Fastigheter",
+                "value": 0,
+                "labelOne": "Fastighetsvärdering",
+                "procent": 0,
+                "labelTwo": "Beräknad årlig värdeökning"
+            },
+            {
+                "id": 3,
+                "title": "Båt",
+                "labelOne": "Sjöfordon",
+                "value": 0,
+                "procent": 0,
+                "labelTwo": "Beräknad årlig värdeförändring"
+            },
+            {
+                "id": 4,
+                "title": "Fordon",
+                "labelOne": "Bilar och motorcyklar",
+                "value": 0,
+                "procent": 0,
+                "labelTwo": "Beräknad årlig värdeförändring"
+            },
+            {
+                "id": 5,
+                "title": "Övrigt",
+                "labelOne": "Konst och värdeföremål",
+                "value": 0,
+                "procent": 0,
+                "labelTwo": "Beräknad årlig värdeförändring"
+            }
+        ],
         "pension": [
             {
                 "type": "Allmän pension", 
@@ -96,6 +138,8 @@
             ]
         },
         "inflation": 0.02,
-        "risks": [0.04, 0.08, 0.1]
+        "risks": [0.04, 0.08, 0.1],
+        "totalAssets": 10,
+        "totalDebts": 1
     }
 ]

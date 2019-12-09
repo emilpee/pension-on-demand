@@ -1,7 +1,7 @@
 <template>
     <main class="doughnut__labels">
         <div class="label" @click="showDetails">
-            <div class="label__asset" v-for="label in labelData.pension" :key="label.id" >
+            <div class="label__asset" v-for="label in pension" :key="label.id" >
                  <div>
                     <span class="debt__item">{{ label.type }}</span>
                     <p class="debt__data"> {{ label.value }}</p> 
@@ -16,7 +16,7 @@
                 </div>
             </div>
             
-            <div class="label__asset" v-for="label in labelData.holdings" :key="label.id" >
+            <div class="label__asset" v-for="label in holdings" :key="label.id" >
                  <div>
                     <span class="debt__item">{{ label.assets.type }}</span>
                     <p class="debt__data"> {{ label.assets.value }}</p> 
@@ -35,12 +35,12 @@
         </div>
 
         <div class="label" @click="showDetails">
-            <div class="label__debt"  v-for="label in labelData.holdings" :key="label.id">
+            <div class="label__debt" v-for="label in holdings" :key="label.id">
                  <div v-if="label.debts.value > 0">
                     <span class="debt__item">{{ label.debts.loan }}</span>
                     <p class="debt__data"> {{ label.debts.value }}</p> 
                     <div class="debt__lights">
-                        <traffic-lights :data="label.data" />
+                        <traffic-lights :data="label.debts.data" />
                     </div>
                 </div>
                 <div> 
@@ -59,16 +59,15 @@
 import TrafficLights from './TrafficLights.vue';
 import BarChart from './BarChart.vue';
 import { barData } from '../../data/';
-import pensionData from '../../data/data.json';
 
 export default {
     data() {
         return {
             barData: barData,
             display: false,
-            labelData: pensionData[0]
         }
     },
+    props: ['holdings', 'pension'],
     components: {
         TrafficLights, BarChart
     },
@@ -76,7 +75,7 @@ export default {
         showDetails() {
             this.display = !this.display;
         }
-    },
+    }
 
 }
 </script>
