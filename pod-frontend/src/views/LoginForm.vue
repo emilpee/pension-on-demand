@@ -21,6 +21,7 @@
 
 <script>
 import { Button, LoadingSpinner } from '../components/';
+import { db } from '../../firebase-config';
  
 export default {
 
@@ -68,6 +69,7 @@ export default {
             },
          
         cancelSignIn() {
+            // TODO - avbryt request.
             this.loading = false;
             this.interval = '';
         }, 
@@ -81,6 +83,7 @@ export default {
 
         checkStatus() {
             this.$store.dispatch('checkStatus', { status: this.orderRef }).then(response => {
+
             // Check status every 2 seconds
             this.interval = 2000;
             let status = response.data.status;
@@ -90,11 +93,31 @@ export default {
 
                 let interval = setInterval(() => {
                     this.$store.dispatch('checkStatus', { status: this.orderRef }).then(resp => {
-                        let status = resp.data.status;
-                        console.log(resp);
+                        let data = resp.data;
+                        let status = data.status;
 
+                        // User successfully signed the application
                         if (status === "complete") {
                             clearInterval(interval);
+                            let fbData = db.collection("pensiondata").doc(data.user.personalNumber);
+
+                            const personalNr = data.user.personalNumber.substr(0,8);
+                            let today = new Date();
+                            let currentDate = today.getDate(); 
+                            currentDate < 10 ? currentDate = '0' + currentDate : currentDate;
+                            
+                            let date = today.getFullYear()+''+(today.getMonth()+1)+''+currentDate;
+                            
+                            let currentAge = date - personalNr;
+
+                            fbData.set({
+                                user: {
+                                    name: data.user.name,
+                                    personalNr: data.user.personalNumber,
+                                    age: currentAge.toString().substr(0,2)
+                                }
+                            });
+
                             this.$store.commit('setUser', resp.data.user);
                             sessionStorage.setItem('user', resp.data.token); 
                             this.navigateUser();
@@ -102,11 +125,11 @@ export default {
 
                         if (status === "failed") {
 
-                            if (resp.data.hintCode === "userCancel") {
+                            if (data.hintCode === "userCancel") {
                                 this.error = "Du har avbrutit signeringen.";
                             }
 
-                            else if (resp.data.hintCode === "expiredTransaction") {
+                            else if (data.hintCode === "expiredTransaction") {
                                 this.error = "Inget svar från BankID-appen. Var god försök igen.";
                             }
 

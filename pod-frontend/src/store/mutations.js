@@ -7,5 +7,8 @@ export default {
     },
     setGoal(state, goal) {
         state.wantedPension = goal;
+    }, 
+    setPensionData(state, data) {
+        state.pensionData = data;
     }
 }

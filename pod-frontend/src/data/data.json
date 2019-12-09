@@ -1,10 +1,5 @@
 [
     {
-        "user": {
-            "age": 44,
-            "personalNr": 197512165668,
-            "name": "Sylvia Johnsson"
-        }, 
         "pension": [
             {
                 "type": "Allmän pension", 
@@ -14,7 +9,6 @@
                 "type": "Tjänstepension",
                 "value": 2500
             }
-
         ],
         "holdings": [
             {
@@ -99,12 +93,9 @@
                     "minValue": 0,
                     "maxValue": 2
                 }
-            ],
-            "response": 0
+            ]
         },
         "inflation": 0.02,
-        "risks": [0.04, 0.08, 0.1],
-        "totalAssets": 950000,
-        "totalDebts": 95000 
+        "risks": [0.04, 0.08, 0.1]
     }
 ]

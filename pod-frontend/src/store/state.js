@@ -1,7 +1,9 @@
 export default {
     signedIn: false,
     user: {},
+    pensionData: [],
     wantedPension: '',
+    salary: '',
     slideData: [
         {
             id: 1,
@@ -16,7 +18,7 @@ export default {
             maxValue: 70
         },
         {
-            id: 4,
+            id: 3,
             title: 'Riskprofil',
             minValue: 0,
             maxValue: 2

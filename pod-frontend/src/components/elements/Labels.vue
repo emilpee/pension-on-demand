@@ -44,7 +44,6 @@
                     </div>
                 </div>
                 <div> 
-                    <!-- // TODO - fråga om v-show -->
                     <div class="label__details" v-if="display">
                         <bar-chart :chartsData="barData" />
                     </div>
@@ -72,9 +71,6 @@ export default {
     },
     components: {
         TrafficLights, BarChart
-    },
-    mounted() {
-        console.log(this.labelData);
     },
     methods: {
         showDetails() {

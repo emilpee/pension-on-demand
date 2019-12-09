@@ -23,7 +23,7 @@
         <h3>Målbild</h3>
       </div>
       <div class="sliders">
-        <slider v-for="(data, index) in pensionData.goals.label" :data="data" :key="index" /> 
+        <slider v-for="(data, index) in jsonData.goals.label" :data="data" :key="index" /> 
       </div>
     </section>
 
@@ -36,7 +36,7 @@
       <Button msg="Optimera med PD" />
     </section>
 
-    <section class="home__doughnut">
+    <section class="home__doughnut" v-if="pensionData !== undefined">
 
       <div class="doughnut">
         <div class="doughnut__header title">
@@ -102,7 +102,7 @@ import {
 import { doughnutData } from '../data/';
 import { barData } from '../data/';
 import { db } from '../../firebase-config';
-import pensionData from '../data/data.json';
+import jsonData from '../data/data.json';
 
 export default {
   name: 'home',
@@ -118,7 +118,8 @@ export default {
         data: barData.data,
         colors: barData.colors
       },
-      pensionData: pensionData[0]
+      jsonData: jsonData[0],
+      firebaseData: []
     }
   },
 
@@ -135,26 +136,20 @@ export default {
     },
     slideData() {
       return this.$store.state.slideData;
+    },
+    pensionData() {
+      return this.$store.state.pensionData[0];
     }
   },
 
   mounted() {
+    this.$store.commit('setPensionData', this.firebaseData);
+  },
 
-    let pensionData = db.collection("pensiondata").doc("NF0ADjddicp3p4xnnEQn");
+  firestore: {
+    firebaseData: db.collection('pensiondata')
+  },
 
-    pensionData.get().then(function(doc) {
-        if (doc.exists) {
-            console.log("Document data:", doc.data()); 
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-    });
-
-
-  }
 }
 </script>
 
