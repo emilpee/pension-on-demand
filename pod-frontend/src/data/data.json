@@ -116,10 +116,10 @@
             "label": [
                 {
                     "id": 1,
-                    "title": "Önskad pension",
+                    "title": "Utrymme för privat sparande",
                     "value": 5000,
-                    "minValue": 5000,
-                    "maxValue": 50000
+                    "minValue": 100,
+                    "maxValue": 35000
                 },
                 {
                     "id": 2,
@@ -139,7 +139,10 @@
         },
         "inflation": 0.02,
         "risks": [0.04, 0.08, 0.1],
-        "totalAssets": 10,
-        "totalDebts": 1
+        "barData": {
+            "labels": ["Månadslön", "Tillgångar", "Privat pension", "Tjänstepension", "Allmän pension"],
+            "data": [42000, 999, 9999, 9999, 999],
+            "colors": ["#C04D4D", "#0F7354", "#C04D4D", "#0F7354", "#0F7354"]
+        }
     }
 ]

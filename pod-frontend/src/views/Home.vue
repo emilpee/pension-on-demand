@@ -23,20 +23,20 @@
         <h3>Målbild</h3>
       </div>
       <div class="sliders">
-        <slider v-for="(data, index) in goals.label" :data="data" :key="index" /> 
+        <slider v-for="(data, index) in jsonData.goals.label" :data="data" :key="index" /> 
       </div>
     </section>
 
 
     <section class="home__optimize">
       <div class="optimize title">
-        <h2>Önskad pensionsmål på {{ wantedPension }} kr/mån uppnåelig.</h2>
+        <h2>Se hur mycket pension du kan få för ett sparande på {{ wantedPension }} kr/mån.</h2>
         <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span>
       </div>
       <Button msg="Optimera med PD" />
     </section>
 
-    <section class="home__doughnut" v-if="pensionData !== undefined">
+    <section class="home__doughnut" v-if="jsonData.pension !== undefined">
 
       <div class="doughnut">
         <div class="doughnut__header title">
@@ -46,17 +46,17 @@
         <div class="doughnut__chart">
           <div class="doughnut__charttext">
             <p>Tillgångar</p>
-            <p v-text="totalAssets"></p>
+            <p v-text="$store.state.totalAssets"></p>
           </div>
-          <doughnut-chart :chartsData="doughnutData" :pensionData="[totalAssets, totalDebts]" /> 
+          <doughnut-chart :chartsData="doughnutData" :pensionData="[$store.state.totalAssets, $store.state.totalDebts]" /> 
           <div class="doughnut__charttext">
             <p>Skulder</p>
-            <p v-text="totalDebts"></p>
+            <p v-text="$store.state.totalDebts"></p>
           </div>
         </div>
 
         <div class="doughnut__labels">
-          <Labels :holdings="holdings" :pension="pension"  />
+          <Labels :holdings="jsonData.holdings" :pension="jsonData.pension"  />
         </div>
       </div>      
 
@@ -67,16 +67,6 @@
         <div class="bar__header title">
           <h3>Nuvarande pensionslösning</h3>
           <span>Prognosen ser ut som följande ifall du behåller din nuvarande strategi.</span>
-        </div>
-        <div class="bar__chart">
-          <bar-chart :chartsData="barData" />
-        </div>
-      </div>
-
-      <div class="bar">
-        <div class="bar__header title">
-          <h3>Pension on demand</h3>
-          <span>Baserat på analysen finns följande potential att uppnå.</span>
         </div>
         <div class="bar__chart">
           <bar-chart :chartsData="barData" />
@@ -106,19 +96,16 @@ export default {
   name: 'home',
   data() {
     return {
-        doughnutData: {
-          labels: ['Tillgångar', 'Skulder'],
-          colors: [ "#0F7354", "#C04D4D"]
-        },
-        barData: {
-          labels: ['Månadslön', 'Tillgångar', 'Privat pension', 'Tjänstepension', 'Allmän pension'],
-          data: [42000, 999, 9999, 9999, 999],
-          colors: ["#C04D4D", "#0F7354", "#C04D4D", "#0F7354", "#0F7354"]
+      doughnutData: {
+        labels: ['Tillgångar', 'Skulder'],
+        colors: [ "#0F7354", "#C04D4D"]
+      },
+      barData: {
+        labels: ['Månadslön', 'Tillgångar', 'Privat pension', 'Tjänstepension', 'Allmän pension'],
+        data: [42000, 999, 9999, 9999, 999],
+        colors: ["#C04D4D", "#0F7354", "#C04D4D", "#0F7354", "#0F7354"]
       },
       jsonData: jsonData[0],
-      goals: jsonData[0].goals,
-      holdings: jsonData[0].holdings,
-      pension: jsonData[0].pension
     }
   },
 
@@ -136,12 +123,6 @@ export default {
     pensionData() {
       return this.$store.state.pensionData[0];
     },
-    totalAssets() {
-      return this.$store.state.totalAssets;
-    },
-    totalDebts() {
-      return this.$store.state.totalDebts;
-    },
     getTotalAssets() {
       return this.$store.getters.getTotalAssets;
     },
@@ -157,7 +138,7 @@ export default {
 
   firestore: {
     firebaseData: db.collection('pensiondata')
-  },
+  }
 
 }
 </script>

@@ -2,7 +2,7 @@ export default {
     signedIn: false,
     user: {},
     pensionData: [],
-    userAssets: [],
+    userData: [],
     wantedPension: '',
     salary: '',
     totalAssets: 0,

@@ -25,7 +25,6 @@
                     </div>
                 </div>
                 <div> 
-                    <!-- // TODO - fråga om v-show -->
                     <div class="label__details" v-if="display">
                         <bar-chart :chartsData="barData" />
                     </div>
@@ -58,12 +57,12 @@
 <script>
 import TrafficLights from './TrafficLights.vue';
 import BarChart from './BarChart.vue';
-import { barData } from '../../data/';
+import barData from '../../data/data.json';
 
 export default {
     data() {
         return {
-            barData: barData,
+            barData: barData[0].barData,
             display: false,
         }
     },

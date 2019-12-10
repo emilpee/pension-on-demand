@@ -47,18 +47,18 @@ export default {
     methods: {
         signIn() {
             if (this.tabs[0].isActive) {
-                // TODO - ta bort hårdkodat personnummer.
-                this.$store.dispatch('signInWithBankID', { ssn: '199309246214' }).then(res => {
-                    let url = `bankid://?autostarttoken=${res.data.autoStartToken}&redirect=null`;
+                this.$store.dispatch('signInWithBankID', { autostart: true, ssn: '199309246214' }).then(res => {
+                    let url = `bankid://?autostarttoken=${res.data.autoStartToken}&redirect=${encodeURI(document.location)}`;
                     document.location = url;
+                    console.log(url);
                     this.orderRef = res.data.orderRef;
+                    this.loading = true;
                     this.checkStatus();
                 })
                 
             } else {
                 this.$store.dispatch('signInWithBankID', { ssn: this.personNr }).then(res => {
                     this.loading = true;
-
                     let url = `https://app.bankid.com/?autostarttoken=${res.data.autoStartToken}&redirect=null`;
                     console.log(url);
                     this.orderRef = res.data.orderRef;
@@ -69,7 +69,6 @@ export default {
             },
          
         cancelSignIn() {
-            // TODO - avbryt request.
             this.loading = false;
             this.interval = '';
         }, 
@@ -83,16 +82,16 @@ export default {
 
         checkStatus() {
             this.$store.dispatch('checkStatus', { status: this.orderRef }).then(response => {
-
             // Check status every 2 seconds
             this.interval = 2000;
             let status = response.data.status;
 
             if (status === "pending") {
-                this.msg = "Väntar på svar från BankID...";
+                this.msg = "Starta BankID-appen...";
 
                 let interval = setInterval(() => {
                     this.$store.dispatch('checkStatus', { status: this.orderRef }).then(resp => {
+                        console.log(resp);
                         let data = resp.data;
                         let status = data.status;
 
@@ -101,6 +100,7 @@ export default {
                             clearInterval(interval);
                             let fbData = db.collection("pensiondata").doc(data.user.personalNumber);
 
+                            // Räkna ut ålder baserat på personnummer
                             const personalNr = data.user.personalNumber.substr(0,8);
                             let today = new Date();
                             let currentDate = today.getDate(); 
@@ -116,7 +116,9 @@ export default {
                                     personalNr: data.user.personalNumber,
                                     age: currentAge.toString().substr(0,2)
                                 }
-                            });
+                            }, { merge: true });
+
+                            this.$store.commit('setUser', resp.data.user)
 
                             sessionStorage.setItem('user', resp.data.token); 
                             this.navigateUser();

@@ -9,6 +9,10 @@
 
     <SettingsItem v-for="data in settingsData" :key="data.id" :setting="data" />
 
+    <section class="settings__message">
+        <p v-text="message"></p>
+    </section>
+
     <section class="settings__button">
         <Button msg="Spara" @click.native="updateSettingsData" />
     </section>
@@ -25,7 +29,8 @@ export default {
 
     data() {
         return {
-            test: [],
+            userData: [],
+            message: '',
             settingsData: data[0].settingsData
         }
     },
@@ -38,6 +43,7 @@ export default {
 
     mounted() {
         this.getUserInfo();
+        console.log(this)
     },
 
     components: {
@@ -47,7 +53,8 @@ export default {
         getUserInfo() {
             this.$store.dispatch('getUserData', this.personalNr).then(res => {
                 res.get().then(doc => {
-                    if (doc.data().income) {  
+                    if (doc.exists) {  
+                        console.log(doc.data());
                         // If exist, show data stored in db
                         for (let i = 0; i < this.settingsData.length; i++) {
                             this.settingsData[i].value = doc.data().income[i].value;
@@ -85,8 +92,9 @@ export default {
                             ]
                         }, { merge: true })
                     }
-                    this.test = doc.data().income;
-                    this.$store.commit('setUserData', this.test);
+
+                    this.userData = doc.data();
+                    this.$store.commit('setUserData', this.userData);
                 })
             })
         },
@@ -94,15 +102,16 @@ export default {
         updateSettingsData() {
             this.$store.dispatch('getUserData', this.personalNr).then(res => {
                 // TODO - make dynamic
-                let test = [];
-                for (let i = 0; i < this.test.length; i++) {
-                    test.push(this.settingsData[i].value);
+                let data = [];
+
+                for (let i = 0; i < this.settingsData.length; i++) {
+                    data.push(this.settingsData[i].value);
                
                     res.set({
                             income: [
                             {
                                 type: "lön",
-                                value: this.settingsData[0].value,
+                                value: data[0],
                                 procent: 0
                             },
                             {
@@ -127,20 +136,19 @@ export default {
                             }
                         ]
                     }, { merge: true }).then(() => {
+                        // TODO - lägg in respons
                         console.log('Uppdaterat!');
                     })
                 }
-                this.test = test;
+                this.$store.commit('setUserData', data);
+                
+                this.message = "Dina inställningar sparades!";
             })       
         }
 
     },
 
-    watch: {
-        settingsData: function() {
-            this.getUserInfo();
-        }
-    }
+    
 }
 
 </script>
@@ -165,9 +173,17 @@ export default {
         }
     }
 
+    &__message {
+        min-height: 2rem;
+        @extend %center-content;
+        > p {
+            margin: 0;
+        }
+    }
+
     &__button {
-        @extend %center-content;    
-        padding: 0 1rem 2rem 1rem;
+        @extend %center-content;
+        margin: 2rem 0;
     }
 }
 

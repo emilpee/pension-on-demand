@@ -40,6 +40,12 @@ export default {
         this.renderChart(this.chartData, this.options)
     },
 
+    watch: {
+        pensionData: function() {
+             this.renderChart(this.chartData, this.options)
+        }
+    }
+
 }
 
 </script>

@@ -2,26 +2,23 @@ import data from '../data/data.json';
 
 export default {
     getTotalAssets(state) {
-        return data.filter(asset => {
-            let total;
+        data.map(asset => {
+            var total;
 
-            asset.holdings.forEach(item => {
-                total = state.totalAssets += Number(item.assets.value);
-           })
+            console.log(asset)
 
-           asset.pension.forEach(item => {
-               total = state.totalAssets += Number(item.value);
-           })
-
-           return total;
+            asset.holdings.forEach(item => total = state.totalAssets += Number(item.assets.value));
+            asset.pension.forEach(item => total = state.totalAssets += Number(item.value));
+            console.log(total);
+       
+            return total;
         })
     },
     getTotalDebts(state) {
-        return data.filter(asset => {
-            asset.holdings.forEach(item => {
-            let total = state.totalDebts += Number(item.debts.value);
+        data.map(asset => {
+            let total;
+            asset.holdings.forEach(item => total = state.totalDebts += Number(item.debts.value));
             return total;
-           })
         })
-    },
+    }
 }
