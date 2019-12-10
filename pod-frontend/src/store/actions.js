@@ -14,6 +14,7 @@ export default {
     },
     async getUserData(ctx, personalNr) {
         let doc = await db.collection("pensiondata").doc(`${personalNr}`);
+        console.log(personalNr);
         return doc;
     },
 }

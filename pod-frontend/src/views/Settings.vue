@@ -37,13 +37,13 @@ export default {
 
     computed: {
         personalNr() {
-            return this.$store.state.user.personalNumber;
+            return this.$store.state.personalNr;
         }
     },
 
     mounted() {
+        this.$store.commit('setPersonalNr', this.$store.state.user.personalNumber);
         this.getUserInfo();
-        console.log(this)
     },
 
     components: {
@@ -57,11 +57,13 @@ export default {
                         console.log(doc.data());
                         // If exist, show data stored in db
                         for (let i = 0; i < this.settingsData.length; i++) {
-                            this.settingsData[i].value = doc.data().income[i].value;
-                            this.settingsData[i].procent = doc.data().income[i].procent;
+                            for (let j = 0; j < doc.data().income.length; j++) {
+                                this.settingsData[i].value = doc.data().income[j].value;
+                                this.settingsData[i].procent = doc.data().income[j].procent;
+                            }
                         }
 
-                    } else {
+                    } else if (!doc.exists) {
                         res.set({
                             income: [
                                 {
@@ -95,6 +97,7 @@ export default {
 
                     this.userData = doc.data();
                     this.$store.commit('setUserData', this.userData);
+                    
                 })
             })
         },
@@ -136,17 +139,21 @@ export default {
                             }
                         ]
                     }, { merge: true }).then(() => {
-                        // TODO - lägg in respons
-                        console.log('Uppdaterat!');
+                        this.message = "Dina inställningar sparades!"
                     })
+
                 }
                 this.$store.commit('setUserData', data);
-                
-                this.message = "Dina inställningar sparades!";
             })       
         }
 
     },
+
+    watch: {
+        values: function() {
+            this.message = '';
+        }
+    }
 
     
 }

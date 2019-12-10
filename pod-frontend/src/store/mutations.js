@@ -13,5 +13,8 @@ export default {
     },
     setUserData(state, data) {
         state.userData = data;
+    },
+    setPersonalNr(state, payload) {
+        state.personalNr = payload;
     }
 }

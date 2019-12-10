@@ -4,11 +4,11 @@
     <div class="form">
         <div class="form__item">
             <label> {{ setting.labelOne }} </label>
-            <input type="number" v-model="setting.value" placeholder="kr/mån">
+            <input type="number" v-model="setting.value" @focus="$parent.message = ''" placeholder="kr/mån">
         </div>
         <div class="form__item">
             <label> {{ setting.labelTwo }} </label>
-            <input type="number" v-model="setting.procent" placeholder="procent"> 
+            <input type="number" v-model="setting.procent" @focus="$parent.message = ''" placeholder="procent"> 
         </div>
     </div>
   </section>

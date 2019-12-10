@@ -46,12 +46,12 @@
         <div class="doughnut__chart">
           <div class="doughnut__charttext">
             <p>Tillgångar</p>
-            <p v-text="$store.state.totalAssets"></p>
+            <p v-text="totalAssets.toString()"></p>
           </div>
-          <doughnut-chart :chartsData="doughnutData" :pensionData="[$store.state.totalAssets, $store.state.totalDebts]" /> 
+          <doughnut-chart :chartsData="doughnutData" :pensionData="[totalAssets, totalDebts]" /> 
           <div class="doughnut__charttext">
             <p>Skulder</p>
-            <p v-text="$store.state.totalDebts"></p>
+            <p v-text="totalDebts.toString()"></p>
           </div>
         </div>
 
@@ -123,10 +123,10 @@ export default {
     pensionData() {
       return this.$store.state.pensionData[0];
     },
-    getTotalAssets() {
+    totalAssets() {
       return this.$store.getters.getTotalAssets;
     },
-    getTotalDebts() {
+    totalDebts() {
       return this.$store.getters.getTotalDebts;
     }
 
@@ -134,6 +134,7 @@ export default {
 
   mounted() {
     this.$store.commit('setPensionData', this.firebaseData);
+    this.$store.commit('setPersonalNr', this.user.personalNumber);
   },
 
   firestore: {
@@ -295,7 +296,7 @@ export default {
 
     .bar {
         @extend %column;
-        margin-top: 2rem;
+        margin: 2rem 0;
 
         &__chart {
           background: $light;

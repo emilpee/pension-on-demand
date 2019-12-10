@@ -1,6 +1,7 @@
 export default {
     signedIn: false,
     user: {},
+    personalNr: '',
     pensionData: [],
     userData: [],
     wantedPension: '',
