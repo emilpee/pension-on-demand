@@ -4,7 +4,7 @@
     <div class="form">
         <div class="form__item">
             <label> {{ setting.labelOne }} </label>
-            <input type="number" v-model="setting.value" @focus="$parent.message = ''" placeholder="kr/mån">
+            <input type="number" v-model="setting.value" @focus="$parent.message = ''" placeholder="SEK">
         </div>
         <div class="form__item">
             <label> {{ setting.labelTwo }} </label>

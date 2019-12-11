@@ -2,10 +2,12 @@
     <main class="doughnut__labels">
 
         <div class="label">
+            <h2 class="label__header">Tillgångar</h2>
             <LabelItem class="label__asset" v-for="(label, index) in data.pension" :label="label" :index="index" :key="index+'pension'" />
             <LabelItem class="label__asset" v-for="(label, index) in userData.income" :label="label" :index="index" :key="index+'income'" />
         </div>
         <div class="label">
+            <h2 class="label__header">Skulder</h2>
             <LabelItem class="label__debt" v-for="(label, index) in data.debts" :label="label" :index="index" :key="index+'debts'" />
         </div>
 
@@ -46,10 +48,6 @@ export default {
         margin-right: 1rem;
     }
 
-    &:nth-child(2) {
-        margin-left: 1rem;
-    }
-
     &__details {
         width: 100%;
     }
@@ -84,6 +82,17 @@ export default {
             @extend %center-content;
         }
     
+    }
+
+    @include breakpoints(large) {
+
+        &__header {
+            display: none;
+        }
+
+        &:nth-child(2) {
+            margin-left: 1rem;
+        }
     }
     
 }

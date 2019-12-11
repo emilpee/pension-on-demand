@@ -54,16 +54,48 @@
             }
         ],
         "debts": [
-            {"type": "Bostadslån", "value": 1250000, "interest": 0.02},
-            {"type": "Billån", "value": 1000, "interest": 0.01},
-            {"type": "Båtlån", "value": 1500, "interest": 0.02},
-            {"type": "Blancolån", "value": 25000, "interest": 0.025}
+            {
+                "type": "Bostadslån", 
+                "value": 1250000, 
+                "interest": 0.02
+            },
+            {
+                "type": "Billån",
+                "value": 1000, 
+                "interest": 0.01
+            },
+            {
+                "type": "Båtlån",
+                "value": 1500,
+                "interest": 0.02
+            },
+            {
+                "type": "Blancolån",
+                "value": 25000,
+                "interest": 0.025
+            }
         ],
         "assets": [
-            {"type": "Fastigheter", "value": 1250000, "annualInc": 0.03},
-            {"type": "Fordon", "value": 1000, "annualInc": -0.02},
-            {"type": "Båt", "value": 1500, "annualInc": 0.02},
-            {"type": "Övrigt", "value": 25000, "annualInc": 0.025}
+            {
+                "type": "Fastigheter",
+                "value": 1250000, 
+                "annualInc": 0.03
+            },
+            {
+                "type": "Fordon", 
+                "value": 1000, 
+                "annualInc": -0.02
+            },
+            {
+                "type": "Båt",
+                "value": 1500, 
+                "annualInc": 0.02
+            },
+            {
+                "type": "Övrigt",
+                "value": 25000,
+                "annualInc": 0.025
+            }
         ],
         "savings": {
             "title": "Sparande", 

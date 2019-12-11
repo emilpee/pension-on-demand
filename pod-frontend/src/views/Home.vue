@@ -48,7 +48,7 @@
             <p>Tillgångar</p>
             <p v-text="totalAssets.toString()"></p>
           </div>
-          <doughnut-chart :chartsData="doughnutData" :pensionData="[totalAssets, totalDebts]" /> 
+          <doughnut-chart v-if="totalAssets" :chartsData="doughnutData" :pensionData="[totalAssets, totalDebts]" /> 
           <div class="doughnut__charttext">
             <p>Skulder</p>
             <p v-text="totalDebts.toString()"></p>
@@ -264,6 +264,7 @@ export default {
 
         &__labels {
           display: flex; 
+          flex-direction: column;
           width: inherit;
           margin-top: .5rem;
         }
@@ -283,10 +284,6 @@ export default {
 
       }
 
-      @include breakpoints(large) {
-        flex-direction: row;
-      }
-
     }
 
     .bar {
@@ -304,6 +301,15 @@ export default {
         }
 
     }
+
+      @include breakpoints(large) {
+        flex-direction: row;
+      
+        .doughnut__labels {
+          flex-direction: row;
+        }
+
+      }
 
   }
 
