@@ -36,7 +36,7 @@
       <Button msg="Optimera med PD" />
     </section>
 
-    <section class="home__doughnut" v-if="jsonData.pension !== undefined">
+    <section class="home__doughnut" v-if="userData !== undefined">
 
       <div class="doughnut">
         <div class="doughnut__header title">
@@ -89,7 +89,6 @@ import {
   Labels
 } from '../components/';
 
-import { db } from '../../firebase-config';
 import jsonData from '../data/data.json';
 
 export default {
@@ -101,11 +100,12 @@ export default {
         colors: [ "#0F7354", "#C04D4D"]
       },
       barData: {
-        labels: ['Månadslön', 'Tillgångar', 'Privat pension', 'Tjänstepension', 'Allmän pension'],
-        data: [42000, 999, 9999, 9999, 999],
-        colors: ["#C04D4D", "#0F7354", "#C04D4D", "#0F7354", "#0F7354"]
+        labels: ['Tillgångar', 'Tjänstepension', 'Allmän pension'],
+        colors: ['#fab', '#h0a', '#b4f'],
+        data: [2323, 15, 2],
+        years: ['', 55, 60, 65, 70, 75, 80]
       },
-      jsonData: jsonData[0],
+      jsonData: jsonData[0]
     }
   },
 
@@ -120,27 +120,25 @@ export default {
     wantedPension() {
       return this.$store.state.wantedPension;
     },
-    pensionData() {
-      return this.$store.state.pensionData[0];
-    },
     totalAssets() {
       return this.$store.getters.getTotalAssets;
     },
     totalDebts() {
       return this.$store.getters.getTotalDebts;
+    },
+    personalNr() {
+      return this.$store.state.personalNr;
+    },
+    userData() {
+      return this.$store.state.userData;
     }
 
   },
 
   mounted() {
-    this.$store.commit('setPensionData', this.firebaseData);
-    this.$store.commit('setPersonalNr', this.user.personalNumber);
-  },
-
-  firestore: {
-    firebaseData: db.collection('pensiondata')
+    this.$store.commit('setPersonalNr', sessionStorage.getItem('personal'));
+    this.$store.dispatch('getUserData', this.personalNr);
   }
-
 }
 </script>
 
@@ -150,7 +148,7 @@ export default {
   .container {
     background: $white;
     overflow: hidden;
-    padding: 0 1rem;
+    padding: 0 1.25rem;
 
     @include breakpoints(large) {
       padding: 0 8rem;
@@ -286,7 +284,6 @@ export default {
         }
 
       }
-
 
       @include breakpoints(large) {
         flex-direction: row;

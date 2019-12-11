@@ -18,26 +18,18 @@ export default {
             barData: {
                 labels: this.chartsData.years,
                 datasets: [
-                    // TODO - se över hur loopa, och få månadslön att ligga enskilt.
                     {
-                        data: [10000],
-                        label: "Månadslön",
-                        backgroundColor: '#000'
-                    },
-                    {
-                        data: [this.chartsData.data[0]],
-                        label: this.chartsData.labels[0],
-                        backgroundColor: this.chartsData.colors[0]
-                    },
+                        data: this.chartsData.data,
+                        backgroundColor: this.chartsData.colors
+                    }
                 ],
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: {
-                    xAxes: [{ stacked: true }],
-                    yAxes: [{ stacked: true }]
-                },
+                legend: {
+                    display: false
+                }
             }
         }
     },

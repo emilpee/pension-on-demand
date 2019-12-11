@@ -11,22 +11,22 @@
                 </div>
                 <div> 
                     <div class="label__details" v-if="display">
-                        <bar-chart :chartsData="barData" />
+                        <LabelDetails />
                     </div>
                 </div>
             </div>
             
-            <div class="label__asset" v-for="label in holdings" :key="label.id" >
+            <div class="label__asset" v-for="label in userData.income" :key="label.id" >
                  <div>
-                    <span class="debt__item">{{ label.assets.type }}</span>
-                    <p class="debt__data"> {{ label.assets.value }}</p> 
+                    <span class="debt__item">{{ label.type }}</span>
+                    <p class="debt__data"> {{ label.value }}</p> 
                     <div class="debt__lights">
                         <traffic-lights :data="label.data" />
                     </div>
                 </div>
                 <div> 
                     <div class="label__details" v-if="display">
-                        <bar-chart :chartsData="barData" />
+                        <LabelDetails />
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 </div>
                 <div> 
                     <div class="label__details" v-if="display">
-                        <bar-chart :chartsData="barData" />
+                        <LabelDetails />
                     </div>
                 </div>
             </div>
@@ -56,8 +56,10 @@
 
 <script>
 import TrafficLights from './TrafficLights.vue';
-import BarChart from './BarChart.vue';
+import LabelDetails from './LabelDetails';
 import barData from '../../data/data.json';
+
+// TODO - lägg in data från Firestore
 
 export default {
     data() {
@@ -66,16 +68,23 @@ export default {
             display: false,
         }
     },
-    props: ['holdings', 'pension'],
+    props: {
+        holdings: Array,
+        pension: Array
+    },
     components: {
-        TrafficLights, BarChart
+        TrafficLights, LabelDetails
     },
     methods: {
         showDetails() {
             this.display = !this.display;
         }
+    },
+    computed: {
+        userData() {
+            return this.$store.state.userData;
+        }
     }
-
 }
 </script>
 

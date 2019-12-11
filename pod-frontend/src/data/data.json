@@ -3,14 +3,6 @@
         "settingsData": [
             {
                 "id": 1,
-                "title": "Inkomster",
-                "value": 0,
-                "procent": 0,
-                "labelOne": "Månadslön",
-                "labelTwo": "Beräknad årlig löneökning"
-            },
-            {
-                "id": 2,
                 "title": "Fastigheter",
                 "value": 0,
                 "labelOne": "Fastighetsvärdering",
@@ -18,7 +10,7 @@
                 "labelTwo": "Beräknad årlig värdeökning"
             },
             {
-                "id": 3,
+                "id": 2,
                 "title": "Båt",
                 "labelOne": "Sjöfordon",
                 "value": 0,
@@ -26,7 +18,7 @@
                 "labelTwo": "Beräknad årlig värdeförändring"
             },
             {
-                "id": 4,
+                "id": 3,
                 "title": "Fordon",
                 "labelOne": "Bilar och motorcyklar",
                 "value": 0,
@@ -34,7 +26,7 @@
                 "labelTwo": "Beräknad årlig värdeförändring"
             },
             {
-                "id": 5,
+                "id": 4,
                 "title": "Övrigt",
                 "labelOne": "Konst och värdeföremål",
                 "value": 0,
@@ -42,6 +34,15 @@
                 "labelTwo": "Beräknad årlig värdeförändring"
             }
         ],
+        "salary": {
+            "id": 1,
+            "title": "Inkomster",
+            "value": 0,
+            "procent": 0,
+            "labelOne": "Månadslön",
+            "labelTwo": "Beräknad årlig löneökning"
+        },
+       
         "pension": [
             {
                 "type": "Allmän pension", 
@@ -102,11 +103,6 @@
                 }
             }
         ],
-        "salary": {
-            "title": "Lön",
-            "value": 25000,
-            "annualInc": 0.021
-        },
         "savings": {
             "title": "Sparande", 
             "value": 50000

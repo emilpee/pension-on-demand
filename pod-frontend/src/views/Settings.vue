@@ -7,6 +7,7 @@
       <span>Nu kan du hantera din framtid själv, inga fler besök hos pensionsrådgivare.</span>
     </section>
 
+    <SettingsItem :setting="salary" />
     <SettingsItem v-for="data in settingsData" :key="data.id" :setting="data" />
 
     <section class="settings__message">
@@ -31,18 +32,19 @@ export default {
         return {
             userData: [],
             message: '',
-            settingsData: data[0].settingsData
+            settingsData: data[0].settingsData,
+            salary: data[0].salary
         }
     },
 
     computed: {
         personalNr() {
             return this.$store.state.personalNr;
-        }
+        },
     },
 
     mounted() {
-        this.$store.commit('setPersonalNr', this.$store.state.user.personalNumber);
+        this.$store.commit('setPersonalNr', sessionStorage.getItem('personal'));
         this.getUserInfo();
     },
 
@@ -51,109 +53,69 @@ export default {
     },
     methods: {
         getUserInfo() {
-            this.$store.dispatch('getUserData', this.personalNr).then(res => {
-                res.get().then(doc => {
-                    if (doc.exists) {  
-                        console.log(doc.data());
-                        // If exist, show data stored in db
-                        for (let i = 0; i < this.settingsData.length; i++) {
-                            for (let j = 0; j < doc.data().income.length; j++) {
-                                this.settingsData[i].value = doc.data().income[j].value;
-                                this.settingsData[i].procent = doc.data().income[j].procent;
-                            }
-                        }
-
-                    } else if (!doc.exists) {
-                        res.set({
-                            income: [
-                                {
-                                    type: "lön",
-                                    value: 0,
-                                    procent: 0
-                                },
-                                {
-                                    type: "fastighet",
-                                    value: 0,
-                                    procent: 0
-                                },
-                                {
-                                    type: "båt",
-                                    value: 0,
-                                    procent: 0
-                                },
-                                {
-                                    type: "fordon",
-                                    value: 0,
-                                    procent: 0
-                                },
-                                {
-                                    type: "övrigt",
-                                    value: 0,
-                                    procent: 0
-                                }
-                            ]
-                        }, { merge: true })
+            this.$store.dispatch('getUserData', this.personalNr).then(doc => {
+                if (doc.exists) {  
+                    // If exist, show data stored in db
+                    for (let i = 0; i < this.settingsData.length; i++) {
+                        this.settingsData[i].value = doc.data().income[i].value;
+                        this.settingsData[i].procent = doc.data().income[i].procent;    
                     }
+                    this.salary.value = doc.data().salary.value;
 
-                    this.userData = doc.data();
-                    this.$store.commit('setUserData', this.userData);
-                    
-                })
+                } 
+
+                this.userData = doc.data();
+                this.$store.commit('setUserData', this.userData);     
             })
         },
 
         updateSettingsData() {
-            this.$store.dispatch('getUserData', this.personalNr).then(res => {
-                // TODO - make dynamic
-                let data = [];
+            this.$store.dispatch('getUserData', this.personalNr).then(doc => {
 
-                for (let i = 0; i < this.settingsData.length; i++) {
-                    data.push(this.settingsData[i].value);
-               
-                    res.set({
-                            income: [
-                            {
-                                type: "lön",
-                                value: data[0],
-                                procent: 0
-                            },
-                            {
-                                type: "fastighet",
-                                value: this.settingsData[1].value,
-                                procent: 0
-                            },
-                            {
-                                type: "båt",
-                                value: this.settingsData[2].value,
-                                procent: 0
-                            },
-                            {
-                                type: "fordon",
-                                value: this.settingsData[3].value,
-                                procent: 0
-                            },
-                            {
-                                type: "övrigt",
-                                value: this.settingsData[4].value,
-                                procent: 0
-                            }
-                        ]
-                    }, { merge: true }).then(() => {
-                        this.message = "Dina inställningar sparades!"
-                    })
+                console.log(doc);
+                
+                  let data = {
+                    income: [
+                        {
+                            type: "Fastigheter",
+                            value: Number(this.settingsData[0].value),
+                            procent: Number(this.settingsData[0].procent),
+                        },
+                        {
+                            type: "Båt",
+                            value: Number(this.settingsData[1].value),
+                            procent: Number(this.settingsData[1].procent)
+                        },
+                        {
+                            type: "Fordon",
+                            value: Number(this.settingsData[2].value),
+                            procent: Number(this.settingsData[2].procent)
+                        },
+                        {
+                            type: "Övrigt",
+                            value: Number(this.settingsData[3].value),
+                            procent: Number(this.settingsData[3].procent)
+                        },
+                    ],
+                    salary: {
+                        type: "Lön",
+                        value: Number(this.salary.value),
+                        procent: Number(this.salary.procent)
+                        }
+                    }
 
-                }
-                this.$store.commit('setUserData', data);
-            })       
+
+                this.$store.dispatch('updateUserData', data).then(() => {
+                    this.message = "Dina inställningar sparades!"
+                });
+            })
+
+            this.$store.commit('setUserData', data);
+        } 
+            
         }
 
-    },
-
-    watch: {
-        values: function() {
-            this.message = '';
-        }
-    }
+    
 
     
 }

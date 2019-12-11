@@ -12,9 +12,15 @@ export default {
         let fetchedStatus = await axios.post(url, status);
         return fetchedStatus;
     },
-    async getUserData(ctx, personalNr) {
-        let doc = await db.collection("pensiondata").doc(`${personalNr}`);
-        console.log(personalNr);
+    async getUserData({ commit }, personalNr) {
+        let doc = await db.collection("pensiondata").doc(`${personalNr}`).get();
+        commit('setUserData', doc.data());
         return doc;
     },
+    async updateUserData({ state }, data) {
+        let doc = await db.collection("pensiondata").doc(state.personalNr);
+        doc.set(data);
+        console.log(doc);
+        console.log(data);
+    }
 }

@@ -115,12 +115,40 @@ export default {
                                     name: data.user.name,
                                     personalNr: data.user.personalNumber,
                                     age: currentAge.toString().substr(0,2)
+                                },
+                                income: [
+                                    {
+                                        type: "Fastigheter",
+                                        value: 0,
+                                        procent: 0
+                                    },
+                                    {
+                                        type: "Båt",
+                                        value: 0,
+                                        procent: 0
+                                    },
+                                    {
+                                        type: "Fordon",
+                                        value: 0,
+                                        procent: 0
+                                    },
+                                    {
+                                        type: "Övrigt",
+                                        value: 0,
+                                        procent: 0
+                                    }
+                                ],
+                                salary: {
+                                    type: "Lön",
+                                    value: 0,
+                                    procent: 0
                                 }
                             }, { merge: true });
 
                             this.$store.commit('setUser', resp.data.user)
 
                             sessionStorage.setItem('user', resp.data.token); 
+                            sessionStorage.setItem('personal', resp.data.user.personalNumber);
                             this.navigateUser();
                         }
 
