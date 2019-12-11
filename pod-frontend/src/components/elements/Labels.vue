@@ -1,84 +1,30 @@
 <template>
     <main class="doughnut__labels">
-        <div class="label" @click="showDetails">
-            <div class="label__asset" v-for="label in pension" :key="label.id" >
-                 <div>
-                    <span class="debt__item">{{ label.type }}</span>
-                    <p class="debt__data"> {{ label.value }}</p> 
-                    <div class="debt__lights">
-                        <traffic-lights :data="label.data" />
-                    </div>
-                </div>
-                <div> 
-                    <div class="label__details" v-if="display">
-                        <LabelDetails />
-                    </div>
-                </div>
-            </div>
-            
-            <div class="label__asset" v-for="label in userData.income" :key="label.id" >
-                 <div>
-                    <span class="debt__item">{{ label.type }}</span>
-                    <p class="debt__data"> {{ label.value }}</p> 
-                    <div class="debt__lights">
-                        <traffic-lights :data="label.data" />
-                    </div>
-                </div>
-                <div> 
-                    <div class="label__details" v-if="display">
-                        <LabelDetails />
-                    </div>
-                </div>
-            </div>
 
+        <div class="label">
+            <LabelItem class="label__asset" v-for="(label, index) in data.pension" :label="label" :index="index" :key="index+'pension'" />
+            <LabelItem class="label__asset" v-for="(label, index) in userData.income" :label="label" :index="index" :key="index+'income'" />
         </div>
-
-        <div class="label" @click="showDetails">
-            <div class="label__debt" v-for="label in holdings" :key="label.id">
-                 <div v-if="label.debts.value > 0">
-                    <span class="debt__item">{{ label.debts.loan }}</span>
-                    <p class="debt__data"> {{ label.debts.value }}</p> 
-                    <div class="debt__lights">
-                        <traffic-lights :data="label.debts.data" />
-                    </div>
-                </div>
-                <div> 
-                    <div class="label__details" v-if="display">
-                        <LabelDetails />
-                    </div>
-                </div>
-            </div>
-
+        <div class="label">
+            <LabelItem class="label__debt" v-for="(label, index) in data.debts" :label="label" :index="index" :key="index+'debts'" />
         </div>
 
     </main>
 </template>
 
 <script>
-import TrafficLights from './TrafficLights.vue';
-import LabelDetails from './LabelDetails';
-import barData from '../../data/data.json';
+import LabelItem from './LabelItem';
+import jsonData from '../../data/data.json';
 
-// TODO - lägg in data från Firestore
 
 export default {
     data() {
         return {
-            barData: barData[0].barData,
-            display: false,
+            data: jsonData[0]
         }
-    },
-    props: {
-        holdings: Array,
-        pension: Array
     },
     components: {
-        TrafficLights, LabelDetails
-    },
-    methods: {
-        showDetails() {
-            this.display = !this.display;
-        }
+        LabelItem
     },
     computed: {
         userData() {

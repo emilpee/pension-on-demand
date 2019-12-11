@@ -99,7 +99,7 @@ export default {
                         type: "Lön",
                         value: Number(this.salary.value),
                         procent: Number(this.salary.procent)
-                        }
+                    }
                 }
 
 
@@ -108,7 +108,6 @@ export default {
                 });
             })
 
-            this.$store.commit('setUserData', data);
         } 
             
     }

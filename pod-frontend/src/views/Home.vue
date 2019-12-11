@@ -56,7 +56,7 @@
         </div>
 
         <div class="doughnut__labels">
-          <Labels :holdings="jsonData.holdings" :pension="jsonData.pension"  />
+          <Labels />
         </div>
       </div>      
 
