@@ -121,7 +121,7 @@ export default {
       return this.$store.state.wantedPension;
     },
     totalAssets() {
-      return this.$store.getters.getTotalAssets;
+      return this.$store.state.totalAssets;
     },
     totalDebts() {
       return this.$store.getters.getTotalDebts;
@@ -132,9 +132,7 @@ export default {
     userData() {
       return this.$store.state.userData;
     }
-
   },
-
   mounted() {
     this.$store.commit('setPersonalNr', sessionStorage.getItem('personal'));
     this.$store.dispatch('getUserData', this.personalNr);

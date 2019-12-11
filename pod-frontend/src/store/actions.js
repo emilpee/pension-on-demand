@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { db } from '../../firebase-config';
-
+import data from '../data/data.json';
 const url = 'https://hfzn51rqf2.execute-api.eu-west-1.amazonaws.com/Prod/bankid';
 
 export default {
@@ -12,15 +12,22 @@ export default {
         let fetchedStatus = await axios.post(url, status);
         return fetchedStatus;
     },
-    async getUserData({ commit }, personalNr) {
+    async getUserData(ctx, personalNr) {
         let doc = await db.collection("pensiondata").doc(`${personalNr}`).get();
-        commit('setUserData', doc.data());
+        ctx.commit('setUserData', doc.data());
+        ctx.commit('setTotal', calcTotal( doc.data() ))
         return doc;
     },
     async updateUserData({ state }, data) {
         let doc = await db.collection("pensiondata").doc(state.personalNr);
         doc.set(data);
-        console.log(doc);
-        console.log(data);
     }
+}
+
+function calcTotal(doc){
+    const reducer = (accumulator, currentValue) => accumulator.value + currentValue.value;
+    let pension = data[0].pension.reduce(reducer);
+    let income = doc.income.reduce((acc, obj) => acc + obj.value, 0);
+    
+    return Number(pension + income);
 }

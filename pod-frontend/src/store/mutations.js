@@ -16,5 +16,8 @@ export default {
     },
     setPersonalNr(state, payload) {
         state.personalNr = payload;
+    },
+    setTotal(state, payload){
+        state.totalAssets = payload
     }
 }

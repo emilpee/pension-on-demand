@@ -70,11 +70,9 @@ export default {
         },
 
         updateSettingsData() {
-            this.$store.dispatch('getUserData', this.personalNr).then(doc => {
-
-                console.log(doc);
+            this.$store.dispatch('getUserData', this.personalNr).then(() => {
                 
-                  let data = {
+                let data = {
                     income: [
                         {
                             type: "Fastigheter",
@@ -102,7 +100,7 @@ export default {
                         value: Number(this.salary.value),
                         procent: Number(this.salary.procent)
                         }
-                    }
+                }
 
 
                 this.$store.dispatch('updateUserData', data).then(() => {
@@ -113,11 +111,7 @@ export default {
             this.$store.commit('setUserData', data);
         } 
             
-        }
-
-    
-
-    
+    }
 }
 
 </script>

@@ -7,5 +7,5 @@ export default {
     wantedPension: '',
     salary: '',
     totalAssets: 0,
-    totalDebts: 0,
+    totalDebts: 0
 }
