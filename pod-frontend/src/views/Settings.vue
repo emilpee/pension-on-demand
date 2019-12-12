@@ -8,7 +8,7 @@
     </section>
 
     <SettingsItem :setting="salary" />
-    <SettingsItem v-for="data in settingsData" :key="data.id" :setting="data" />
+    <SettingsItem v-for="data in settingsData" :key="data.id" :setting="data" /> 
 
     <section class="settings__message">
         <p v-text="message"></p>
@@ -33,7 +33,8 @@ export default {
             userData: [],
             message: '',
             settingsData: data[0].settingsData,
-            salary: data[0].salary
+            salary: data[0].salary,
+            storeData: {}
         }
     },
 
@@ -41,6 +42,9 @@ export default {
         personalNr() {
             return this.$store.state.personalNr;
         },
+        settingsItems() {
+            return this.$store.state.settingItems;
+        }
     },
 
     mounted() {
@@ -55,11 +59,8 @@ export default {
         getUserInfo() {
             this.$store.dispatch('getUserData', this.personalNr).then(doc => {
                 if (doc.exists) {  
-                    // If exist, show data stored in db
-                    for (let i = 0; i < this.settingsData.length; i++) {
-                        this.settingsData[i].value = doc.data().income[i].value;
-                        this.settingsData[i].procent = doc.data().income[i].procent;    
-                    }
+                
+                    this.settingsItems[0][0].value = doc.data().income[0].choices[0].value;
                     this.salary.value = doc.data().salary.value;
 
                 } 
@@ -71,24 +72,72 @@ export default {
 
         updateSettingsData() {
             this.$store.dispatch('getUserData', this.personalNr).then(() => {
-                
-                let data = {
+
+
+                this.settingsItems.forEach(item => {
+                    console.log(item[0].value);
+            
+
+                this.storeData = {
                     income: [
                         {
-                            type: "Fastigheter",
-                            value: Number(this.settingsData[0].value),
-                            procent: Number(this.settingsData[0].procent),
+                            type: this.settingsData[0].title,
+                            value: Number(this.settingsItems[0][0].value + this.settingsItems[0][1].value + this.settingsItems[0][2].value),
+                            choices: [
+                                {
+                                    type: "Villa",
+                                    value: item[0].value,
+                                    procent: Number(this.settingsItems[0][0].procent),
+                                },
+                                {
+                                    type: "Lägenhet",
+                                    value: item[0].value,
+                                    procent: Number(this.settingsItems[0][1].procent),
+                                },
+                                {
+                                    type: "Stuga",
+                                    value: item[0].value,
+                                    procent: Number(this.settingsItems[0][2].procent),
+                                }
+                            ]
                         },
                         {
-                            type: "Fordon",
+                            type: this.settingsData[1].title,
                             value: Number(this.settingsData[1].value),
-                            procent: Number(this.settingsData[1].procent)
+                            choices: [
+                                {
+                                    type: "Bil",
+                                    value: Number(this.settingsItems[0][0].value),
+                                    procent: Number(this.settingsItems[0][0].procent),
+                                },
+                                {
+                                    type: "Motorcykel",
+                                    value: Number(this.settingsItems[0][0].value),
+                                    procent: Number(this.settingsItems[0][0].procent),
+                                },
+                                {
+                                    type: "Båt",
+                                    value: Number(this.settingsItems[0][0].value),
+                                    procent: Number(this.settingsItems[0][0].procent),
+                                }
+                            ]
                         },
                         {
-                            type: "Övrigt",
+                            type: this.settingsData[2].title,
                             value: Number(this.settingsData[2].value),
-                            procent: Number(this.settingsData[2].procent)
-                        },
+                            choices: [
+                                {
+                                    type: "Konst",
+                                    value: Number(this.settingsItems[2][0].value),
+                                    procent: Number(this.settingsItems[1][0].procent),
+                                },
+                                {
+                                    type: "Värdeföremål",
+                                    value: Number(this.settingsItems[2][1].value),
+                                    procent: Number(this.settingsItems[2][1].procent),
+                                }
+                            ]
+                        }
                     ],
                     salary: {
                         type: "Lön",
@@ -97,15 +146,17 @@ export default {
                     }
                 }
 
+                    })
 
-                this.$store.dispatch('updateUserData', data).then(() => {
-                    this.message = "Dina inställningar sparades!"
-                });
             })
 
-        } 
-            
-    }
+            this.$store.dispatch('updateUserData', this.storeData).then(() => {
+                this.message = "Dina inställningar sparades!"
+            });
+
+            } 
+                
+        }
 }
 
 </script>

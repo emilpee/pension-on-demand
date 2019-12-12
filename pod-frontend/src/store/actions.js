@@ -28,7 +28,16 @@ export default {
 function calcTotal(doc){
     const reducer = (accumulator, currentValue) => accumulator.value + currentValue.value;
     let pension = data[0].pension.reduce(reducer);
-    let income = doc.income.reduce((acc, obj) => acc + obj.value, 0);
+
+
+    let test = [];
+    doc.income.forEach(item => {
+        test.push(item);
+    })
+
+    console.log(test);
+    let income = test.reduce((acc, obj) => acc + obj.value, 0);
+    console.log(income);
 
     return Number(pension + income);
 }
