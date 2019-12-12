@@ -39,6 +39,7 @@ export default {
     display: flex;
     justify-content: space-between;
     padding: 1rem;
+    max-width: 20rem;
     position: relative;
 
     > span {
@@ -76,7 +77,7 @@ export default {
 
     &:hover {
         cursor: pointer;
-
+        
         .user__dropdown {
             display: block;
         }

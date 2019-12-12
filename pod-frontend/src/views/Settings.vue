@@ -80,19 +80,14 @@ export default {
                             procent: Number(this.settingsData[0].procent),
                         },
                         {
-                            type: "Båt",
+                            type: "Fordon",
                             value: Number(this.settingsData[1].value),
                             procent: Number(this.settingsData[1].procent)
                         },
                         {
-                            type: "Fordon",
+                            type: "Övrigt",
                             value: Number(this.settingsData[2].value),
                             procent: Number(this.settingsData[2].procent)
-                        },
-                        {
-                            type: "Övrigt",
-                            value: Number(this.settingsData[3].value),
-                            procent: Number(this.settingsData[3].procent)
                         },
                     ],
                     salary: {

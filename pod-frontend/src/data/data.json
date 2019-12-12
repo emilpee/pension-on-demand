@@ -7,31 +7,37 @@
                 "value": 0,
                 "labelOne": "Fastighetsvärdering",
                 "procent": 0,
-                "labelTwo": "Beräknad årlig värdeökning"
+                "labelTwo": "Beräknad årlig värdeökning",
+                "choices": [
+                    {"type": "Villa", "value": 0, "procent": 0},
+                    {"type": "Lägenhet", "value": 0, "procent": 0},
+                    {"type": "Stuga", "value": 0, "procent": 0}
+                ]
             },
             {
                 "id": 2,
-                "title": "Båt",
-                "labelOne": "Sjöfordon",
+                "title": "Fordon",
+                "labelOne": "Fordonsvärdering",
                 "value": 0,
                 "procent": 0,
-                "labelTwo": "Beräknad årlig värdeförändring"
+                "labelTwo": "Beräknad årlig värdeförändring",
+                "choices": [
+                    {"type": "Bil", "value": 0, "procent": 0},
+                    {"type": "Motorcykel", "value": 0, "procent": 0},
+                    {"type": "Båt", "value": 0, "procent": 0}
+                ]
             },
             {
                 "id": 3,
-                "title": "Fordon",
-                "labelOne": "Bilar och motorcyklar",
-                "value": 0,
-                "procent": 0,
-                "labelTwo": "Beräknad årlig värdeförändring"
-            },
-            {
-                "id": 4,
                 "title": "Övrigt",
-                "labelOne": "Konst och värdeföremål",
+                "labelOne": "Värdering",
                 "value": 0,
                 "procent": 0,
-                "labelTwo": "Beräknad årlig värdeförändring"
+                "labelTwo": "Beräknad årlig värdeförändring",
+                "choices": [
+                    {"type": "Konst", "value": 0, "procent": 0},
+                    {"type": "Värdeföremål", "value": 0, "procent": 0}
+                ]
             }
         ],
         "salary": {

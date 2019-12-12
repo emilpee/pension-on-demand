@@ -96,3 +96,11 @@ input[type=range] {
     }
 
 }
+
+
+select {
+  padding: .5rem;
+  height: 2rem;
+  border: 1px solid $borderColor;
+  background: $white;
+}

@@ -2,6 +2,11 @@
   <section class="settings__item">
     <h3>{{ setting.title }}</h3>
     <div class="form">
+        <div v-if="setting.choices" class="form__item">
+            <select>
+                <option v-for="choice in setting.choices" :key="choice.id">{{ choice.type }}</option>
+            </select>
+        </div>
         <div class="form__item">
             <label> {{ setting.labelOne }} </label>
             <input type="number" v-model="setting.value" @focus="$parent.message = ''" placeholder="SEK">
@@ -20,7 +25,7 @@ export default {
 
     props: {
         setting: Object
-    },
+    }
 
 }
 </script>
@@ -42,15 +47,7 @@ export default {
         &__item {
             @extend %column;
             flex: 1;
-
-
-            &:first-child {
-                margin-right: 2.5rem;
-            }
-
-            &:nth-child(2) {
-                margin-left: 2.5rem;
-            }
+            margin: 0 1rem;
 
         }
     }
