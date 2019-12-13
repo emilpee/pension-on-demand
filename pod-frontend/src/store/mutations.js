@@ -19,5 +19,8 @@ export default {
     },
     setTotal(state, payload){
         state.totalAssets = payload
+    },
+    setChoices(state, choices) {
+        state.choices = choices;
     }
 }

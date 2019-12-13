@@ -34,20 +34,18 @@ export default {
             message: '',
             settingsData: data[0].settingsData,
             salary: data[0].salary,
-            storeData: []
+            choices: data[0].choices
         }
     },
 
     computed: {
         personalNr() {
             return this.$store.state.personalNr;
-        },
-        settingsItems() {
-            return this.$store.state.settingItems;
         }
     },
 
     mounted() {
+        this.$store.commit('setChoices', this.choices);
         this.$store.commit('setPersonalNr', sessionStorage.getItem('personal'));
         this.getUserInfo();
     },
@@ -62,153 +60,77 @@ export default {
                 // Set DB data
                 this.userData = doc.data();
                 this.$store.commit('setUserData', this.userData);  
- 
-      
-                this.userData.income.forEach(asset => {
-
-                    this.settingsData.forEach(data => {
-
-                        asset.choices.forEach(assetA => {
-                            console.log(assetA);
-                        })
-
-                        data.choices.forEach(dataA => {
-                            console.log(dataA);
-                        })
-
-                    })
-
-                })
-
-                
-                // this.userData.income.forEach(asset => {
-                //     for (let i = 0; i < asset.choices.length; i++) {
-                //         console.log(asset.choices[i].value);
-                //     }
-                // })
-            
-                // this.settingsData.forEach(asset => {
-                //     for (let j = 0; j < asset.choices.length; j++) {
-                       
-                //         console.log(asset.choices[j].value)
-                    
-                //     }
-                // })
-
-                
-                // this.settingsData.forEach(data => {
-                    
-                //     data.choices.forEach(item => {
-                //         doc.data().income.forEach(asset => {
-                //             asset.choices.forEach(assetItem => {
-                //                 console.log(assetItem.value);
-                //                 assetItem.value = item.value;
-                //             })
-                //         })
-                //     })
 
 
-                    // asset.choices.forEach(item => {
-                    //     console.log(item);
-                    //     console.log(doc.data().income);
-                //     // })
-                // })
+                for (let i = 0; i < this.choices.length; i++) {
+                    this.choices[i].value = this.userData.choices[i].value;
+                    this.choices[i].procent = this.userData.choices[i].procent;
+                }
 
-                // doc.data().income.forEach(asset => {
-
-                //     asset.choices.forEach( item => {
-
-                //         this.userData = item;
-
-                //         console.log(item.value);
-                //         console.log(item.procent);
-                    
-                //     })
-
-
-                // })
-
-                this.salary.value = doc.data().salary.value;         
+                this.salary.value = this.userData.salary.value;         
             })
         },
 
         updateSettingsData() {
-            this.$store.dispatch('getUserData', this.personalNr).then(() => {
+            this.$store.dispatch('getUserData', this.personalNr).then(() => {      
 
-                this.storeData = {
-                    income: [
+                // TODO - gör dynamisk
+                var data = {
+                    choices: [
                         {
-                            type: this.settingsData[0].title,
-                            value: Number(this.settingsItems[0][0].value + this.settingsItems[0][1].value + this.settingsItems[0][2].value),
-                            choices: [
-                                {
-                                    type: "Villa",
-                                    value: 0,
-                                    procent: Number(this.settingsItems[0][0].procent),
-                                },
-                                {
-                                    type: "Lägenhet",
-                                    value: 0,
-                                    procent: Number(this.settingsItems[0][1].procent),
-                                },
-                                {
-                                    type: "Stuga",
-                                    value: 0,
-                                    procent: Number(this.settingsItems[0][2].procent),
-                                }
-                            ]
+                            type: "Villa",
+                            value: this.choices[0].value,
+                            procent: this.choices[0].procent
                         },
                         {
-                            type: this.settingsData[1].title,
-                            value: Number(this.settingsData[1].value),
-                            choices: [
-                                {
-                                    type: "Bil",
-                                    value: Number(this.settingsItems[0][0].value),
-                                    procent: Number(this.settingsItems[0][0].procent),
-                                },
-                                {
-                                    type: "Motorcykel",
-                                    value: Number(this.settingsItems[0][0].value),
-                                    procent: Number(this.settingsItems[0][0].procent),
-                                },
-                                {
-                                    type: "Båt",
-                                    value: Number(this.settingsItems[0][0].value),
-                                    procent: Number(this.settingsItems[0][0].procent),
-                                }
-                            ]
+                            type: "Lägenhet",
+                            value: this.choices[1].value,
+                            procent: this.choices[1].procent
                         },
                         {
-                            type: this.settingsData[2].title,
-                            value: Number(this.settingsData[2].value),
-                            choices: [
-                                {
-                                    type: "Konst",
-                                    value: Number(this.settingsItems[2][0].value),
-                                    procent: Number(this.settingsItems[1][0].procent),
-                                },
-                                {
-                                    type: "Värdeföremål",
-                                    value: Number(this.settingsItems[2][1].value),
-                                    procent: Number(this.settingsItems[2][1].procent),
-                                }
-                            ]
+                            type: "Stuga",
+                            value: this.choices[2].value,
+                            procent: this.choices[2].procent
+                        },
+                        {
+                            type: "Bil",
+                            value: this.choices[3].value,
+                            procent: this.choices[3].procent
+                        },
+                        {
+                            type: "Motorcykel",
+                            value: this.choices[4].value,
+                            procent: this.choices[4].procent
+                        },
+                        {
+                            type: "Båt",
+                            value: this.choices[5].value,
+                            procent: this.choices[5].procent
+                        },
+                        {
+                            type: "Konst",
+                            value: this.choices[6].value,
+                            procent: this.choices[6].procent
+                        },
+                        {
+                            type: "Värdeföremål",
+                            value: this.choices[7].value,
+                            procent: this.choices[7].procent
                         }
+                            
                     ],
                     salary: {
-                        type: "Lön",
                         value: Number(this.salary.value),
                         procent: Number(this.salary.procent)
                     }
                 }
 
+                this.$store.dispatch('updateUserData', data).then(() => {
+                    this.message = "Dina inställningar sparades!"
+                });
 
                 })
-     
-            this.$store.dispatch('updateUserData', this.storeData).then(() => {
-                this.message = "Dina inställningar sparades!"
-            });
+
 
             } 
                 

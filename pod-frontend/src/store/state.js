@@ -8,5 +8,6 @@ export default {
     salary: '',
     totalAssets: 0,
     totalDebts: 0,
-    settingItems: []
+    settingItems: [], 
+    choices: []
 }

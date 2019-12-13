@@ -10,14 +10,5 @@ export default {
 
             return state.totalDebts;
         })
-    }, 
-    getSettingItems(state) {
-        let arr = []; 
-        let items = data[0].settingsData;
-        items.forEach(item => {
-            arr.push(item.choices);
-        })
-        state.settingItems = arr;
-        return state.settingItems;
     }
 }

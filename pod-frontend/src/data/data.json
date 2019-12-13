@@ -7,12 +7,7 @@
                 "value": 0,
                 "labelOne": "Fastighetsvärdering",
                 "procent": 0,
-                "labelTwo": "Beräknad årlig värdeökning",
-                "choices": [
-                    {"type": "Villa", "value": 300, "procent": 0},
-                    {"type": "Lägenhet", "value": 0, "procent": 0},
-                    {"type": "Stuga", "value": 0, "procent": 0}
-                ]
+                "labelTwo": "Beräknad årlig värdeökning"
             },
             {
                 "id": 2,
@@ -20,12 +15,7 @@
                 "labelOne": "Fordonsvärdering",
                 "value": 0,
                 "procent": 0,
-                "labelTwo": "Beräknad årlig värdeförändring",
-                "choices": [
-                    {"type": "Bil", "value": 0, "procent": 0},
-                    {"type": "Motorcykel", "value": 0, "procent": 0},
-                    {"type": "Båt", "value": 0, "procent": 0}
-                ]
+                "labelTwo": "Beräknad årlig värdeförändring"
             },
             {
                 "id": 3,
@@ -33,15 +23,10 @@
                 "labelOne": "Värdering",
                 "value": 0,
                 "procent": 0,
-                "labelTwo": "Beräknad årlig värdeförändring",
-                "choices": [
-                    {"type": "Konst", "value": 0, "procent": 0},
-                    {"type": "Värdeföremål", "value": 0, "procent": 0}
-                ]
+                "labelTwo": "Beräknad årlig värdeförändring"
             }
         ],
         "salary": {
-            "id": 1,
             "title": "Inkomster",
             "value": 0,
             "procent": 0,
@@ -139,6 +124,16 @@
             "labels": ["Månadslön", "Tillgångar", "Privat pension", "Tjänstepension", "Allmän pension"],
             "data": [42000, 999, 9999, 9999, 999],
             "colors": ["#C04D4D", "#0F7354", "#C04D4D", "#0F7354", "#0F7354"]
-        }
+        },
+        "choices": [
+            {"type": "Villa", "value": 300, "procent": 0, "parent": "Fastigheter"},
+            {"type": "Lägenhet", "value": 0, "procent": 0, "parent": "Fastigheter"},
+            {"type": "Stuga", "value": 0, "procent": 0, "parent": "Fastigheter"},
+            {"type": "Bil", "value": 300, "procent": 0, "parent": "Fordon"},
+            {"type": "Motorcykel", "value": 0, "procent": 0, "parent": "Fordon"},
+            {"type": "Båt", "value": 0, "procent": 0, "parent": "Fordon"},
+            {"type": "Konst", "value": 150, "procent": 0, "parent": "Övrigt"},
+            {"type": "Värdeföremål", "value": 300, "procent": 0, "parent": "Övrigt"}
+        ]
     }
 ]

@@ -1,7 +1,7 @@
 <template>
-  <section class="settings__item">
+  <section class="settings__item" v-if="setting !== undefined">
     <h3>{{ setting.title }}</h3>
-    <div v-if="!setting.choices" class="form">
+    <div v-if="!setting.hasOwnProperty('id')" class="form">
           <div class="form__item">
             <label> {{ setting.labelOne }} </label>
             <input type="number" v-model="setting.value" @focus="$parent.message = ''" placeholder="SEK">
@@ -12,20 +12,20 @@
         </div>
     </div>
 
-    <div class="form" v-for="choice in setting.choices" :key="choice.id">
-        <div v-if="setting.choices" class="form__item">
+    <div class="form" v-for="choice in filterChoices(setting)" :key="choice.id">
+        <div v-if="choice" class="form__item">
             <span v-text="choice.type"></span>
         </div>
         <div class="form__item">
-            <label> {{ setting.labelOne }} </label>
+            <label> {{ choice.labelOne }} </label>
             <input type="number" v-model="choice.value" @focus="$parent.message = ''" placeholder="SEK">
         </div>
         <div class="form__item">
-            <label> {{ setting.labelTwo }} </label>
+            <label> {{ choice.labelTwo }} </label>
             <input type="number" v-model="choice.procent" @focus="$parent.message = ''" placeholder="procent"> 
         </div>
     </div>
-
+    
   </section>
 </template>
 
@@ -34,6 +34,19 @@
 export default {
     props: {
         setting: Object
+    },
+    computed: {
+        choices() {
+            return this.$store.state.choices;
+        }
+    },
+    mounted() {
+        this.filterChoices();
+    },
+    methods: {
+        filterChoices(setting) {
+            return this.choices.filter(choice => choice.parent === setting.title)
+        }
     }
 }
 </script>

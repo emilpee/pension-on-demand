@@ -21,7 +21,7 @@ export default {
     },
     async updateUserData({ state }, data) {
         let doc = await db.collection("pensiondata").doc(state.personalNr);
-        doc.set({ data }, { merge: true });
+        doc.set(data, { merge: true });
     }
 }
 

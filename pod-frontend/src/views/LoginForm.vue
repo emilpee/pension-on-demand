@@ -122,62 +122,67 @@ export default {
                                     income: [
                                         {
                                             type: "Fastigheter",
-                                            value: 0,
-                                            choices: [
-                                                {
-                                                    "type": "Villa",
-                                                    value: 0,
-                                                    procent: 0
-                                                },
-                                                {
-                                                    "type": "Lägenhet",
-                                                    "value": 0,
-                                                    "procent": 0
-                                                },
-                                                {
-                                                    "type": "Stuga",
-                                                    "value": 0,
-                                                    "procent": 0
-                                                }
-                                            ]
+                                            total: 0,
                                         },
                                         {
                                             type: "Fordon",
-                                            value: 0,
-                                            choices: [
-                                                {
-                                                    "type": "Bil",
-                                                    value: 0,
-                                                    procent: 0
-                                                },
-                                                {
-                                                    "type": "Motorcykel",
-                                                    "value": 0,
-                                                    "procent": 0
-                                                },
-                                                {
-                                                    "type": "Båt",
-                                                    "value": 0,
-                                                    "procent": 0
-                                                }
-                                            ]
+                                            total: 0,
                                         },
                                         {
                                             type: "Övrigt",
-                                            value: 0,
-                                            choices: [
-                                                {
-                                                    "type": "Konst",
-                                                    value: 0,
-                                                    procent: 0
-                                                },
-                                                {
-                                                    "type": "Värdeföremål",
-                                                    "value": 0,
-                                                    "procent": 0
-                                                }
-                                            ]
+                                            total: 0,
                                         }
+                                    ],
+                                    choices: [
+                                        {
+                                            type: "Villa",
+                                            value: 0,
+                                            procent: 0,
+                                            parent: "Fastigheter"
+                                        },
+                                        {
+                                            type: "Lägenhet",
+                                            value: 0,
+                                            procent: 0,
+                                            parent: "Fastigheter"
+                                        },
+                                        {
+                                            type: "Stuga",
+                                            value: 0,
+                                            procent: 0,
+                                            parent: "Fastigheter"
+                                        },
+                                        {
+                                            type: "Bil",
+                                            value: 0,
+                                            procent: 0,
+                                            parent: "Fordon"
+                                        },
+                                        {
+                                            type: "Motorcykel",
+                                            value: 0,
+                                            procent: 0,
+                                            parent: "Fordon"
+                                        },
+                                        {
+                                            type: "Båt",
+                                            value: 0,
+                                            procent: 0,
+                                            parent: "Fordon"
+                                        },
+                                        {
+                                            type: "Konst",
+                                            value: 0,
+                                            procent: 0,
+                                            parent: "Övrigt"
+                                        },
+                                        {
+                                            type: "Värdeföremål",
+                                            value: 0,
+                                            procent: 0,
+                                            parent: "Övrigt"
+                                        }
+                                            
                                     ],
                                     salary: {
                                         type: "Lön",
