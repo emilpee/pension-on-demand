@@ -25,23 +25,16 @@
             <input type="number" v-model="choice.procent" @focus="$parent.message = ''" placeholder="procent"> 
         </div>
     </div>
+
   </section>
 </template>
 
 <script>
 
 export default {
-
     props: {
         setting: Object
-    }, 
-
-    computed: {
-        settingItems() {
-            return this.$store.state.settingItems;
-        }
     }
-
 }
 </script>
 

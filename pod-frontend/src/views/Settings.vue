@@ -34,7 +34,7 @@ export default {
             message: '',
             settingsData: data[0].settingsData,
             salary: data[0].salary,
-            storeData: {}
+            storeData: []
         }
     },
 
@@ -58,25 +58,82 @@ export default {
     methods: {
         getUserInfo() {
             this.$store.dispatch('getUserData', this.personalNr).then(doc => {
-                if (doc.exists) {  
-                
-                    this.settingsItems[0][0].value = doc.data().income[0].choices[0].value;
-                    this.salary.value = doc.data().salary.value;
 
-                } 
-
+                // Set DB data
                 this.userData = doc.data();
-                this.$store.commit('setUserData', this.userData);     
+                this.$store.commit('setUserData', this.userData);  
+ 
+      
+                this.userData.income.forEach(asset => {
+
+                    this.settingsData.forEach(data => {
+
+                        asset.choices.forEach(assetA => {
+                            console.log(assetA);
+                        })
+
+                        data.choices.forEach(dataA => {
+                            console.log(dataA);
+                        })
+
+                    })
+
+                })
+
+                
+                // this.userData.income.forEach(asset => {
+                //     for (let i = 0; i < asset.choices.length; i++) {
+                //         console.log(asset.choices[i].value);
+                //     }
+                // })
+            
+                // this.settingsData.forEach(asset => {
+                //     for (let j = 0; j < asset.choices.length; j++) {
+                       
+                //         console.log(asset.choices[j].value)
+                    
+                //     }
+                // })
+
+                
+                // this.settingsData.forEach(data => {
+                    
+                //     data.choices.forEach(item => {
+                //         doc.data().income.forEach(asset => {
+                //             asset.choices.forEach(assetItem => {
+                //                 console.log(assetItem.value);
+                //                 assetItem.value = item.value;
+                //             })
+                //         })
+                //     })
+
+
+                    // asset.choices.forEach(item => {
+                    //     console.log(item);
+                    //     console.log(doc.data().income);
+                //     // })
+                // })
+
+                // doc.data().income.forEach(asset => {
+
+                //     asset.choices.forEach( item => {
+
+                //         this.userData = item;
+
+                //         console.log(item.value);
+                //         console.log(item.procent);
+                    
+                //     })
+
+
+                // })
+
+                this.salary.value = doc.data().salary.value;         
             })
         },
 
         updateSettingsData() {
             this.$store.dispatch('getUserData', this.personalNr).then(() => {
-
-
-                this.settingsItems.forEach(item => {
-                    console.log(item[0].value);
-            
 
                 this.storeData = {
                     income: [
@@ -86,17 +143,17 @@ export default {
                             choices: [
                                 {
                                     type: "Villa",
-                                    value: item[0].value,
+                                    value: 0,
                                     procent: Number(this.settingsItems[0][0].procent),
                                 },
                                 {
                                     type: "Lägenhet",
-                                    value: item[0].value,
+                                    value: 0,
                                     procent: Number(this.settingsItems[0][1].procent),
                                 },
                                 {
                                     type: "Stuga",
-                                    value: item[0].value,
+                                    value: 0,
                                     procent: Number(this.settingsItems[0][2].procent),
                                 }
                             ]
@@ -146,16 +203,20 @@ export default {
                     }
                 }
 
-                    })
 
-            })
-
+                })
+     
             this.$store.dispatch('updateUserData', this.storeData).then(() => {
                 this.message = "Dina inställningar sparades!"
             });
 
             } 
                 
+        },
+        watch: {
+            salary: function() {
+                console.log(this.salary);
+            }
         }
 }
 

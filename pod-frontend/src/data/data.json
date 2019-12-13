@@ -9,7 +9,7 @@
                 "procent": 0,
                 "labelTwo": "Beräknad årlig värdeökning",
                 "choices": [
-                    {"type": "Villa", "value": 0, "procent": 0},
+                    {"type": "Villa", "value": 300, "procent": 0},
                     {"type": "Lägenhet", "value": 0, "procent": 0},
                     {"type": "Stuga", "value": 0, "procent": 0}
                 ]

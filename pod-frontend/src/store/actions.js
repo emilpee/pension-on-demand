@@ -21,7 +21,7 @@ export default {
     },
     async updateUserData({ state }, data) {
         let doc = await db.collection("pensiondata").doc(state.personalNr);
-        doc.set(data);
+        doc.set({ data }, { merge: true });
     }
 }
 
@@ -35,9 +35,7 @@ function calcTotal(doc){
         test.push(item);
     })
 
-    console.log(test);
     let income = test.reduce((acc, obj) => acc + obj.value, 0);
-    console.log(income);
 
     return Number(pension + income);
 }

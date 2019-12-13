@@ -110,78 +110,82 @@ export default {
 
                             let currentAge = date - personalNr;
 
-                            fbData.set({
-                                user: {
-                                    name: data.user.name,
-                                    personalNr: data.user.personalNumber,
-                                    age: currentAge.toString().substr(0,2)
-                                },
-                                income: [
-                                    {
-                                        type: "Fastigheter",
-                                        value: 0,
-                                        choices: [
-                                            {
-                                                "type": "Villa",
-                                                value: 0,
-                                                procent: 0
-                                            },
-                                            {
-                                                "type": "Lägenhet",
-                                                "value": 0,
-                                                "procent": 0
-                                            },
-                                            {
-                                                "type": "Stuga",
-                                                "value": 0,
-                                                "procent": 0
-                                            }
-                                        ]
+                            fbData.get().then(doc => {
+                                    
+                                if (!doc.exists) {
+                                    fbData.set({
+                                    user: {
+                                        name: data.user.name,
+                                        personalNr: data.user.personalNumber,
+                                        age: currentAge.toString().substr(0,2)
                                     },
-                                    {
-                                        type: "Fordon",
+                                    income: [
+                                        {
+                                            type: "Fastigheter",
+                                            value: 0,
+                                            choices: [
+                                                {
+                                                    "type": "Villa",
+                                                    value: 0,
+                                                    procent: 0
+                                                },
+                                                {
+                                                    "type": "Lägenhet",
+                                                    "value": 0,
+                                                    "procent": 0
+                                                },
+                                                {
+                                                    "type": "Stuga",
+                                                    "value": 0,
+                                                    "procent": 0
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            type: "Fordon",
+                                            value: 0,
+                                            choices: [
+                                                {
+                                                    "type": "Bil",
+                                                    value: 0,
+                                                    procent: 0
+                                                },
+                                                {
+                                                    "type": "Motorcykel",
+                                                    "value": 0,
+                                                    "procent": 0
+                                                },
+                                                {
+                                                    "type": "Båt",
+                                                    "value": 0,
+                                                    "procent": 0
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            type: "Övrigt",
+                                            value: 0,
+                                            choices: [
+                                                {
+                                                    "type": "Konst",
+                                                    value: 0,
+                                                    procent: 0
+                                                },
+                                                {
+                                                    "type": "Värdeföremål",
+                                                    "value": 0,
+                                                    "procent": 0
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    salary: {
+                                        type: "Lön",
                                         value: 0,
-                                        choices: [
-                                            {
-                                                "type": "Bil",
-                                                value: 0,
-                                                procent: 0
-                                            },
-                                            {
-                                                "type": "Motorcykel",
-                                                "value": 0,
-                                                "procent": 0
-                                            },
-                                            {
-                                                "type": "Båt",
-                                                "value": 0,
-                                                "procent": 0
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        type: "Övrigt",
-                                        value: 0,
-                                        choices: [
-                                            {
-                                                "type": "Konst",
-                                                value: 0,
-                                                procent: 0
-                                            },
-                                            {
-                                                "type": "Värdeföremål",
-                                                "value": 0,
-                                                "procent": 0
-                                            }
-                                        ]
-                                    }
-                                ],
-                                salary: {
-                                    type: "Lön",
-                                    value: 0,
-                                    procent: 0
+                                        procent: 0
+                                    }}, { merge: true });
                                 }
-                            }, { merge: true });
+                            })
 
                             this.$store.commit('setUser', resp.data.user)
 

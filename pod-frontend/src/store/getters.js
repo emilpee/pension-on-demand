@@ -16,7 +16,6 @@ export default {
         let items = data[0].settingsData;
         items.forEach(item => {
             arr.push(item.choices);
-            console.log(item.choices);
         })
         state.settingItems = arr;
         return state.settingItems;
