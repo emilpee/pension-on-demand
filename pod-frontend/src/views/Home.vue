@@ -132,10 +132,6 @@ export default {
     userData() {
       return this.$store.state.userData;
     }
-  },
-  mounted() {
-    this.$store.commit('setPersonalNr', sessionStorage.getItem('personal'));
-    this.$store.dispatch('getUserData', this.personalNr);
   }
 }
 </script>

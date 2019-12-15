@@ -25,6 +25,7 @@
 <script>
 import { SettingsItem, Button } from '../components/';
 import data from '../data/data.json';
+import { db } from '../../firebase-config';
 
 export default {
 
@@ -72,67 +73,20 @@ export default {
         },
 
         updateSettingsData() {
-            this.$store.dispatch('getUserData', this.personalNr).then(() => {      
 
-                // TODO - gör dynamisk
-                var data = {
-                    choices: [
-                        {
-                            type: "Villa",
-                            value: this.choices[0].value,
-                            procent: this.choices[0].procent
-                        },
-                        {
-                            type: "Lägenhet",
-                            value: this.choices[1].value,
-                            procent: this.choices[1].procent
-                        },
-                        {
-                            type: "Stuga",
-                            value: this.choices[2].value,
-                            procent: this.choices[2].procent
-                        },
-                        {
-                            type: "Bil",
-                            value: this.choices[3].value,
-                            procent: this.choices[3].procent
-                        },
-                        {
-                            type: "Motorcykel",
-                            value: this.choices[4].value,
-                            procent: this.choices[4].procent
-                        },
-                        {
-                            type: "Båt",
-                            value: this.choices[5].value,
-                            procent: this.choices[5].procent
-                        },
-                        {
-                            type: "Konst",
-                            value: this.choices[6].value,
-                            procent: this.choices[6].procent
-                        },
-                        {
-                            type: "Värdeföremål",
-                            value: this.choices[7].value,
-                            procent: this.choices[7].procent
-                        }
-                            
-                    ],
-                    salary: {
-                        value: Number(this.salary.value),
-                        procent: Number(this.salary.procent)
-                    }
-                }
+            var batch = db.batch();
+            
+            let ref = db.collection("pensiondata").doc(this.personalNr);
 
-                this.$store.dispatch('updateUserData', data).then(() => {
-                    this.message = "Dina inställningar sparades!"
+            ref.get().then(() => {
+                batch.update(ref, { choices: this.choices, salary: this.salary } );
+                // Commit the batch
+                batch.commit().then(() => {
+                    this.message = 'Dina inställningar sparades!'
                 });
-
-                })
-
-
-            } 
+            })
+            
+        } 
                 
         },
         watch: {

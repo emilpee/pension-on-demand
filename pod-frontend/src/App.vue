@@ -18,6 +18,8 @@ export default {
     if (sessionStorage.getItem('user') !== null) {
         const token = sessionStorage.getItem('user');
         let user = atob(token.split('.')[1]);
+        this.$store.commit('setPersonalNr', sessionStorage.getItem('personal'));
+        this.$store.dispatch('getUserData', this.personalNr);
         this.$store.commit('setUser', JSON.parse(user));
         this.$store.commit('hasSignedIn', true) 
     }

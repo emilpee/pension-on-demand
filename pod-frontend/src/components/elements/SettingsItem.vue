@@ -1,6 +1,6 @@
 <template>
-  <section class="settings__item" v-if="setting !== undefined">
-    <h3>{{ setting.title }}</h3>
+  <section class="settings__item">
+    <h3 v-if="setting !== undefined">{{ setting.title }}</h3>
     <div v-if="!setting.hasOwnProperty('id')" class="form">
           <div class="form__item">
             <label> {{ setting.labelOne }} </label>
