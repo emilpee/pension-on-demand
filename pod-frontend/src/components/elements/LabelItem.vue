@@ -4,7 +4,7 @@
         <span class="debt__item">{{ label.type }}</span>
         <p class="debt__data"> {{ label.value }}</p> 
         <div class="debt__lights">
-            <traffic-lights :data="label.data" />
+            <traffic-lights :data="label.value" />
         </div>
     </div>
     <div> 
@@ -24,11 +24,10 @@ export default {
         return {
             i: -1,
             barData: {
-                labels: ['Månadslön', 'Tillgångar', 'Tjänstepension', 'Allmän pension'],
-                colors: ['#000', '#000', '#000', '#000'],
+                labels: this.choices,
+                colors: ['#000', '#000','#000', '#000'], 
                 data: [10000, 2323, 15, 2],
-                years: ['', 55, 60, 65, 70, 75, 80]
-            }
+            },
         }
     },
     props: {
@@ -37,6 +36,13 @@ export default {
     methods: {
         showDetails(i) {
             this.i !== i ? this.i = i : this.i = -1;
+        },
+    },
+    computed: {
+        choices() {
+            return this.$store.state.choices.filter(choice => {
+                return choice.parent === this.label.type
+            })
         }
     },
     components: {

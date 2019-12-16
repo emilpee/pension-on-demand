@@ -67,7 +67,8 @@ export default {
                     this.choices[i].procent = this.userData.choices[i].procent;
                 }
 
-                this.salary.value = this.userData.salary.value;         
+                this.salary.value = this.userData.salary.value;  
+                this.$store.commit('setSalary', Number(this.salary.value));       
             })
         },
 

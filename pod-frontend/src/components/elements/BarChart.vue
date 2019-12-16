@@ -11,32 +11,56 @@ export default {
         chartsData: {
             type: Object,
             default: null
+        },
+        pension: {
+            type: Array
         }
     },
+
     data() {
         return {
             barData: {
                 labels: this.chartsData.years,
                 datasets: [
                     // TODO - se över hur loopa, och få månadslön att ligga enskilt.
+                    // TODO - uppdatera data med flera items för att skapa flöde.
                     {
-                        data: [10000],
+                        data: [this.$store.state.salary],
                         label: "Månadslön",
-                        backgroundColor: '#000'
+                        backgroundColor: this.chartsData.colors[0],
+                        stack: ''
                     },
                     {
-                        data: [this.chartsData.data[0]],
-                        label: this.chartsData.labels[0],
-                        backgroundColor: this.chartsData.colors[0]
+                        data: [this.$store.state.totalAssets],
+                        label: "Tillgångar",
+                        backgroundColor: this.chartsData.colors[1]
                     },
+                    {
+                        data: [this.pension[0].value],
+                        label: [this.pension[0].type],
+                        backgroundColor: this.chartsData.colors[2]
+                    },
+                    {
+                        data: [this.pension[1].value],
+                        label: this.pension[1].type,
+                        backgroundColor: this.chartsData.colors[3]
+                    }
                 ],
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    xAxes: [{ stacked: true }],
-                    yAxes: [{ stacked: true }]
+                    xAxes: [
+                        { 
+                            stacked: true
+                        },
+                    ],
+                    yAxes: [
+                        { 
+                            stacked: true
+                        }
+                    ]
                 },
             }
         }
@@ -45,7 +69,6 @@ export default {
     mounted() {
         this.renderChart(this.barData, this.options)
     },
-
     
 }
 </script>

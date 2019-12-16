@@ -69,7 +69,7 @@
           <span>Prognosen ser ut som följande ifall du behåller din nuvarande strategi.</span>
         </div>
         <div class="bar__chart">
-          <bar-chart :chartsData="barData" />
+          <bar-chart :chartsData="barData" :pension="jsonData.pension" />
         </div>
       </div>
 
@@ -100,10 +100,8 @@ export default {
         colors: [ "#0F7354", "#C04D4D"]
       },
       barData: {
-        labels: ['Tillgångar', 'Tjänstepension', 'Allmän pension'],
-        colors: ['#fab', '#h0a', '#b4f'],
-        data: [2323, 15, 2],
-        years: ['', 55, 60, 65, 70, 75, 80]
+        colors: ['#fab', '#h0a', '#b4f', '#a3b'],
+        years: ['', 60, 65, 70, 75, 80]
       },
       jsonData: jsonData[0],
     }

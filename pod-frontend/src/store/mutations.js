@@ -22,5 +22,8 @@ export default {
     },
     setChoices(state, choices) {
         state.choices = choices;
+    },
+    setSalary(state, salary) {
+        state.salary = salary;
     }
 }

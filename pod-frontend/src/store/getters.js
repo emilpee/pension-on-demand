@@ -1,7 +1,7 @@
 import data from '../data/data.json';
 
 export default {
-    getTotalDebts(state) {
+    getTotalDebts: state => {
         return data.map(asset => {
             let total;
 
@@ -11,4 +11,7 @@ export default {
             return state.totalDebts;
         })
     },
+    filterTypes: state => {
+        return state.choices.map(choice => choice.type);
+    }
 }

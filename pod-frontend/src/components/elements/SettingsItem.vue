@@ -1,6 +1,6 @@
 <template>
-  <section class="settings__item">
-    <h3 v-if="setting !== undefined">{{ setting.title }}</h3>
+  <section v-if="setting.title" class="settings__item">
+    <h3>{{ setting.title }}</h3>
     <div v-if="!setting.hasOwnProperty('id')" class="form">
           <div class="form__item">
             <label> {{ setting.labelOne }} </label>
@@ -17,11 +17,11 @@
             <span v-text="choice.type"></span>
         </div>
         <div class="form__item">
-            <label> {{ choice.labelOne }} </label>
+            <label> {{ setting.labelOne }} </label>
             <input type="number" v-model="choice.value" @focus="$parent.message = ''" placeholder="SEK">
         </div>
         <div class="form__item">
-            <label> {{ choice.labelTwo }} </label>
+            <label> {{ setting.labelTwo }} </label>
             <input type="number" v-model="choice.procent" @focus="$parent.message = ''" placeholder="procent"> 
         </div>
     </div>
@@ -38,10 +38,10 @@ export default {
     computed: {
         choices() {
             return this.$store.state.choices;
-        }
+        },
     },
     mounted() {
-        this.filterChoices();
+       this.filterChoices();
     },
     methods: {
         filterChoices(setting) {

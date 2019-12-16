@@ -16,7 +16,7 @@ export default {
     data() {
         return {
             barData: {
-                labels: this.chartsData.years,
+                labels: this.chartsData.labels,
                 datasets: [
                     {
                         data: this.chartsData.data,
@@ -27,6 +27,9 @@ export default {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                legend: {
+                    display: false
+                }
             }
         }
     },

@@ -31,17 +31,22 @@ export default {
     computed: {
         userData() {
             return this.$store.state.userData;
+        },
+        choices() {
+            return this.$store.state.choices;
         }
     },
     mounted() {
         this.$store.dispatch('getUserData', sessionStorage.getItem('personal')).then(doc => {
             this.$store.commit('setUserData', doc.data());  
+            this.$store.commit('setChoices', doc.data().choices)
             this.getTotal();
         })
     },
     methods: {
         getTotal() {
-            let choices = this.userData.choices;
+            // TODO - hitta snyggare lösning.
+            let choices = this.choices;
             let incomes = this.userData.income;
 
             var estates = choices.filter(choice => choice.parent === "Fastigheter");
