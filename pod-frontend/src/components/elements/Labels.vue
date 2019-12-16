@@ -32,6 +32,37 @@ export default {
         userData() {
             return this.$store.state.userData;
         }
+    },
+    mounted() {
+        this.$store.dispatch('getUserData', sessionStorage.getItem('personal')).then(doc => {
+            this.$store.commit('setUserData', doc.data());  
+            this.getTotal();
+        })
+    },
+    methods: {
+        getTotal() {
+            let choices = this.userData.choices;
+            let incomes = this.userData.income;
+
+            var estates = choices.filter(choice => choice.parent === "Fastigheter");
+            var vehicles = choices.filter(choice => choice.parent === "Fordon");
+            var other = choices.filter(choice => choice.parent === "Övrigt");
+
+            estates = estates.reduce((acc, obj) => acc + Number(obj.value), 0);
+            vehicles = vehicles.reduce((acc, obj) => acc + Number(obj.value), 0);
+            other = other.reduce((acc, obj) => acc + Number(obj.value), 0);
+
+            incomes.filter(income => {
+                if (income.type === "Fastigheter") {
+                    return income.value = estates;
+                } else if (income.type === "Fordon") {
+                    return income.value = vehicles;
+                } else {
+                    return income.value = other;
+                }
+            })
+
+        }
     }
 }
 </script>

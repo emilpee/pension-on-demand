@@ -122,15 +122,15 @@ export default {
                                     income: [
                                         {
                                             type: "Fastigheter",
-                                            total: 0,
+                                            value: 0,
                                         },
                                         {
                                             type: "Fordon",
-                                            total: 0,
+                                            value: 0,
                                         },
                                         {
                                             type: "Övrigt",
-                                            total: 0,
+                                            value: 0,
                                         }
                                     ],
                                     choices: [

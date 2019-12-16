@@ -105,7 +105,7 @@ export default {
         data: [2323, 15, 2],
         years: ['', 55, 60, 65, 70, 75, 80]
       },
-      jsonData: jsonData[0]
+      jsonData: jsonData[0],
     }
   },
 
@@ -120,11 +120,11 @@ export default {
     wantedPension() {
       return this.$store.state.wantedPension;
     },
-    totalAssets() {
-      return this.$store.state.totalAssets;
-    },
     totalDebts() {
       return this.$store.getters.getTotalDebts;
+    },
+    totalAssets() {
+      return this.$store.state.totalAssets
     },
     personalNr() {
       return this.$store.state.personalNr;

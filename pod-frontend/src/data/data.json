@@ -4,32 +4,32 @@
             {
                 "id": 1,
                 "title": "Fastigheter",
-                "value": 0,
+                "value": "",
                 "labelOne": "Fastighetsvärdering",
-                "procent": 0,
+                "procent": "",
                 "labelTwo": "Beräknad årlig värdeökning"
             },
             {
                 "id": 2,
                 "title": "Fordon",
                 "labelOne": "Fordonsvärdering",
-                "value": 0,
-                "procent": 0,
+                "value": "",
+                "procent": "",
                 "labelTwo": "Beräknad årlig värdeförändring"
             },
             {
                 "id": 3,
                 "title": "Övrigt",
                 "labelOne": "Värdering",
-                "value": 0,
-                "procent": 0,
+                "value": "",
+                "procent": "",
                 "labelTwo": "Beräknad årlig värdeförändring"
             }
         ],
         "salary": {
             "title": "Inkomster",
-            "value": 0,
-            "procent": 0,
+            "value": "",
+            "procent": "",
             "labelOne": "Månadslön",
             "labelTwo": "Beräknad årlig löneökning"
         },
@@ -64,28 +64,6 @@
                 "type": "Blancolån",
                 "value": 25000,
                 "interest": 0.025
-            }
-        ],
-        "assets": [
-            {
-                "type": "Fastigheter",
-                "value": 1250000, 
-                "annualInc": 0.03
-            },
-            {
-                "type": "Fordon", 
-                "value": 1000, 
-                "annualInc": -0.02
-            },
-            {
-                "type": "Båt",
-                "value": 1500, 
-                "annualInc": 0.02
-            },
-            {
-                "type": "Övrigt",
-                "value": 25000,
-                "annualInc": 0.025
             }
         ],
         "savings": {
@@ -126,14 +104,14 @@
             "colors": ["#C04D4D", "#0F7354", "#C04D4D", "#0F7354", "#0F7354"]
         },
         "choices": [
-            {"type": "Villa", "value": 300, "procent": 0, "parent": "Fastigheter"},
-            {"type": "Lägenhet", "value": 0, "procent": 0, "parent": "Fastigheter"},
-            {"type": "Stuga", "value": 0, "procent": 0, "parent": "Fastigheter"},
-            {"type": "Bil", "value": 300, "procent": 0, "parent": "Fordon"},
-            {"type": "Motorcykel", "value": 0, "procent": 0, "parent": "Fordon"},
-            {"type": "Båt", "value": 0, "procent": 0, "parent": "Fordon"},
-            {"type": "Konst", "value": 150, "procent": 0, "parent": "Övrigt"},
-            {"type": "Värdeföremål", "value": 300, "procent": 0, "parent": "Övrigt"}
+            {"type": "Villa", "value": "", "procent": "", "parent": "Fastigheter"},
+            {"type": "Lägenhet", "value": "", "procent": "", "parent": "Fastigheter"},
+            {"type": "Stuga", "value": "", "procent": "", "parent": "Fastigheter"},
+            {"type": "Bil", "value": "", "procent": "", "parent": "Fordon"},
+            {"type": "Motorcykel", "value": "", "procent": "", "parent": "Fordon"},
+            {"type": "Båt", "value": "", "procent": "", "parent": "Fordon"},
+            {"type": "Konst", "value": "", "procent": "", "parent": "Övrigt"},
+            {"type": "Värdeföremål", "value": "", "procent": "", "parent": "Övrigt"}
         ]
     }
 ]

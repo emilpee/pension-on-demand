@@ -29,13 +29,13 @@ function calcTotal(doc){
     const reducer = (accumulator, currentValue) => accumulator.value + currentValue.value;
     let pension = data[0].pension.reduce(reducer);
 
+    let arr = [];
 
-    let test = [];
-    doc.income.forEach(item => {
-        test.push(item);
+    doc.choices.forEach(item => {
+        arr.push(Number(item.value));
     })
 
-    let income = test.reduce((acc, obj) => acc + obj.value, 0);
-
+    let income = arr.reduce((acc, obj) => acc + Number(obj), 0);
+    
     return Number(pension + income);
 }

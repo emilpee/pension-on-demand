@@ -62,7 +62,6 @@ export default {
                 this.userData = doc.data();
                 this.$store.commit('setUserData', this.userData);  
 
-
                 for (let i = 0; i < this.choices.length; i++) {
                     this.choices[i].value = this.userData.choices[i].value;
                     this.choices[i].procent = this.userData.choices[i].procent;
@@ -89,11 +88,11 @@ export default {
         } 
                 
         },
-        watch: {
-            salary: function() {
-                console.log(this.salary);
-            }
+    watch: {
+        salary: function() {
+            console.log(this.salary);
         }
+    }
 }
 
 </script>
