@@ -8,10 +8,11 @@
         </div>
     </div>
     <div> 
-        <div class="label__details" v-if="i === $attrs.index">
-            <LabelItemChart :chartsData="barData" />
+        <div class="label__details" v-if="i === $attrs.index && choices">
+            <LabelItemChart :chartData="barData" />
         </div>
     </div>
+    
 </div>
 </template>
 
@@ -24,14 +25,21 @@ export default {
         return {
             i: -1,
             barData: {
-                labels: this.choices,
-                colors: ['#000', '#000','#000', '#000'], 
-                data: [10000, 2323, 15, 2],
+                labels: [],
+                colors: ['#0F7354', '#F0CD08','#C04D4D'], 
+                data: []
             },
         }
     },
     props: {
-        label: Object
+        label: Object,
+        choices: Array
+    },
+    mounted() {
+        if (this.choices !== undefined) {
+            this.barData.labels = this.filteredChoices.map(choice => choice.type);
+            this.barData.data = this.filteredChoices.map(choice => choice.value);
+        }
     },
     methods: {
         showDetails(i) {
@@ -39,15 +47,16 @@ export default {
         },
     },
     computed: {
-        choices() {
-            return this.$store.state.choices.filter(choice => {
-                return choice.parent === this.label.type
+        filteredChoices() {
+             return this.choices.filter(choice => {
+                return choice.parent === this.label.type 
             })
         }
     },
     components: {
         TrafficLights, LabelItemChart
-    }
+    },
+
 }
 </script>
 

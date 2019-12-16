@@ -69,7 +69,7 @@
           <span>Prognosen ser ut som följande ifall du behåller din nuvarande strategi.</span>
         </div>
         <div class="bar__chart">
-          <bar-chart :chartsData="barData" :pension="jsonData.pension" />
+          <bar-chart :chartData="barData" :pension="jsonData.pension" />
         </div>
       </div>
 

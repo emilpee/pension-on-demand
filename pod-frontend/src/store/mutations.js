@@ -25,5 +25,8 @@ export default {
     },
     setSalary(state, salary) {
         state.salary = salary;
+    }, 
+    setLabelChartData(state, payload) {
+        state.labelChartData = payload;
     }
 }
