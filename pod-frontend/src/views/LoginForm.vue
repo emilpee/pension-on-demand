@@ -119,6 +119,16 @@ export default {
                                         personalNr: data.user.personalNumber,
                                         age: currentAge.toString().substr(0,2)
                                     },
+                                    pension: [
+                                        {
+                                            type: "Allmän pension",
+                                            value: 0
+                                        },
+                                        {
+                                            type: "Tjänstepension",
+                                            value: 0
+                                        }
+                                    ],
                                     income: [
                                         {
                                             type: "Fastigheter",

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { db } from '../../firebase-config';
-import data from '../data/data.json';
 
 const url = 'https://hfzn51rqf2.execute-api.eu-west-1.amazonaws.com/Prod/bankid';
 
@@ -32,10 +31,11 @@ export default {
 }
 
 function calcTotal(doc){
-    const reducer = (accumulator, currentValue) => accumulator.value + currentValue.value;
-    let pension = data[0].pension.reduce(reducer);
-
     let arr = [];
+
+    doc.pension.forEach(item => {
+        arr.push(Number(item.value));
+    })
 
     doc.choices.forEach(item => {
         arr.push(Number(item.value));
@@ -43,5 +43,5 @@ function calcTotal(doc){
 
     let income = arr.reduce((acc, obj) => acc + Number(obj), 0);
     
-    return Number(pension + income);
+    return Number(income);
 }

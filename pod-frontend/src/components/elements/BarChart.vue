@@ -30,7 +30,7 @@ export default {
                     {
                         data: [this.$store.state.salary.value],
                         label: "Månadslön",
-                        backgroundColor: this.chartData.colors[0],
+                        backgroundColor: this.chartData.colors[0]
                     },
                     {
                         data: [],
@@ -76,7 +76,7 @@ export default {
     methods: {
         calculateAssets() {
             let totalArray = [];
-            let valuesArray = [];
+            let assetsArray = [];
             let reduce;
             let settingItems = this.$store.state.settingItems;
             let total = this.$store.state.totalAssets;
@@ -95,11 +95,13 @@ export default {
             const reducer = (accumulator, currentValue) => accumulator + currentValue;
             reduce = totalArray.reduce(reducer);
 
+            console.log(reduce);
+
             for (let i = 0; i < this.chartData.years.length; i++) {
-                valuesArray.push(Number((total += (total * reduce))).toFixed());
+                assetsArray.push(Number((total += (total * reduce))).toFixed());
             }
 
-            this.barData.datasets[1].data = valuesArray;
+            this.barData.datasets[1].data = assetsArray;
             
         }
     }

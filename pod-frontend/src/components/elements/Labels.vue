@@ -3,7 +3,7 @@
 
         <div class="label">
             <h2 class="label__header">Tillgångar</h2>
-            <LabelItem class="label__asset" v-for="(label, index) in data.pension" :label="label" :index="index" :key="index+'pension'" />
+            <LabelItem class="label__asset" v-for="(label, index) in userData.pension" :label="label" :index="index" :key="index+'pension'" />
             <LabelItem class="label__asset" v-for="(label, index) in userData.income" :label="label" :index="index" :choices="userData.choices" :key="index+'income'" />
         </div>
         <div class="label">
@@ -36,13 +36,14 @@ export default {
             return this.$store.state.choices;
         }
     },
-    mounted() {
-        this.$store.dispatch('getUserData', sessionStorage.getItem('personal')).then(doc => {
-            this.$store.commit('setUserData', doc.data());  
-            this.$store.commit('setChoices', doc.data().choices)
-            this.getTotal();
-        })
-    },
+    // mounted() {
+    //     this.$store.dispatch('getUserData', sessionStorage.getItem('personal')).then(doc => {
+    //         this.$store.commit('setUserData', doc.data());  
+    //         this.$store.commit('setChoices', doc.data().choices);
+    //         this.$store.commit('setPensionData', doc.data().pension);
+    //         this.getTotal();
+    //     })
+    // },
     methods: {
         getTotal() {
             // TODO - hitta snyggare lösning.

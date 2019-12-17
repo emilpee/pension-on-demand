@@ -26,7 +26,7 @@ export default {
             i: -1,
             barData: {
                 labels: [],
-                colors: ['#0F7354', '#F0CD08','#C04D4D'], 
+                colors: ['#76C04D', '#F0CD08','#C04D4D'], 
                 data: []
             },
         }
@@ -40,6 +40,7 @@ export default {
             this.barData.labels = this.filteredChoices.map(choice => choice.type);
             this.barData.data = this.filteredChoices.map(choice => choice.value);
         }
+        console.log(this.label);
     },
     methods: {
         showDetails(i) {

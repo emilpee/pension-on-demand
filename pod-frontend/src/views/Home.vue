@@ -17,25 +17,6 @@
       </div>
     </section>
 
-    <section class="home__sliders">
-      <div class="title">
-        <i class="far icons fa-laugh-beam"></i>
-        <h3>Målbild</h3>
-      </div>
-      <div class="sliders">
-        <slider v-for="(data, index) in jsonData.goals.label" :data="data" :key="index" /> 
-      </div>
-    </section>
-
-
-    <section class="home__optimize">
-      <div class="optimize title">
-        <h2>Se hur mycket pension du kan få för ett sparande på {{ wantedPension }} kr/mån.</h2>
-        <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span>
-      </div>
-      <Button msg="Optimera med PD" />
-    </section>
-
     <section class="home__doughnut" v-if="userData !== undefined">
 
       <div class="doughnut">
@@ -72,7 +53,25 @@
           <bar-chart :chartData="barData" :pension="jsonData.pension" />
         </div>
       </div>
+    </section>
 
+       <section class="home__sliders">
+      <div class="title">
+        <i class="far icons fa-laugh-beam"></i>
+        <h3>Målbild</h3>
+      </div>
+      <div class="sliders">
+        <slider v-for="(data, index) in jsonData.goals.label" :data="data" :key="index" /> 
+      </div>
+    </section>
+
+
+    <section class="home__optimize">
+      <div class="optimize title">
+        <h2>Se hur mycket pension du kan få för ett sparande på {{ wantedPension }} kr/mån.</h2>
+        <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span>
+      </div>
+      <Button msg="Optimera med PD" />
     </section>
 
     </div>
@@ -110,6 +109,15 @@ export default {
   components: {
     DoughnutChart, BarChart, Slider, Symbols, Button, Labels
   },
+
+      mounted() {
+        this.$store.dispatch('getUserData', sessionStorage.getItem('personal')).then(doc => {
+            this.$store.commit('setUserData', doc.data());  
+            this.$store.commit('setChoices', doc.data().choices);
+            this.$store.commit('setPensionData', doc.data().pension);
+            this.getTotal();
+        })
+    },
 
   computed: {
     user() {
