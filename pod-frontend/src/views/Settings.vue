@@ -45,6 +45,7 @@ export default {
     },
 
     mounted() {
+        console.log(this.salary);
         this.$store.commit('setChoices', this.choices);
         this.$store.commit('setPersonalNr', sessionStorage.getItem('personal'));
         this.getUserInfo();
@@ -56,7 +57,7 @@ export default {
     methods: {
         getUserInfo() {
             this.$store.dispatch('getUserData', this.personalNr).then(doc => {
-
+                console.log(doc.data());
                 // Set DB data
                 this.userData = doc.data();
                 this.$store.commit('setUserData', this.userData);  
@@ -67,7 +68,8 @@ export default {
                 }
 
                 this.salary.value = this.userData.salary.value;  
-                this.$store.commit('setSalary', Number(this.salary.value));       
+                this.salary.procent = this.userData.salary.procent;  
+                this.$store.commit('setSalary', this.salary);      
             })
         },
 

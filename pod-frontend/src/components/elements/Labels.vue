@@ -53,6 +53,8 @@ export default {
             var vehicles = choices.filter(choice => choice.parent === "Fordon");
             var other = choices.filter(choice => choice.parent === "Övrigt");
 
+            this.$store.commit('setSettingItems', { estates, vehicles, other });
+
             estates = estates.reduce((acc, obj) => acc + Number(obj.value), 0);
             vehicles = vehicles.reduce((acc, obj) => acc + Number(obj.value), 0);
             other = other.reduce((acc, obj) => acc + Number(obj.value), 0);

@@ -1,5 +1,5 @@
 <template>
-  <section v-if="setting.title" class="settings__item">
+  <section class="settings__item">
     <h3>{{ setting.title }}</h3>
     <div v-if="!setting.hasOwnProperty('id')" class="form">
           <div class="form__item">
@@ -37,6 +37,7 @@ export default {
     },
     computed: {
         choices() {
+            console.log(this.setting);
             return this.$store.state.choices;
         },
     },
@@ -45,6 +46,7 @@ export default {
     },
     methods: {
         filterChoices(setting) {
+            // TODO - setting ger undefined.
             return this.choices.filter(choice => choice.parent === setting.title)
         }
     }

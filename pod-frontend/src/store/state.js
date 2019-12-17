@@ -7,6 +7,6 @@ export default {
     salary: 0,
     totalAssets: 0,
     totalDebts: 0,
-    choices: [],
-    labelChartData: []
+    choices: [], 
+    settingItems: []
 }

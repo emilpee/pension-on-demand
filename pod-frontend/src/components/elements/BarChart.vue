@@ -28,13 +28,12 @@ export default {
                     // TODO - se över hur loopa, och få månadslön att ligga enskilt.
                     // TODO - uppdatera data med flera items för att skapa flöde.
                     {
-                        data: [this.$store.state.salary],
+                        data: [this.$store.state.salary.value],
                         label: "Månadslön",
                         backgroundColor: this.chartData.colors[0],
-                        stack: ''
                     },
                     {
-                        data: [this.$store.state.totalAssets],
+                        data: [],
                         label: "Tillgångar",
                         backgroundColor: this.chartData.colors[1]
                     },
@@ -60,7 +59,7 @@ export default {
                         },
                     ],
                     yAxes: [
-                        { 
+                        {
                             stacked: true
                         }
                     ]
@@ -70,8 +69,40 @@ export default {
     },
 
     mounted() {
+        this.calculateAssets();
         this.renderChart(this.barData, this.options)
     },
+
+    methods: {
+        calculateAssets() {
+            let totalArray = [];
+            let valuesArray = [];
+            let reduce;
+            let settingItems = this.$store.state.settingItems;
+            let total = this.$store.state.totalAssets;
+  
+            const settingsArray = Object.keys(settingItems).map(i => settingItems[i])
+
+            settingsArray.map(item => {
+                item.forEach(data => {
+                    let value = Number(data.value);
+                    let percent = Number(data.procent);
+                    totalArray.push(Number(100 * percent / value));
+                    console.log(totalArray);
+                })
+            })
+
+            const reducer = (accumulator, currentValue) => accumulator + currentValue;
+            reduce = totalArray.reduce(reducer);
+
+            for (let i = 0; i < this.chartData.years.length; i++) {
+                valuesArray.push(Number((total += (total * reduce))).toFixed());
+            }
+
+            this.barData.datasets[1].data = valuesArray;
+            
+        }
+    }
     
 }
 </script>

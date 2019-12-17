@@ -188,7 +188,7 @@ export default {
                                         type: "Lön",
                                         value: 0,
                                         procent: 0
-                                    }}, { merge: true });
+                                    }});
                                 }
                             })
 
