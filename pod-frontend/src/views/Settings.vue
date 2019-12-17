@@ -25,7 +25,6 @@
 <script>
 import { SettingsItem, Button } from '../components/';
 import data from '../data/data.json';
-import { db } from '../../firebase-config';
 
 export default {
 
@@ -73,17 +72,8 @@ export default {
         },
 
         updateSettingsData() {
-
-            var batch = db.batch();
-            
-            let ref = db.collection("pensiondata").doc(this.personalNr);
-
-            ref.get().then(() => {
-                batch.update(ref, { choices: this.choices, salary: this.salary } );
-                // Commit the batch
-                batch.commit().then(() => {
-                    this.message = 'Dina inställningar sparades!'
-                });
+            this.$store.dispatch('updateUserData', { salary: this.salary, choices: this.choices }).then(() => {
+                this.message = 'Dina inställningar sparades!'
             })
             
         } 

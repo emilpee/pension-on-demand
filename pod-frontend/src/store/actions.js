@@ -20,8 +20,14 @@ export default {
         return doc;
     },
     async updateUserData({ state }, data) {
-        let doc = await db.collection("pensiondata").doc(state.personalNr);
-        doc.set(data, { merge: true });
+        var batch = db.batch();
+            
+        let ref = db.collection("pensiondata").doc(state.personalNr);
+
+        ref.get().then(() => {
+            batch.update(ref, data);
+            batch.commit();
+        })
     }
 }
 

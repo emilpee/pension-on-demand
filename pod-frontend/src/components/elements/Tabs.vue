@@ -16,11 +16,12 @@ export default {
   methods: {
     changeView() {
       let tabs = this.$parent.tabs;
-      
-      // TODO - snygga till.
+
       if (!this.tab.isActive) {
-        tabs[0].isActive = !tabs[0].isActive;
-        tabs[1].isActive = !tabs[1].isActive;
+        for (let i = 0; i < tabs.length; i++) {
+          tabs[i].isActive = !tabs[i].isActive;
+        }
+
       } 
   
     }
