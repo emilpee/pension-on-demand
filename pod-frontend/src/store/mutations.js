@@ -28,5 +28,8 @@ export default {
     },
     setSettingItems(state, payload) {
         state.settingItems = payload;
+    },
+    setUserAge(state, age) {
+        state.userAge = age;
     }
 }

@@ -36,14 +36,6 @@ export default {
             return this.$store.state.choices;
         }
     },
-    // mounted() {
-    //     this.$store.dispatch('getUserData', sessionStorage.getItem('personal')).then(doc => {
-    //         this.$store.commit('setUserData', doc.data());  
-    //         this.$store.commit('setChoices', doc.data().choices);
-    //         this.$store.commit('setPensionData', doc.data().pension);
-    //         this.getTotal();
-    //     })
-    // },
     methods: {
         getTotal() {
             // TODO - hitta snyggare lösning.
@@ -54,7 +46,7 @@ export default {
             var vehicles = choices.filter(choice => choice.parent === "Fordon");
             var other = choices.filter(choice => choice.parent === "Övrigt");
 
-            this.$store.commit('setSettingItems', { estates, vehicles, other });
+            this.$store.commit('setSettingItems', { estates, vehicles, other } );
 
             estates = estates.reduce((acc, obj) => acc + Number(obj.value), 0);
             vehicles = vehicles.reduce((acc, obj) => acc + Number(obj.value), 0);
@@ -70,6 +62,11 @@ export default {
                 }
             })
 
+        }
+    },
+    watch: {
+        userData: function() {
+            this.getTotal();
         }
     }
 }

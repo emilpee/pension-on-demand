@@ -37,7 +37,6 @@ export default {
     },
     computed: {
         choices() {
-            console.log(this.setting);
             return this.$store.state.choices;
         },
     },
@@ -46,8 +45,9 @@ export default {
     },
     methods: {
         filterChoices(setting) {
-            // TODO - setting ger undefined.
-            return this.choices.filter(choice => choice.parent === setting.title)
+            if (setting) {
+                return this.choices.filter(choice => choice.parent === setting.title)
+            }
         }
     }
 }

@@ -58,12 +58,12 @@
             {
                 "type": "Båtlån",
                 "value": 1500,
-                "interest": 0.02
+                "interest": 0.03
             },
             {
                 "type": "Blancolån",
                 "value": 25000,
-                "interest": 0.025
+                "interest": 0.05
             }
         ],
         "savings": {
@@ -85,7 +85,7 @@
                     "title": "Jag vill gå i pension vid",
                     "value": 65,
                     "minValue": 55,
-                    "maxValue": 75
+                    "maxValue": 80
                 },
                 {
                     "id": 3,

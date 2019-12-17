@@ -9,5 +9,6 @@ export default {
     totalDebts: 0,
     choices: [], 
     settingItems: [],
-    pensionData: []
+    pensionData: [],
+    userAge: 0
 }

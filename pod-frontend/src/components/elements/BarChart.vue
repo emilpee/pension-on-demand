@@ -15,9 +15,6 @@ export default {
             type: Object,
             default: null
         },
-        pension: {
-            type: Array
-        }
     },
 
     data() {
@@ -38,13 +35,13 @@ export default {
                         backgroundColor: this.chartData.colors[1]
                     },
                     {
-                        data: [this.pension[0].value],
-                        label: [this.pension[0].type],
+                        data: [],
+                        label: "Allmän pension",
                         backgroundColor: this.chartData.colors[2]
                     },
                     {
-                        data: [this.pension[1].value],
-                        label: this.pension[1].type,
+                        data: [],
+                        label: "Tjänstepension",
                         backgroundColor: this.chartData.colors[3]
                     }
                 ],
@@ -69,8 +66,8 @@ export default {
     },
 
     mounted() {
-        this.calculateAssets();
         this.renderChart(this.barData, this.options)
+        this.calculateAssets();
     },
 
     methods: {
@@ -78,30 +75,62 @@ export default {
             let totalArray = [];
             let assetsArray = [];
             let reduce;
+            let pensionsArray1 = [];
+            let pensionsArray2 = []
+            let pensionData = this.$store.state.pensionData;
             let settingItems = this.$store.state.settingItems;
             let total = this.$store.state.totalAssets;
   
             const settingsArray = Object.keys(settingItems).map(i => settingItems[i])
+            const pensionArray = Object.keys(pensionData).map(i => pensionData[i])
 
             settingsArray.map(item => {
                 item.forEach(data => {
                     let value = Number(data.value);
                     let percent = Number(data.procent);
-                    totalArray.push(Number(100 * percent / value));
-                    console.log(totalArray);
+                    // TODO - se över hur procenten räknas ut.
+                    totalArray.push((percent * 100) / value);
+                    // console.log(totalArray);
                 })
             })
 
             const reducer = (accumulator, currentValue) => accumulator + currentValue;
             reduce = totalArray.reduce(reducer);
 
-            console.log(reduce);
+            // Allmän pension
+            let percentage1 = 1.185;
 
+            // Tjänstepension
+            let percentage2 = 1.045;
+
+            // Räkna ut pension
             for (let i = 0; i < this.chartData.years.length; i++) {
-                assetsArray.push(Number((total += (total * reduce))).toFixed());
+                let lastItem = this.chartData.years[this.chartData.years.length - 1];
+                if (lastItem === 65) {
+                    console.log('Tjean');
+                    // TODO - se över uträkning
+                    pensionsArray1.push(Number(pensionArray[0].value *= percentage1).toFixed());
+                    pensionsArray2.push(Number(pensionArray[1].value *= percentage2).toFixed());
+                } else {
+                    console.log('aha');
+                    pensionsArray1.push(Number(pensionArray[0].value *= percentage1).toFixed());
+                    pensionsArray2.push(Number(pensionArray[1].value *= percentage2).toFixed());
+                    if (this.chartData.years[i] === 65) {
+                        // TODO - modifiera pension. Lägg till en break om nuvarande index är 65.
+                        break;
+                    }
+                }
             }
 
+            // Räkna ut tillgångar
+            for (let i = 0; i < this.chartData.years.length; i++) {
+                // TODO - fixa kalkylering.
+                assetsArray.push(Number((total += (total * reduce))).toFixed()); 
+            }
+        
             this.barData.datasets[1].data = assetsArray;
+            this.barData.datasets[2].data = pensionsArray1;
+            this.barData.datasets[3].data = pensionsArray2;
             
         }
     }

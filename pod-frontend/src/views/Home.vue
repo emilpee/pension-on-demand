@@ -100,7 +100,7 @@ export default {
       },
       barData: {
         colors: ['#fab', '#h0a', '#b4f', '#a3b'],
-        years: ['', 60, 65, 70, 75, 80]
+        years: []
       },
       jsonData: jsonData[0],
     }
@@ -110,19 +110,31 @@ export default {
     DoughnutChart, BarChart, Slider, Symbols, Button, Labels
   },
 
-      mounted() {
-        this.$store.dispatch('getUserData', sessionStorage.getItem('personal')).then(doc => {
-            this.$store.commit('setUserData', doc.data());  
-            this.$store.commit('setChoices', doc.data().choices);
-            this.$store.commit('setPensionData', doc.data().pension);
-            this.getTotal();
-        })
-    },
+  mounted() {
+      this.$store.dispatch('getUserData', sessionStorage.getItem('personal')).then(doc => {
+        this.$store.commit('setUserData', doc.data());  
+        this.$store.commit('setUserAge', doc.data().user.age);
+        this.$store.commit('setPensionData', doc.data().pension);
+        this.$store.commit('setChoices', doc.data().choices);
+      })
+
+      console.log(this.user);
+
+      // TODO - skapa ålderslogik.
+      if (this.userAge < 30) {
+        this.barData.years.push('', 30, 35, 40, 45, 50, 55, 60, 65);
+      } else if (this.userAge > 40) {
+        this.barData.years.push('', 45, 50, 55, 60, 65, 70, 75, 80);
+      }
+  },
 
   computed: {
     user() {
       return this.$store.state.user;
     }, 
+    userAge() {
+      return this.$store.state.userAge;
+    },
     wantedPension() {
       return this.$store.state.wantedPension;
     },
