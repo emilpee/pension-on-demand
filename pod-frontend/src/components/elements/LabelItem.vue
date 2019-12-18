@@ -66,7 +66,7 @@ export default {
 .label__details {
 
     canvas {
-        width: 90% !important;
+        width: 99% !important;
     }
 }
 

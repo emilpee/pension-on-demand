@@ -5,9 +5,15 @@ export default {
     setUser(state, user) {
         state.user = user;
     },
-    setGoal(state, goal) {
-        state.wantedPension = goal;
+    setPrivateSavings(state, savings) {
+        state.privateSavings = savings;
     }, 
+    setPensionAge(state, age) {
+        state.pensionAge = age;
+    },
+    setRisk(state, risk) {
+        state.risk = risk;
+    },
     setPensionData(state, data) {
         state.pensionData = data;
     },

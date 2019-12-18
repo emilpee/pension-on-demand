@@ -67,11 +67,15 @@
 
 
     <section class="home__optimize">
-      <div class="optimize title">
-        <h2>Se hur mycket pension du kan få för ett sparande på {{ wantedPension }} kr/mån.</h2>
-        <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span>
+      <div v-show="!showResponse" class="optimize__header title" :class="{ loading: loading }">
+        <h2>Se hur mycket pension du kan få för ett sparande på {{ privateSavings }} kr/mån.</h2>
+        <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span> 
       </div>
-      <Button msg="Optimera med PD" />
+      <div class="optimize__footer" :class="{ loading: loading }">
+        <h2 v-show="showResponse">Enligt vår analys kan du få cirka {{ response }} kr/mån, om du går i pension vid {{ pensionAge }} år. </h2>
+        <loading-spinner v-show="loading" />
+        <Button v-show="!loading" msg="Optimera med PD" @click.native="optimize" />
+      </div>
     </section>
 
     </div>
@@ -85,7 +89,8 @@ import {
   Slider, 
   Button, 
   Symbols,
-  Labels
+  Labels,
+  LoadingSpinner
 } from '../components/';
 
 import jsonData from '../data/data.json';
@@ -103,19 +108,66 @@ export default {
         years: []
       },
       jsonData: jsonData[0],
+      loading: false,
+      showResponse: false,
+      response: ''
     }
   },
 
   components: {
-    DoughnutChart, BarChart, Slider, Symbols, Button, Labels
+    DoughnutChart, BarChart, Slider, Symbols, Button, Labels, LoadingSpinner
   },
+
+  methods: {
+    optimize() {
+
+      this.loading = true;
+
+      setTimeout(() => {
+        const age = this.userAge;
+        let savings = this.privateSavings;
+        let pensionAge = this.pensionAge; 
+        let chosenRisk = this.risk;
+        let risks = this.jsonData.risks;
+        let inflation = this.jsonData.inflation;
+        
+        // Calculate total saving years
+        let years = pensionAge - age; 
+
+        let totalSavings = (savings * 12) * years;
+
+        let risk = totalSavings * risks[chosenRisk];
+        let generalValue;
+        let occupationalValue;
+
+        this.pensionData.forEach(item => item.type === "Allmän pension" ? generalValue = item.value : occupationalValue = item.value);
+
+        let generalPension = ((this.salary.value *= this.salary.procent) * 0.185) * years; 
+        generalPension += generalValue;
+        let occupationalPension = ((this.salary.value *= this.salary.procent) * 0.045) * years;
+        occupationalPension += occupationalValue;
+
+        let totalPension = generalPension + occupationalPension;
+
+        let total = ((totalSavings + totalPension) * (inflation * 100)) / (12 * (80 - pensionAge));
+
+        this.response = Number(total + risk).toFixed();
+
+        this.loading = !this.loading;
+        this.showResponse = true;
+
+      }, 2000)
+ 
+    }
+  }, 
 
   mounted() {
       this.$store.dispatch('getUserData', sessionStorage.getItem('personal')).then(doc => {
         this.$store.commit('setUserData', doc.data());  
-        this.$store.commit('setUserAge', doc.data().user.age);
-        this.$store.commit('setPensionData', doc.data().pension);
         this.$store.commit('setChoices', doc.data().choices);
+        this.$store.commit('setUserAge', doc.data().user.age);
+        this.$store.commit('setSalary', doc.data().salary);
+        this.$store.commit('setPensionData', doc.data().pension);
       })
 
       // TODO - skapa ålderslogik.
@@ -133,8 +185,20 @@ export default {
     userAge() {
       return this.$store.state.userAge;
     },
-    wantedPension() {
-      return this.$store.state.wantedPension;
+    privateSavings() {
+      return this.$store.state.privateSavings;
+    },
+    salary() {
+      return this.$store.state.salary;
+    },
+    risk() {
+      return this.$store.state.risk;
+    },
+    pensionAge() {
+      return this.$store.state.pensionAge;
+    },
+    pensionData() {
+      return this.$store.state.pensionData;
     },
     totalDebts() {
       return this.$store.getters.getTotalDebts;
@@ -166,6 +230,14 @@ export default {
 
   }
 
+  .loading {
+    
+    > * {
+      color: rgba($gray, .3);
+    }
+
+  }
+
   .icons {
     font-size: 1.5em;
     margin-right: .25rem;
@@ -176,7 +248,7 @@ export default {
     max-width: 1200px;
     margin: 0 auto;
 
-    > section:not(:first-child) {
+    > section:not(:generalValue-child) {
       padding-top: 2rem;
     }
 
@@ -192,6 +264,7 @@ export default {
       > h3 {
         margin: .5rem 0;
       }
+
     }
 
     &__intro {
@@ -254,8 +327,12 @@ export default {
       padding: 1rem;
       text-align: center;
 
-      .optimize {
+      .title {
         @extend %column;
+      }
+
+      .optimize__footer {
+        padding: 1rem 0;
       }
 
       > a {

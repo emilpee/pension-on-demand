@@ -66,8 +66,8 @@ export default {
     },
 
     mounted() {
-        this.renderChart(this.barData, this.options)
         this.calculateAssets();
+        this.renderChart(this.barData, this.options)
     },
 
     methods: {
@@ -89,13 +89,14 @@ export default {
                     let value = Number(data.value);
                     let percent = Number(data.procent);
                     // TODO - se över hur procenten räknas ut.
-                    totalArray.push((percent * 100) / value);
+                    totalArray.push(Number((percent * 100) / value));
                     console.log(totalArray);
                 })
             })
 
             const reducer = (accumulator, currentValue) => accumulator + currentValue;
-            reduce = totalArray.reduce(reducer);
+            reduce = totalArray.reduce(reducer); 
+            console.log(reduce);
 
             // Allmän pension i procent
             let percentage1 = 1.185;
@@ -109,12 +110,13 @@ export default {
                 if (lastItem === 65) {
                     console.log('Tjean');
                     // TODO - se över uträkning
-                    pensionsArray1.push(parseInt(pensionArray[0].value *= percentage1).toFixed());
-                    pensionsArray2.push(parseInt(pensionArray[1].value *= percentage2).toFixed());
-                } else if (this.chartData.years[i] === 65) {
+                    pensionsArray1.push(Number(pensionArray[0].value *= percentage1).toFixed());
+                    pensionsArray2.push(Number(pensionArray[1].value *= percentage2).toFixed());
+                } 
+                if (this.chartData.years[i] === 65) {
                     // TODO - modifiera pension. Lägg till en break om nuvarande index är 65.
-                    pensionsArray1.push(parseInt(pensionArray[0].value *= percentage1).toFixed());
-                    pensionsArray2.push(parseInt(pensionArray[1].value *= percentage2).toFixed());
+                    pensionsArray1.push(Number(pensionArray[0].value *= percentage1)).toFixed();
+                    pensionsArray2.push(Number(pensionArray[1].value *= percentage2)).toFixed();
                     break;
                 }
             }
@@ -122,15 +124,15 @@ export default {
             // Räkna ut tillgångar
             for (let i = 0; i < this.chartData.years.length; i++) {
                 // TODO - fixa kalkylering.
-                assetsArray.push(Number((total *= reduce))).toFixed(); 
-                console.log(assetsArray);
+                assetsArray.push(Number((total += (total * reduce)))).toFixed(); 
             }
 
             console.log(pensionsArray1);
             console.log(pensionsArray2);
-            this.barData.datasets[1].data = assetsArray;
-            this.barData.datasets[2].data = pensionsArray1;
-            this.barData.datasets[3].data = pensionsArray2;
+
+            this.barData.datasets[1].data = assetsArray.unshift();
+            this.barData.datasets[2].data = pensionsArray1.unshift();
+            this.barData.datasets[3].data = pensionsArray2.unshift();
             
         }
     }

@@ -66,10 +66,6 @@
                 "interest": 5.7
             }
         ],
-        "savings": {
-            "title": "Sparande", 
-            "value": 50000
-        },
         "goals": {
             "title": "Mål",
             "label": [
@@ -78,7 +74,7 @@
                     "title": "Utrymme för privat sparande",
                     "value": 5000,
                     "minValue": 100,
-                    "maxValue": 25000
+                    "maxValue": 20000
                 },
                 {
                     "id": 2,
@@ -97,7 +93,7 @@
             ]
         },
         "inflation": 0.02,
-        "risks": [0.04, 0.08, 0.1],
+        "risks": [0.04, 0.08, 0.12],
         "barData": {
             "labels": ["Månadslön", "Tillgångar", "Privat pension", "Tjänstepension", "Allmän pension"],
             "data": [42000, 999, 9999, 9999, 999],

@@ -45,7 +45,6 @@ export default {
     },
 
     mounted() {
-        console.log(this.salary);
         this.$store.commit('setChoices', this.choices);
         this.$store.commit('setPersonalNr', sessionStorage.getItem('personal'));
         this.getUserInfo();
@@ -57,7 +56,7 @@ export default {
     methods: {
         getUserInfo() {
             this.$store.dispatch('getUserData', this.personalNr).then(doc => {
-                console.log(doc.data());
+
                 // Set DB data
                 this.userData = doc.data();
                 this.$store.commit('setUserData', this.userData);  
