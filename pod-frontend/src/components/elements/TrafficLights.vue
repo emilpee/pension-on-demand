@@ -1,17 +1,17 @@
 <template>
     <main class="lights">
-        <div class="light" :class="{ lights__red: label.interest > 0.02 }"></div>
-        <div class="light" :class="{ lights__yellow: label.interest > 0 && label.interest < 0.02 }"></div>
-        <div class="light" :class="{ lights__green: label.value > 0 }"></div>
+        <div class="light" :class="{ lights__red: label.interest > 5 }"></div>
+        <div class="light" :class="{ lights__yellow: label.interest >= 3 && label.interest < 5 }"></div>
+        <div class="light" :class="{ lights__green: label.value > 0 && (label.interest <= 2.5 || !label.interest) }"></div>
     </main>
 </template>
 
 <script>
 export default {
     props: ['label'],
-    mounted() {
-        console.log(this.label);
-    }
+    // mounted() {
+    //     console.log(this.label);
+    // }
 }
 </script>
 
@@ -37,7 +37,7 @@ export default {
     }
 
     &__yellow {
-        background: $yellow;
+        background: $yellow !important;
     }
 
     &__red {

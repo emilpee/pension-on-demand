@@ -118,8 +118,6 @@ export default {
         this.$store.commit('setChoices', doc.data().choices);
       })
 
-      console.log(this.user);
-
       // TODO - skapa ålderslogik.
       if (this.userAge < 30) {
         this.barData.years.push('', 30, 35, 40, 45, 50, 55, 60, 65);
