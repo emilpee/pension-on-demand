@@ -122,10 +122,12 @@ export default {
                                     pension: [
                                         {
                                             type: "Allmän pension",
+                                            title: "Pension",
                                             value: 0
                                         },
                                         {
                                             type: "Tjänstepension",
+                                            title: "Pension",
                                             value: 0
                                         }
                                     ],
@@ -198,7 +200,7 @@ export default {
                                         type: "Lön",
                                         value: 0,
                                         procent: 0
-                                    }});
+                                    }}, { merge: true });
                                 }
                             })
 

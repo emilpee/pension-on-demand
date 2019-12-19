@@ -72,9 +72,10 @@
         <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span> 
       </div>
       <div class="optimize__footer" :class="{ loading: loading }">
-        <h2 v-show="showResponse">Enligt vår analys kan du få cirka {{ response }} kr/mån, om du går i pension vid {{ pensionAge }} år. </h2>
+        <h2 v-show="showResponse">Enligt vår analys kan du få cirka {{ response }} kr/mån, om du går i pension vid {{ shownAge }} år. </h2>
         <loading-spinner v-show="loading" />
-        <Button v-show="!loading" msg="Optimera med PD" @click.native="optimize" />
+        <Button v-show="!loading && !showResponse" msg="Optimera med PD" @click.native="optimize" />
+        <Button v-show="!loading && showResponse" msg="Optimera igen" @click.native="optimize" />
       </div>
     </section>
 
@@ -110,7 +111,8 @@ export default {
       jsonData: jsonData[0],
       loading: false,
       showResponse: false,
-      response: ''
+      response: '', 
+      shownAge: ''
     }
   },
 
@@ -130,28 +132,34 @@ export default {
         let chosenRisk = this.risk;
         let risks = this.jsonData.risks;
         let inflation = this.jsonData.inflation;
+
+        this.shownAge = pensionAge;
         
         // Calculate total saving years
         let years = pensionAge - age; 
 
         let totalSavings = (savings * 12) * years;
 
-        let risk = totalSavings * risks[chosenRisk];
+        let risk = risks[chosenRisk];
         let generalValue;
         let occupationalValue;
 
         this.pensionData.forEach(item => item.type === "Allmän pension" ? generalValue = item.value : occupationalValue = item.value);
 
-        let generalPension = ((this.salary.value *= this.salary.procent) * 0.185) * years; 
+        // Räkna ut pension baserat på nuvarande pension, lön med årlig ökning, samt hur många år till pensionen.
+        let generalPension = ((this.salary.value *= this.salary.procent) * 0.185) * years;
         generalPension += generalValue;
         let occupationalPension = ((this.salary.value *= this.salary.procent) * 0.045) * years;
         occupationalPension += occupationalValue;
 
         let totalPension = generalPension + occupationalPension;
 
-        let total = ((totalSavings + totalPension) * (inflation * 100)) / (12 * (80 - pensionAge));
+        // Räkna ut totalen
+        let total = totalPension / (12 * (80 / pensionAge)); 
+ 
+        total += ((totalSavings * risk) * (inflation * years)) / (pensionAge * (years / 12));
 
-        this.response = Number(total + risk).toFixed();
+        this.response = Number(total).toFixed();
 
         this.loading = !this.loading;
         this.showResponse = true;
@@ -168,6 +176,8 @@ export default {
         this.$store.commit('setUserAge', doc.data().user.age);
         this.$store.commit('setSalary', doc.data().salary);
         this.$store.commit('setPensionData', doc.data().pension);
+
+
       })
 
       // TODO - skapa ålderslogik.

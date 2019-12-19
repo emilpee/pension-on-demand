@@ -5,6 +5,8 @@ export default {
     userData: [],
     privateSavings: '',
     pensionAge: '', 
+    generalPension: 0.185,
+    occupationalPension: 0.045,
     risk: '',
     salary: 0,
     totalAssets: 0,

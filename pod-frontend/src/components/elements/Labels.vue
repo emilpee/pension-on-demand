@@ -39,8 +39,8 @@ export default {
     methods: {
         getTotal() {
             // TODO - hitta snyggare lösning.
-            let choices = this.choices;
             let incomes = this.userData.income;
+            let choices = this.choices;
 
             var estates = choices.filter(choice => choice.parent === "Fastigheter");
             var vehicles = choices.filter(choice => choice.parent === "Fordon");

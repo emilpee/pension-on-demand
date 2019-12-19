@@ -17,6 +17,15 @@ export default {
         },
     },
 
+    computed: {
+        settingItems() {
+            return this.$store.state.settingItems;
+        },
+        salary() {
+            return this.$store.state.salary;
+        }
+    },
+
     data() {
         return {
             barData: {
@@ -25,7 +34,7 @@ export default {
                     // TODO - se över hur loopa, och få månadslön att ligga enskilt.
                     // TODO - uppdatera data med flera items för att skapa flöde.
                     {
-                        data: [this.$store.state.salary.value],
+                        data: [],
                         label: "Månadslön",
                         backgroundColor: this.chartData.colors[0]
                     },
@@ -66,7 +75,6 @@ export default {
     },
 
     mounted() {
-        this.calculateAssets();
         this.renderChart(this.barData, this.options)
     },
 
@@ -74,49 +82,43 @@ export default {
         calculateAssets() {
             let totalArray = [];
             let assetsArray = [];
-            let reduce;
             let pensionsArray1 = [];
-            let pensionsArray2 = []
+            let pensionsArray2 = [];
             let pensionData = this.$store.state.pensionData;
-            let settingItems = this.$store.state.settingItems;
+            let settingItems = this.settingItems;
             let total = this.$store.state.totalAssets;
   
             const settingsArray = Object.keys(settingItems).map(i => settingItems[i])
             const pensionArray = Object.keys(pensionData).map(i => pensionData[i])
 
-            settingsArray.map(item => {
+            settingsArray.map(item => { 
                 item.forEach(data => {
                     let value = Number(data.value);
                     let percent = Number(data.procent);
                     // TODO - se över hur procenten räknas ut.
-                    totalArray.push(Number((percent * 100) / value));
-                    console.log(totalArray);
+                    if ((value || percent === 0) || (!isNaN((value || percent)))) {
+                        totalArray.push(Number((percent * 100) / value));
+                    }
                 })
             })
 
             const reducer = (accumulator, currentValue) => accumulator + currentValue;
-            reduce = totalArray.reduce(reducer); 
+             
+            let reduce = totalArray.reduce(reducer); 
+            reduce /= 1000;
             console.log(reduce);
-
-            // Allmän pension i procent
-            let percentage1 = 1.185;
-
-            // Tjänstepension i procent
-            let percentage2 = 1.045;
+            let general = this.$store.state.generalPension;
+            let occupational = this.$store.state.occupationalPension;
 
             // Räkna ut pension
             for (let i = 0; i < this.chartData.years.length; i++) {
-                let lastItem = this.chartData.years[this.chartData.years.length - 1];
-                if (lastItem === 65) {
-                    console.log('Tjean');
-                    // TODO - se över uträkning
-                    pensionsArray1.push(Number(pensionArray[0].value *= percentage1).toFixed());
-                    pensionsArray2.push(Number(pensionArray[1].value *= percentage2).toFixed());
-                } 
+   
+                pensionsArray1.push(Number(pensionArray[0].value += (pensionArray[0].value * general)).toFixed());
+                pensionsArray2.push(Number(pensionArray[1].value += (pensionArray[1].value * occupational)).toFixed());
                 if (this.chartData.years[i] === 65) {
                     // TODO - modifiera pension. Lägg till en break om nuvarande index är 65.
-                    pensionsArray1.push(Number(pensionArray[0].value *= percentage1)).toFixed();
-                    pensionsArray2.push(Number(pensionArray[1].value *= percentage2)).toFixed();
+                    pensionsArray1.push(Number(pensionArray[0].value *= general).toFixed());
+                    pensionsArray2.push(Number(pensionArray[1].value *= occupational).toFixed());
                     break;
                 }
             }
@@ -124,16 +126,28 @@ export default {
             // Räkna ut tillgångar
             for (let i = 0; i < this.chartData.years.length; i++) {
                 // TODO - fixa kalkylering.
-                assetsArray.push(Number((total += (total * reduce)))).toFixed(); 
+                assetsArray.push(Number((total += (total * reduce))).toFixed()); 
             }
 
+            console.log(assetsArray);
             console.log(pensionsArray1);
             console.log(pensionsArray2);
 
-            this.barData.datasets[1].data = assetsArray.unshift();
-            this.barData.datasets[2].data = pensionsArray1.unshift();
-            this.barData.datasets[3].data = pensionsArray2.unshift();
+            pensionsArray1[0] = '';
+            pensionsArray2[0] = '';
+            assetsArray[0] = '';
+
+            this.barData.datasets[0].data = [this.salary.value];
+            this.barData.datasets[1].data = assetsArray;
+            this.barData.datasets[2].data = pensionsArray1;
+            this.barData.datasets[3].data = pensionsArray2;
             
+        }
+    },
+
+    watch: {
+        settingItems() {
+            this.calculateAssets();
         }
     }
     

@@ -1,17 +1,19 @@
 <template>
     <main class="lights">
-        <div class="light" :class="{ lights__red: label.interest > 5 }"></div>
-        <div class="light" :class="{ lights__yellow: label.interest >= 3 && label.interest < 5 }"></div>
-        <div class="light" :class="{ lights__green: label.value > 0 && (label.interest <= 2.5 || !label.interest) }"></div>
+        <div class="light" :class="{ lights__red: label.interest > 5 || (label.hasOwnProperty('title') && (salary.value < 12000)) }"></div>
+        <div class="light" :class="{ lights__yellow: (label.interest >= 3 && label.interest < 5) || (label.hasOwnProperty('title') && (salary.value >= 12000 && salary.value <= 20000)) } "></div>
+        <div class="light" :class="{ lights__green: label.value > 0 && (label.interest <= 2.5 || !label.interest || salary.value > 20000) }"></div>
     </main>
 </template>
 
 <script>
 export default {
     props: ['label'],
-    // mounted() {
-    //     console.log(this.label);
-    // }
+    computed: {
+        salary() {
+            return this.$store.state.salary;
+        }
+    }
 }
 </script>
 

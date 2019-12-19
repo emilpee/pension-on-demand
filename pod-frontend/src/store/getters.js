@@ -13,5 +13,5 @@ export default {
     },
     filterTypes: state => {
         return state.choices.map(choice => choice.type);
-    }
+    },
 }
