@@ -31,8 +31,6 @@ export default {
             barData: {
                 labels: this.chartData.years,
                 datasets: [
-                    // TODO - se över hur loopa, och få månadslön att ligga enskilt.
-                    // TODO - uppdatera data med flera items för att skapa flöde.
                     {
                         data: [],
                         label: "Månadslön",
@@ -99,8 +97,6 @@ export default {
                     if ((value || percent === 0) || (!isNaN((value || percent)))) {
                         totalArray.push(Number((percent * 100) / value));
                         percentArray.push(percent);
-                        console.log(totalArray);
-                        console.log(percentArray);
                     }
                 })
             })
@@ -130,9 +126,7 @@ export default {
 
             // Räkna ut tillgångar
             for (let i = 0; i < this.chartData.years.length; i++) {
-                // TODO - fixa kalkylering.
                 assetsArray.push(Number((total += (total * avgPercent)) / (totalYears * 12) ).toFixed()); 
-                console.log(total);
             }
 
             pensionsArray1[0] = '';

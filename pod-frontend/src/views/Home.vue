@@ -72,10 +72,13 @@
         <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span> 
       </div>
       <div class="optimize__footer" :class="{ loading: loading }">
-        <h2 v-show="showResponse">Enligt vår analys kan du få cirka {{ response }} kr/mån, om du går i pension vid {{ shownAge }} år. </h2>
+        <span v-show="showResponse">Enligt vår analys kommer din första utbetalning att bli
+          <h2 :style="{ margin: '10px' }"> {{ response }} kr/mån </h2> 
+          före skatt, om du går i pension vid {{ shownAge }} år.
+        </span>
         <loading-spinner v-show="loading" />
-        <Button v-show="!loading && !showResponse" msg="Optimera med PD" @click.native="optimize" />
-        <Button v-show="!loading && showResponse" msg="Optimera igen" @click.native="optimize" />
+        <Button v-show="!loading && !showResponse" msg="Optimera med PD" @click.native="calculatePension" />
+        <Button v-show="!loading && showResponse" msg="Optimera igen" @click.native="calculatePension" />
       </div>
     </section>
 
@@ -121,45 +124,44 @@ export default {
   },
 
   methods: {
-    optimize() {
+    calculatePension() {
 
       this.loading = true;
 
       setTimeout(() => {
         const age = this.userAge;
-        let savings = this.privateSavings;
-        let pensionAge = this.pensionAge; 
-        let chosenRisk = this.risk;
-        let risks = this.jsonData.risks;
-        let inflation = this.jsonData.inflation;
+        const savings = this.privateSavings;
+        const pensionAge = this.pensionAge; 
+        const chosenRisk = this.risk;
+        const risks = this.jsonData.risks;
 
         this.shownAge = pensionAge;
-        
-        // Calculate total saving years
+
+        // Räkna ut antal år med sparande
         let years = pensionAge - age; 
-
         let totalSavings = (savings * 12) * years;
-
         let risk = risks[chosenRisk];
-        let generalValue;
-        let occupationalValue;
 
-        this.pensionData.forEach(item => item.type === "Allmän pension" ? generalValue = item.value : occupationalValue = item.value);
+        let currentPension = this.pensionValues.reduce((acc, obj) => acc + obj);
+        let salary =  Number(this.salary.value)
+        let percent = Number(this.salary.procent);
 
         // Räkna ut pension baserat på nuvarande pension, lön med årlig ökning, samt hur många år till pensionen.
-        let generalPension = ((this.salary.value *= this.salary.procent) * 0.185) * years;
-        generalPension += generalValue;
-        let occupationalPension = ((this.salary.value *= this.salary.procent) * 0.045) * years;
-        occupationalPension += occupationalValue;
+        let totalSalary = ((salary * 12) * years) + (salary * (percent / 100));
+        let generalPension = totalSalary * this.generalPension;
+        let occupationalPension = totalSalary * this.occupationalPension;
 
-        let totalPension = generalPension + occupationalPension;
+        // Slå ihop allmän pension och tjänstepension
+        let totalPension = currentPension + generalPension + occupationalPension;
 
         // Räkna ut totalen
-        let total = totalPension / (12 * (80 / pensionAge)); 
- 
-        total += ((totalSavings * risk) * (inflation * years)) / (pensionAge * (years / 12));
+        let total = totalPension + (totalSavings + (totalSavings * risk));
 
-        this.response = Number(total).toFixed();
+        // Fördela total på antalet pensionsmånader
+        let numOfMonths = (80 - 65) * 12;
+        let newTotal = total / numOfMonths;
+
+        this.response = Number(newTotal).toFixed();
 
         this.loading = !this.loading;
         this.showResponse = true;
@@ -179,10 +181,12 @@ export default {
       })
 
       // TODO - skapa ålderslogik.
-      if (this.userAge < 30) {
-        this.barData.years.push('', 30, 35, 40, 45, 50, 55, 60, 65);
-      } else if (this.userAge > 40) {
-        this.barData.years.push('', 45, 50, 55, 60, 65, 70, 75, 80);
+      if (this.userAge < 55) {
+        this.barData.years.push('', 55, 60, 65, 70, 75, 80);
+      } else if (this.userAge > 55 && this.userAge < 60) {
+        this.barData.years.push('', 60, 65, 70, 75, 80);
+      } else {
+         this.barData.years.push('', 65, 70, 75, 80);
       }
   },
 
@@ -195,6 +199,15 @@ export default {
     },
     privateSavings() {
       return this.$store.state.privateSavings;
+    },
+    pensionValues() {
+      return this.$store.getters.getPensionValues;
+    },
+    generalPension() {
+      return this.$store.state.generalPension;
+    },
+    occupationalPension() {
+      return this.$store.state.occupationalPension;
     },
     salary() {
       return this.$store.state.salary;
@@ -242,6 +255,9 @@ export default {
     
     > * {
       color: rgba($gray, .3);
+      > h2 {
+        color: inherit;
+      } 
     }
 
   }
@@ -341,6 +357,11 @@ export default {
 
       .optimize__footer {
         padding: 1rem 0;
+        @extend %column;
+        align-items: center;
+        > span {
+          margin-bottom: 1rem;
+        }
       }
 
       > a {

@@ -14,4 +14,7 @@ export default {
     filterTypes: state => {
         return state.choices.map(choice => choice.type);
     },
+    getPensionValues: state => {
+        return state.userData.pension.map(val => val.value);
+    }
 }
