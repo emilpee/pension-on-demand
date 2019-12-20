@@ -111,16 +111,19 @@ export default {
             let general = this.$store.state.generalPension;
             let occupational = this.$store.state.occupationalPension;
 
+            // Räkna ut antal år
             const maxAge = this.chartData.years[this.chartData.years.length - 1];
             const userAge = this.$store.state.userAge;
             let totalYears = maxAge - userAge;
 
             // Räkna ut pension
             for (let i = 0; i < this.chartData.years.length; i++) {
+                if (pensionArray[0]) {
                 pensionsArray1.push(Number((pensionArray[0].value += (pensionArray[0].value * general)) /  totalYears).toFixed());
                 pensionsArray2.push(Number((pensionArray[1].value += (pensionArray[1].value * occupational)) / totalYears).toFixed());
-                if (this.chartData.years[i] === 65) {
-                    break;
+                    if (this.chartData.years[i] === 65) {
+                        break;
+                    }
                 }
             }
 

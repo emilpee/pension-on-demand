@@ -21,6 +21,9 @@ export default {
     computed: {
         barData() {
             return this.chartData;
+        },
+        choices() {
+            return this.$store.state.choices;
         }
     },
 
@@ -48,6 +51,12 @@ export default {
     mounted() {
         this.renderBarChart();
     },
+
+    watch: {
+        choices: function() {
+            this.renderBarChart();
+        }
+    }
 
     
 }

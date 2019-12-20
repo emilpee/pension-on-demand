@@ -149,49 +149,49 @@ export default {
                                         {
                                             type: "Villa",
                                             value: 0,
-                                            procent: 0,
+                                            procent: 3.8,
                                             parent: "Fastigheter"
                                         },
                                         {
                                             type: "Lägenhet",
                                             value: 0,
-                                            procent: 0,
+                                            procent: 4.3,
                                             parent: "Fastigheter"
                                         },
                                         {
                                             type: "Stuga",
                                             value: 0,
-                                            procent: 0,
+                                            procent: 3,
                                             parent: "Fastigheter"
                                         },
                                         {
                                             type: "Bil",
                                             value: 0,
-                                            procent: 0,
+                                            procent: -10,
                                             parent: "Fordon"
                                         },
                                         {
                                             type: "Motorcykel",
                                             value: 0,
-                                            procent: 0,
+                                            procent: -10,
                                             parent: "Fordon"
                                         },
                                         {
                                             type: "Båt",
                                             value: 0,
-                                            procent: 0,
+                                            procent: -3,
                                             parent: "Fordon"
                                         },
                                         {
                                             type: "Konst",
                                             value: 0,
-                                            procent: 0,
+                                            procent: 1,
                                             parent: "Övrigt"
                                         },
                                         {
                                             type: "Värdeföremål",
                                             value: 0,
-                                            procent: 0,
+                                            procent: 0.5,
                                             parent: "Övrigt"
                                         }
                                             
@@ -199,7 +199,7 @@ export default {
                                     salary: {
                                         type: "Lön",
                                         value: 0,
-                                        procent: 0
+                                        procent: 1
                                     }}, { merge: true });
                                 }
                             })

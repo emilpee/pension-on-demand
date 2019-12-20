@@ -108,7 +108,7 @@ export default {
         colors: [ "#0F7354", "#C04D4D"]
       },
       barData: {
-        colors: ['#fab', '#h0a', '#b4f', '#a3b'],
+        colors: ['#fab', '#a9f', '#b4f', '#a3b'],
         years: []
       },
       jsonData: jsonData[0],
