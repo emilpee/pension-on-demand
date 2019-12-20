@@ -24,8 +24,7 @@
 </template>
 
 <script>
-import { Tabs } from '@/components/'; 
-import LoginForm from './LoginForm.vue';
+import { Tabs, LoginForm } from '@/components/'; 
 
 export default {
   name: 'Login',

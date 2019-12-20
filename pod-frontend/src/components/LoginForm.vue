@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { Button, LoadingSpinner } from '../components/';
+import { Button, LoadingSpinner } from './';
 import { db } from '../../firebase-config';
  
 export default {

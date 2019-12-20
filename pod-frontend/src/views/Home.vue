@@ -176,8 +176,6 @@ export default {
         this.$store.commit('setUserAge', doc.data().user.age);
         this.$store.commit('setSalary', doc.data().salary);
         this.$store.commit('setPensionData', doc.data().pension);
-
-
       })
 
       // TODO - skapa ålderslogik.

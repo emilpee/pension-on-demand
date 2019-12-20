@@ -1,6 +1,7 @@
 export { default as Header } from './Header.vue';
 export { default as Footer } from './Footer.vue';
 export { default as Profile } from './Profile.vue';
+export { default as LoginForm } from './LoginForm.vue';
 
 export { default as Button } from './elements/Button.vue';
 export { default as Tabs } from './elements/Tabs.vue';
