@@ -1,8 +1,8 @@
 <template>
     <main class="lights">
-        <div class="light" :class="{ lights__red: label.interest > 5 || (label.hasOwnProperty('title') && (salary.value < 10000)) }"></div>
-        <div class="light" :class="{ lights__yellow: (label.interest >= 3 && label.interest < 5) || (label.hasOwnProperty('title') && (salary.value >= 10000 && salary.value <= 18000)) } "></div>
-        <div class="light" :class="{ lights__green: (label.interest <= 2.5 || (label.value > 0 && !label.interest) || salary.value > 18000) }"></div>
+        <div class="light" :class="{ lights__red: label.interest > 5 || (label.hasOwnProperty('title') && (salary.value < 8000)) }"></div>
+        <div class="light" :class="{ lights__yellow: (label.interest >= 3 && label.interest < 5) || (label.hasOwnProperty('title') && (salary.value > 8000 && salary.value < 15000)) } "></div>
+        <div class="light" :class="{ lights__green: (label.interest <= 2.5) || (!label.interest && !label.hasOwnProperty('title')) || (label.hasOwnProperty('title') && salary.value >= 15000) }"></div>
     </main>
 </template>
 

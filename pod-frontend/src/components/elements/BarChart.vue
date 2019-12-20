@@ -92,12 +92,12 @@ export default {
 
             settingsArray.map(item => { 
                 item.forEach(data => {
+ 
                     let value = Number(data.value);
                     let percent = Number(data.procent);
-                    if ((value || percent === 0) || (!isNaN((value || percent)))) {
-                        totalArray.push(Number((percent * 100) / value));
-                        percentArray.push(percent);
-                    }
+                    totalArray.push(Number((percent * 100) / value));
+                    percentArray.push(percent);
+                    
                 })
             })
 
