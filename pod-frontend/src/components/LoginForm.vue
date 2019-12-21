@@ -3,24 +3,26 @@
       <p>{{ tabs.title }}</p>
 
         <div class="login__forminput" v-show="!loading">
-            <span class="error-message">{{ error }}</span>
+            <span :style="{ margin: 0}" class="error-message">{{ error }}</span>
             <img src="../../src/assets/img/bankid.png" alt="BankID logo" v-if="tabs[0].isActive" /> 
             <input type="text" placeholder="Personnummer" v-model="personNr" v-else />
         </div>
-        <div class="login__loading" v-show="loading" v-if="!tabs[0].isActive">
+
+        <div class="login__loading" v-show="loading">
             <p class="message">{{ msg }}</p> 
             <loading-spinner />
         </div>
 
-      <Button msg="Öppna BankID-applikationen" v-show="!loading" @click.native="signIn" /> 
-      <div class="login__text">
-        <p :style="{ textDecoration: 'underline', cursor: 'pointer' }" @click="cancelSignIn">Avbryt</p>
-      </div>
+        <div class="login__text">
+            <Button msg="Öppna BankID-applikationen" v-show="!loading" @click.native="signIn" /> 
+            <p v-show="loading" :style="{ textDecoration: 'underline', cursor: 'pointer' }" @click="cancelSignIn">Avbryt</p>
+        </div>
     </div>
 </template>
 
 <script>
-import { Button, LoadingSpinner } from './';
+import Button from './elements/Button';
+import LoadingSpinner from './elements/LoadingSpinner';
 import { db } from '../../firebase-config';
  
 export default {
@@ -246,6 +248,12 @@ export default {
         user() {
             return this.$store.state.user;
         }
+    },
+
+    watch: {
+        tabs: function() {
+            this.error = '';
+        }
     }
     
 }
@@ -256,14 +264,6 @@ export default {
 
     .login__form {
         border-top: none;
-    }
-
-    .login__loading {
-        display: flex;
-        align-items: center; 
-        justify-content: space-between;
-        flex-direction: column;
-        margin: 1rem 0;
     }
 
     .error-message {

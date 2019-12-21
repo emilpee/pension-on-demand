@@ -272,7 +272,7 @@ export default {
     max-width: 1200px;
     margin: 0 auto;
 
-    > section:not(:generalValue-child) {
+    > section:not(:first-child) {
       padding-top: 2rem;
     }
 
@@ -294,6 +294,10 @@ export default {
     &__intro {
       padding-top: 5rem;
       @extend %column;
+
+      .text {
+        text-align: center;
+      }
 
       @include breakpoints(large) {
         flex-direction: row;
@@ -422,6 +426,12 @@ export default {
 
       @include breakpoints(large) {
         flex-direction: row;
+
+        &__intro {
+          .text {
+            text-align: left;
+          }
+        }
       
         .doughnut__labels {
           flex-direction: row;

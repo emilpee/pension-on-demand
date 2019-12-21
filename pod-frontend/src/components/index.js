@@ -14,4 +14,5 @@ export { default as DoughnutChart } from './elements/DoughnutChart.vue';
 export { default as TrafficLights } from './elements/TrafficLights.vue';
 export { default as LoadingSpinner } from './elements/LoadingSpinner.vue';
 export { default as Symbols } from './elements/Symbols.vue';
+export { default as MobileMenu } from './elements/MobileMenu.vue';
 export { default as SettingsItem } from './elements/SettingsItem.vue';

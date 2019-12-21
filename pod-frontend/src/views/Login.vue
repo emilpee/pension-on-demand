@@ -62,8 +62,8 @@ export default {
 
 .login {
   background: $white;
-  border-radius: $borderRadius;
   @extend %column;
+  height: 100%;
   margin: 0 auto;
   padding: 0 1rem;
 
@@ -78,6 +78,7 @@ export default {
       top: 3.75rem;
       right: 0;
     }
+
   }
 
   &__tabs {
@@ -85,6 +86,19 @@ export default {
     margin-top: 1rem;
   }
 
+  &__text {
+    display: flex;
+    flex: 1;
+    align-items: center;
+  }
+
+
+  &__loading {
+      @extend %column;
+      align-items: center; 
+      justify-content: space-between;
+      flex: 2;
+  }
 
   &__form {
     border: 1px solid $borderColor;
@@ -92,13 +106,13 @@ export default {
     flex-direction: column;
     padding: .5rem 2.5rem 0 2.5rem;
     margin-bottom: 1rem;
-    min-height: 18rem;
-    flex: 1; 
+    min-height: 16rem;
     
     &input {
-      display: flex;
-      flex: 1;
       flex-direction: column;
+      flex: 1;
+      margin: 0;
+      @extend %center-content;
 
       > input {
         background: #efefef url('../assets/img/bankid.png') no-repeat top 4px right 1rem;
@@ -121,7 +135,14 @@ export default {
   }
 
   @include breakpoints(large) {
+    border-radius: $borderRadius;
+    height: auto;
     padding: 0 2rem;
+
+    &__text {
+      min-height: 6rem;
+    }
+
   }
 
 }

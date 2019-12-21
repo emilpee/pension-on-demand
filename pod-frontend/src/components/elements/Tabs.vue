@@ -1,7 +1,7 @@
 <template>
 
   <a class="tabs__item"  :class="{ active: tab.isActive }" @click="changeView">
-    {{ this.tab.title }}
+    {{ tab.title }}
   </a>
   
 </template>

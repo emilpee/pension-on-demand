@@ -1,5 +1,9 @@
 <template>
   <header class="header">
+    <div class="header__mobile">
+          <MobileMenu />
+      </div>
+
       <div class="header__logo" @click="$router.push('/')">
         <h1>Pension</h1>
         <p>on demand</p>
@@ -17,10 +21,11 @@
 
 <script>
 import Profile from './Profile.vue';
+import MobileMenu from './elements/MobileMenu';
 
 export default {
     components: {
-        Profile
+        Profile, MobileMenu
     },
 }
 
@@ -30,10 +35,8 @@ export default {
 @import '@/scss/';
 
 .header {
-    align-items: center;
     background: $headerGradient;
-    display: flex;
-    justify-content: space-between;
+    @extend %center-content;
     flex-direction: column;
     min-height: 12.5rem;
     position: relative;
@@ -42,13 +45,12 @@ export default {
         display: flex;
         cursor: pointer;
         align-items: center;
-        justify-content: flex-end;
         position: relative;
         flex: 3;
 
         > p {
             position: absolute;
-            top: 3.75rem;
+            top: 6.75rem;
             right: 0;
         }
     }
@@ -70,11 +72,44 @@ export default {
     }
 
     &__profile {
-        flex: 4;
+        display: none;
+    }
+
+    &__nav {
+        display: none;
+    }
+    
+    &__mobile {
+        display: flex;
     }
 
     @include breakpoints(large) {
         flex-direction: row;
+        justify-content: space-between;
+
+        &__logo {
+            justify-content: flex-end;
+        }
+
+        &__profile {
+            display: flex;
+            flex: 4;
+        }
+
+        &__mobile {
+            display: none;
+        }
+
+        &__nav {
+            display: flex;
+        }
+
+        &__logo {
+            > p {
+                top: 3.75rem;
+            }
+        }
+
     }
 }
 
