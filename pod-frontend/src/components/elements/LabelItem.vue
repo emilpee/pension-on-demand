@@ -62,12 +62,19 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../scss/';
 
-.label__details {
+    #doughnut-chart {
+        margin: 0 auto;
+        width: 90% !important;
+        height: 90% !important;
 
-    canvas {
-        width: 99% !important;
+        @include breakpoints(large) {
+            width: 100%;
+            height: 100%;
+        }
+
     }
-}
+
 
 </style>

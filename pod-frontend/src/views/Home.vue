@@ -24,7 +24,19 @@
           <i class="far icons fa-laugh-beam"></i>
           <h3>Översikt</h3>
         </div>
+
         <div class="doughnut__chart">
+          <div class="doughnut__chartlabels">
+            <div class="doughnut__chartlabel">
+              <p>Tillgångar</p>
+              <p v-text="totalAssets.toString()"></p>
+            </div>
+            <div class="doughnut__chartlabel">
+              <p>Skulder</p>
+              <p v-text="totalDebts.toString()"></p>
+            </div>
+          </div>
+
           <div class="doughnut__charttext">
             <p>Tillgångar</p>
             <p v-text="totalAssets.toString()"></p>
@@ -393,13 +405,19 @@ export default {
 
         &__chart {
           background: $light;
-          @extend %row;
+          @extend %column;
           justify-content: space-around;
           align-items: center;
           padding: 1rem 0; 
 
           &text {
-            @extend %column;
+            display: none;
+          }
+
+          &labels {
+            width: 100%;
+            @extend %row;
+            justify-content: space-around;
           }
 
         }
@@ -424,20 +442,41 @@ export default {
 
     }
 
-      @include breakpoints(large) {
-        flex-direction: row;
+    @include breakpoints(large) {
+      flex-direction: row;
 
-        &__intro {
-          .text {
-            text-align: left;
-          }
+      &__intro {
+        .text {
+          text-align: left;
         }
-      
-        .doughnut__labels {
+      }
+
+      .doughnut {
+
+
+        &__labels {
           flex-direction: row;
         }
 
+        &__chart {
+          flex-direction: row;
+          justify-content: space-around;
+
+          &text {
+            flex-direction: column;
+            display: flex;
+            margin: 0 3rem;
+          }
+
+          &labels {
+            display: none;
+          }
+          
+        }
+
       }
+
+    }
 
   }
 

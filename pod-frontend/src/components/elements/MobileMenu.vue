@@ -34,7 +34,7 @@ export default {
             this.showMenu = !this.showMenu;
         },
         handleScroll() {
-            this.position = window.pageYOffset > 160;
+            this.position = window.pageYOffset > 162;
         }
     },
 
@@ -44,13 +44,14 @@ export default {
 
     destroyed() {
         window.removeEventListener('scroll', this.handleScroll);
+        this.showMenu = false;
     },
 
     watch: {
         position: function() {
             console.log('hej')
         }
-    }
+    },
     
 
 }
@@ -59,12 +60,6 @@ export default {
 <style lang="scss">
 
 @import '../../scss/';
-
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
-}
 
 .burger__container {
     width: 100vw;
@@ -79,6 +74,7 @@ export default {
 }
 
 .darkBg {
+    transition: all 0.33s ease;
     background: rgba($black, .8);
 }
 
@@ -88,7 +84,7 @@ export default {
     overflow: hidden;
     position: fixed;
     top: 0;
-    min-height: 3rem;
+    min-height: 3.3rem;
     display: flex;
     width: 100%;
     z-index: 9999;
@@ -101,7 +97,6 @@ export default {
             z-index: -1;
         }
 
-        /* Close Icon */
         input[type=checkbox]:checked + label #menu-icon {
             background: transparent;
         }
