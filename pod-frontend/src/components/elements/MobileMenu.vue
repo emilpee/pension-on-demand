@@ -11,7 +11,7 @@
                 <li><router-link to="/">Kom igång</router-link></li>
                 <div class="seperator"></div>
                 <li><router-link to="/settings">Mina tillgångar</router-link></li>
-                <li><router-link to="/">Logga ut</router-link></li>
+                <li><router-link @click.native="signOut" to="/">Logga ut</router-link></li>
             </ul>
         </div>
     </nav>
@@ -35,6 +35,9 @@ export default {
         },
         handleScroll() {
             this.position = window.pageYOffset > 162;
+        },
+        signOut() {
+            sessionStorage.removeItem('user');
         }
     },
 
@@ -75,7 +78,7 @@ export default {
 
 .darkBg {
     transition: all 0.33s ease;
-    background: rgba($black, .8);
+    background: $black;
 }
 
 .burger {

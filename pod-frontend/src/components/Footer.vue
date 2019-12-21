@@ -2,16 +2,6 @@
   <footer class="footer">
       <div class="footer__item">
         <ul>
-            <p>Om oss</p>
-            <li>Om Pension on Demand</li>
-            <li>Allt om Pension on Demand</li>
-            <li>Kom igång</li>
-            <li>Mina sidor</li>
-            <li>Behandling av personuppgifter</li>
-        </ul>
-      </div>
-      <div class="footer__item">
-        <ul>
             <p>Hitta snabbt</p>
             <li>Vanliga frågor</li>
             <li>Ordlista</li>
@@ -37,6 +27,16 @@
             <li>Företagsservice</li>
         </ul>
       </div>
+      <div class="footer__item">
+        <ul>
+            <p>Om oss</p>
+            <li>Om Pension on Demand</li>
+            <li>Allt om Pension on Demand</li>
+            <li>Kom igång</li>
+            <li>Mina sidor</li>
+            <li>Behandling av personuppgifter</li>
+        </ul>
+      </div>
   </footer>
 </template>
 
@@ -52,6 +52,7 @@ export default {
 .footer {
     background: $gray;
     @extend %column;
+    align-items: flex-start;
 
     &__item {
         display: flex;

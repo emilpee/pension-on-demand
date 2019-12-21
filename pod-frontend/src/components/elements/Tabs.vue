@@ -21,7 +21,6 @@ export default {
         for (let i = 0; i < tabs.length; i++) {
           tabs[i].isActive = !tabs[i].isActive;
         }
-
       } 
   
     }
@@ -36,24 +35,45 @@ export default {
   .tabs__item {
       background: #efefef;
       border: 1px solid $borderColor;
-      border-top-left-radius: $borderRadius;
-      border-top-right-radius: $borderRadius;
+      border-radius: 0px;
       border-bottom: none;
-      color: $gray;
+      color: $black;
       cursor: pointer;
+      flex-direction: column;
       @extend %center-content;
       font-family: $btnText;
       font-size: 1.125rem;
       flex: 1;
       padding: 1rem;
 
-      &:nth-child(1) {
-        margin-right: .5rem;
+      // &:nth-child(1) {
+      //     margin-right: .5rem;  
+      // }
+
+      @include breakpoints(large) {
+        background: #efefef;
+        border-top-left-radius: $borderRadius;
+        border-top-right-radius: $borderRadius;
+        color: $gray;
+        flex-direction: row;
+
+
+        &:nth-child(1) {
+          margin-right: .5rem;
+        }
+
+        .active {
+          background: $white;
+          color: $white;
+        }
+
       }
+
   }
 
   .active {
-    background: $white;
+    background: $mediumGreen;
+    color: $white;
   }
 
 </style>

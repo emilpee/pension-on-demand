@@ -63,7 +63,6 @@ export default {
 .login {
   background: $white;
   @extend %column;
-  height: 100%;
   margin: 0 auto;
   padding: 0 1rem;
 
@@ -83,6 +82,7 @@ export default {
 
   &__tabs {
     display: flex;
+    flex-direction: column;
     margin-top: 1rem;
   }
 
@@ -141,6 +141,10 @@ export default {
 
     &__text {
       min-height: 6rem;
+    }
+
+    &__tabs {
+      flex-direction: row;
     }
 
   }
