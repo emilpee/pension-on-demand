@@ -4,11 +4,17 @@
     <div v-if="!setting.hasOwnProperty('id')" class="form">
           <div class="form__item">
             <label> {{ setting.labelOne }} </label>
-            <input type="number" v-model="setting.value" @focus="$parent.message = ''" placeholder="SEK">
+            <div class="form__iteminput">
+                <input type="text" pattern="\d*" maxlength="10" v-model="setting.value" @focus="$parent.message = ''" placeholder="SEK">
+                <span>kr</span>
+            </div>
         </div>
         <div class="form__item">
             <label> {{ setting.labelTwo }} </label>
-            <input type="number" v-model="setting.procent" @focus="$parent.message = ''" placeholder="procent"> 
+            <div class="form__iteminput">
+                <input type="text" pattern="\d*" maxlength="4" v-model="setting.procent" @focus="$parent.message = ''" placeholder="procent"> 
+                <span>procent</span>
+            </div>
         </div>
     </div>
 
@@ -18,11 +24,17 @@
         </div>
         <div class="form__item">
             <label> {{ setting.labelOne }} </label>
-            <input type="number" v-model="choice.value" @focus="$parent.message = ''" placeholder="SEK">
+            <div class="form__iteminput">
+                <input type="text" pattern="\d*" maxlength="10" v-model="choice.value" @focus="$parent.message = ''" placeholder="SEK">
+                <span>kr</span>
+            </div>
         </div>
         <div class="form__item">
             <label> {{ setting.labelTwo }} </label>
-            <input type="number" v-model="choice.procent" @focus="$parent.message = ''" placeholder="procent"> 
+            <div class="form__iteminput">
+                <input type="text" pattern="\d*" maxlength="4" v-model="choice.procent" @focus="$parent.message = ''" placeholder="procent">
+                <span>procent</span> 
+            </div>
         </div>
     </div>
     
@@ -67,12 +79,29 @@ export default {
         background: $light;
         padding: 2rem;
 
-
         &__item {
             @extend %column;
             flex: 1;
             justify-content: center;
             margin: 1rem;
+
+            &input {
+                position: relative;
+
+                > input {
+                    font-size: 1.25em;
+                    min-width: 15rem;
+                    padding: 1rem;
+                    border: 1px solid $black;
+                }
+
+                > span {
+                    position: absolute;
+                    top: 25%;
+                    right: 1rem;
+                }
+
+            }
 
             > span {
                 text-align: center;
@@ -81,6 +110,15 @@ export default {
         }
     }
 
+    @include breakpoints(medium) {
+
+        .settings__item {
+            display: flex;
+            flex-direction: column;
+            margin: 2rem 0;
+        }
+
+    }
 
     @include breakpoints(large) {
 
@@ -90,6 +128,20 @@ export default {
             &__item {
                 margin: 0 1rem;
                 text-align: left;
+
+            &input {
+                position: relative;
+                min-width: 20rem;
+
+                > input {
+                    font-size: 1.25em;
+                }
+
+                > span {
+                    top: 30%;
+                    right: 3.5rem;
+                }
+            }
 
                 > span {
                     text-align: left;

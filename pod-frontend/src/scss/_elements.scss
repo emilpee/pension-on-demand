@@ -44,16 +44,6 @@ input[type=range] {
     }
 }
 
-input[type=number] {
-  padding: 1rem;
-  border: 1px solid black;
-
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
-  
-}
-
 label {
   font-family: $mainText;
   font-size: 1.25em;

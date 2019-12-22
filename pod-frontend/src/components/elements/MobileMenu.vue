@@ -50,13 +50,6 @@ export default {
         this.showMenu = false;
     },
 
-    watch: {
-        position: function() {
-            console.log('hej')
-        }
-    },
-    
-
 }
 </script>
 

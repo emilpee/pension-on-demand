@@ -3,7 +3,7 @@
       <p>{{ tabs.title }}</p>
 
         <div class="login__forminput" v-show="!loading">
-            <span :style="{ margin: 0}" class="error-message">{{ error }}</span>
+            <span :style="{ margin: 0 }" class="error-message">{{ error }}</span>
             <img src="../../src/assets/img/bankid.png" alt="BankID logo" v-if="tabs[0].isActive" /> 
             <input type="text" placeholder="Personnummer" v-model="personNr" v-else />
         </div>
@@ -14,7 +14,7 @@
         </div>
 
         <div class="login__text">
-            <Button msg="Öppna BankID-applikationen" v-show="!loading" @click.native="signIn" /> 
+            <Button msg="Öppna BankID-applikationen" v-show="!loading" @click="signIn" @click.native="signIn" /> 
             <p v-show="loading" :style="{ textDecoration: 'underline', cursor: 'pointer' }" @click="cancelSignIn">Avbryt</p>
         </div>
     </div>

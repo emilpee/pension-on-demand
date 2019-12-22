@@ -128,6 +128,12 @@ export default {
 
     @include breakpoints(large) {
         padding: 0 1.25rem;
+
+        &__button {
+            > a {
+                width: 10rem;
+            }
+        }
     }
 }
 
