@@ -86,6 +86,10 @@ export default {
 
     @include breakpoints(large) {
         margin-right: 2rem;
+
+        > span {
+            padding: 0 1rem;
+        }
     }
 
 }

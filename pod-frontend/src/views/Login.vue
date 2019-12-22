@@ -117,17 +117,20 @@ export default {
       @extend %center-content;
 
       > input {
-        background: #efefef url('../assets/img/bankid.png') no-repeat top 4px right 1rem;
-        background-size: 2.5rem;
+        background: #efefef url('../assets/img/bankid.png') no-repeat top 12px right 1rem;
+        background-size: 2.75rem;
         border-radius: $borderRadius;
         border: 1px solid $borderColor;
         padding: 1rem; 
+        font-size: 1em;
+        letter-spacing: $letterSpacing * 2;
+        height: 2rem;
         min-width: 20rem;
         margin: 1rem 0;
   
         &::placeholder {
           font-family: $btnText;
-          font-size: 15px;
+          font-size: 1.5em;
           color: #43425D;
         }
   
@@ -151,6 +154,7 @@ export default {
 
     &__form {
       padding: .5rem 2.5rem 0 2.5rem;
+
     }
 
   }

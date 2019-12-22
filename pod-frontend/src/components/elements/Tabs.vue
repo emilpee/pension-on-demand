@@ -46,17 +46,12 @@ export default {
       flex: 1;
       padding: 1rem;
 
-      // &:nth-child(1) {
-      //     margin-right: .5rem;  
-      // }
-
       @include breakpoints(large) {
         background: #efefef;
         border-top-left-radius: $borderRadius;
         border-top-right-radius: $borderRadius;
         color: $gray;
         flex-direction: row;
-
 
         &:nth-child(1) {
           margin-right: .5rem;

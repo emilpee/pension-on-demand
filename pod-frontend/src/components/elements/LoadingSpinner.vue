@@ -23,10 +23,10 @@
     width: 64px;
     height: 64px;
     margin: 8px;
-    border: 8px solid $mediumGreen;
-    border-radius: 50%;
+    border: 12px solid $lightGreen;
+    border-radius: 9999rem;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: $mediumGreen transparent transparent transparent;
+    border-color: $lightGreen transparent transparent transparent;
 
     &:nth-child(1) {
         animation-delay: -0.45s;

@@ -73,6 +73,12 @@ export default {
         cancelSignIn() {
             this.loading = false;
             this.interval = '';
+            // TODO - kolla hur avbryta.
+            this.$store.dispatch('checkStatus', { status: this.orderRef }).then(response => {
+                response.data.status = "failed";
+                console.log(response);
+                response.data.hintCode = "userCancel";
+            })
         }, 
 
         navigateUser() {
@@ -91,11 +97,17 @@ export default {
             if (status === "pending") {
                 this.msg = "Starta BankID-appen...";
 
+
                 let interval = setInterval(() => {
                     this.$store.dispatch('checkStatus', { status: this.orderRef }).then(resp => {
                         console.log(resp);
+                        let hintCode = resp.data.hintCode
                         let data = resp.data;
                         let status = data.status;
+                        
+                        if (hintCode === "userSign") {
+                            this.msg = "Skriv in din säkerhetskod i BankID-appen och välj Legitimera eller Skriv under.";
+                        }
 
                         // User successfully signed the application
                         if (status === "complete") {
@@ -215,18 +227,28 @@ export default {
 
                         if (status === "failed") {
 
-                            if (data.hintCode === "userCancel") {
-                                this.error = "Du har avbrutit signeringen.";
+                            let error = data.hintCode;
+
+                            switch(error) {
+                                case "userCancel":
+                                    this.error = "Åtgärd avbruten."
+                                    break;
+                                case "expiredTransaction": 
+                                    this.error = "BankID-appen svarar inte. Kontrollera att den är startad och att du har internetanslutning."
+                                    break;
+                                case "alreadyInProgress": 
+                                    this.error = "En identifiering eller underskrift för det här personnumret är redan påbörjad. Försök igen.";
+                                    break;
+                                case "requestTimeout": 
+                                    this.error = "Internt tekniskt fel. Försök igen.";
+                                    break;
+                                case "cancelled": 
+                                    this.error = "Åtgärd avbruten. Försök igen.";
+                                    break;
+                                default:
+                                    this.error = "Något gick fel. Var god försök igen.";
                             }
 
-                            else if (data.hintCode === "expiredTransaction") {
-                                this.error = "Inget svar från BankID-appen. Var god försök igen.";
-                            }
-
-                            else {
-                                this.error = "Något gick fel. Var god försök igen.";
-                            }
-                            
                             clearInterval(interval);
                             this.cancelSignIn();
                         }
@@ -276,6 +298,9 @@ export default {
     .message {
         font-size: 1em;
         font-weight: normal;
+        max-width: 18.75rem;
+        min-height: 2rem;
+        text-align: center;
     }
 
 </style>

@@ -372,7 +372,8 @@ export default {
       }
 
       .optimize__footer {
-        padding: 1rem 0;
+        padding: 1rem 0 0 0;
+        min-height: 6rem;
         @extend %column;
         align-items: center;
         > span {
