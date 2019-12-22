@@ -96,7 +96,6 @@ export default {
     background: $white;
     max-width: 64rem;
     margin: 0 auto;
-    padding: 0 1rem;
 
     .text {
         > h1 {
@@ -120,6 +119,15 @@ export default {
     &__button {
         @extend %center-content;
         margin: 2rem 0;
+
+        > a {
+            width: 80%;
+            text-align: center;
+        }
+    }
+
+    @include breakpoints(large) {
+        padding: 0 1.25rem;
     }
 }
 

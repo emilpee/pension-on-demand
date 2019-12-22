@@ -62,18 +62,21 @@ export default {
           margin-right: .5rem;
         }
 
-        .active {
-          background: $white;
-          color: $white;
-        }
-
       }
 
   }
 
+
   .active {
-    background: $mediumGreen;
-    color: $white;
+      background: $mediumGreen;
+      color: white;
+
+      @include breakpoints (large) {
+        background: $white;
+        color: $gray;
+      }
   }
+
+
 
 </style>

@@ -18,7 +18,7 @@ export default {
     cursor: pointer;
     font-family: $btnText;
     font-size: 1.125em;
-    padding: .75rem 3.5rem;
+    padding: 1rem 3.5rem;
     text-decoration: none;
 }
 

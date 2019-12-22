@@ -63,6 +63,7 @@ export default {
 .login {
   background: $white;
   @extend %column;
+  height: 100%;
   margin: 0 auto;
   padding: 0 1rem;
 
@@ -88,7 +89,6 @@ export default {
 
   &__text {
     display: flex;
-    flex: 1;
     align-items: center;
   }
 
@@ -104,7 +104,8 @@ export default {
     border: 1px solid $borderColor;
     @extend %center-content;
     flex-direction: column;
-    padding: .5rem 2.5rem 0 2.5rem;
+    flex: 1;
+    padding: 1rem .5rem;
     margin-bottom: 1rem;
     min-height: 16rem;
     
@@ -112,6 +113,7 @@ export default {
       flex-direction: column;
       flex: 1;
       margin: 0;
+      min-height: 8.2rem;
       @extend %center-content;
 
       > input {
@@ -145,6 +147,10 @@ export default {
 
     &__tabs {
       flex-direction: row;
+    }
+
+    &__form {
+      padding: .5rem 2.5rem 0 2.5rem;
     }
 
   }

@@ -45,6 +45,7 @@ export default {
     },
     methods: {
         filterChoices(setting) {
+            // TODO - lägg in i getters
             if (setting) {
                 return this.choices.filter(choice => choice.parent === setting.title)
             }
@@ -62,7 +63,7 @@ export default {
 
     .form {
         display:inherit;
-        flex-direction: row;
+        flex-direction: column;
         background: $light;
         padding: 2rem;
 
@@ -71,8 +72,29 @@ export default {
             @extend %column;
             flex: 1;
             justify-content: center;
-            margin: 0 1rem;
+            margin: 1rem;
 
+            > span {
+                text-align: center;
+                font-weight: 500;
+            }
+        }
+    }
+
+
+    @include breakpoints(large) {
+
+        .form {
+            flex-direction: row;
+
+            &__item {
+                margin: 0 1rem;
+                text-align: left;
+
+                > span {
+                    text-align: left;
+                }
+            }
         }
     }
 

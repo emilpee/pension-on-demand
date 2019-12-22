@@ -7,8 +7,7 @@
             </label>
             <div v-show="showMenu" id="overlay"></div>
             <ul v-show="showMenu">
-                <li><router-link to="/">Om tjänsten</router-link></li>
-                <li><router-link to="/">Kom igång</router-link></li>
+                <li><router-link to="/">Start</router-link></li>
                 <div class="seperator"></div>
                 <li><router-link to="/settings">Mina tillgångar</router-link></li>
                 <li><router-link @click.native="signOut" to="/">Logga ut</router-link></li>
@@ -38,6 +37,7 @@ export default {
         },
         signOut() {
             sessionStorage.removeItem('user');
+            this.$router.push('/login');
         }
     },
 
