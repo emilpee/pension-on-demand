@@ -71,14 +71,9 @@ export default {
             },
          
         cancelSignIn() {
+            // TODO - kolla hur avbryta.
             this.loading = false;
             this.interval = '';
-            // TODO - kolla hur avbryta.
-            this.$store.dispatch('checkStatus', { status: this.orderRef }).then(response => {
-                response.data.status = "failed";
-                console.log(response);
-                response.data.hintCode = "userCancel";
-            })
         }, 
 
         navigateUser() {
@@ -89,6 +84,8 @@ export default {
         },
 
         checkStatus() {
+            this.error = '';
+
             this.$store.dispatch('checkStatus', { status: this.orderRef }).then(response => {
             // Check status every 2 seconds
             this.interval = 2000;
@@ -104,9 +101,13 @@ export default {
                         let hintCode = resp.data.hintCode
                         let data = resp.data;
                         let status = data.status;
-                        
+
                         if (hintCode === "userSign") {
                             this.msg = "Skriv in din säkerhetskod i BankID-appen och välj Legitimera eller Skriv under.";
+                        }
+
+                        if (hintCode === "outstandingTransaction") {
+                            this.msg = "Försöker starta BankID-appen.";
                         }
 
                         // User successfully signed the application
@@ -244,6 +245,12 @@ export default {
                                     break;
                                 case "cancelled": 
                                     this.error = "Åtgärd avbruten. Försök igen.";
+                                    break;
+                                case "certificateError": 
+                                    this.error = "Det BankID du försöker använda är för gammalt eller spärrat.";
+                                    break;
+                                case "startFailed":
+                                    this.error = "BankID-appen verkar inte finnas i din dator eller telefon. Installera den och hämta ett BankID hos din internetbank.";
                                     break;
                                 default:
                                     this.error = "Något gick fel. Var god försök igen.";
