@@ -1,16 +1,21 @@
 <template>
     <nav class="burger" :class="{ darkBg: position && !showMenu }" >
         <div class="burger__container">
-            <input id="responsive-menu" type="checkbox">
+            <input v-model="toggle" true-value="yes" false-value="no" id="responsive-menu" type="checkbox">
             <label @click="toggleMenu" for="responsive-menu"> 
                 <span id="menu-icon"></span>
             </label>
             <div v-show="showMenu" id="overlay"></div>
             <ul v-show="showMenu">
-                <li><router-link to="/">Start</router-link></li>
-                <div class="seperator"></div>
-                <li><router-link to="/settings">Mina tillgångar</router-link></li>
-                <li><router-link @click.native="signOut" to="/">Logga ut</router-link></li>
+                <li>
+                    <router-link @click.native="toggleMenu" to="/">Start</router-link>
+                </li>
+                <li>
+                    <router-link @click.native="toggleMenu" to="/settings">Mina tillgångar</router-link>
+                </li>
+                <li>
+                    <router-link @click.native="signOut" to="/">Logga ut</router-link>
+                </li>
             </ul>
         </div>
     </nav>
@@ -24,13 +29,15 @@ export default {
     data() {
         return {
             showMenu: false,
-            position: false
+            position: false,
+            toggle: true
         }
     },
 
     methods: {
         toggleMenu() {
             this.showMenu = !this.showMenu;
+            console.log(this.showMenu);
         },
         handleScroll() {
             this.position = window.pageYOffset > 162;
@@ -47,7 +54,12 @@ export default {
 
     destroyed() {
         window.removeEventListener('scroll', this.handleScroll);
-        this.showMenu = false;
+    },
+
+    watch: {
+        showMenu: function() {
+            this.toggle = !this.toggle;
+        }
     },
 
 }
@@ -60,13 +72,6 @@ export default {
 .burger__container {
     width: 100vw;
     margin-top: .5rem;
-}
-
-.seperator {
-    height: 10px;
-    width: 100%;
-    margin: 1rem;
-    background: $white;
 }
 
 .darkBg {
@@ -95,19 +100,20 @@ export default {
 
         input[type=checkbox]:checked + label #menu-icon {
             background: transparent;
+
+            &:before {
+                top: 0;
+                background: $white;
+                transform: rotate(-45deg);   
+            }
+
+            &:after {
+                bottom: 0;
+                background: $white;
+                transform: rotate(45deg);
+            }
         }
 
-        input[type=checkbox]:checked + label #menu-icon:before {
-            top: 0;
-            background: $white;
-            transform: rotate(-45deg);
-        }
-
-        input[type=checkbox]:checked + label #menu-icon:after {
-            bottom: 0;
-            background: $white;
-            transform: rotate(45deg);
-        }
 
         input:checked ~ #overlay {
             background: $black;
@@ -160,26 +166,23 @@ export default {
     }
 }
 
-
-/* Hamburger Icon */
-#menu-icon,
-#menu-icon:before,
-#menu-icon:after {
-    background: $white;
-    height: 0.2em;
-    transition: all 0.2s ease-in-out;
-    width: 100%;
-}
-
 #menu-icon {
     display: inline-block;
     max-width: 1.5rem;
     position: relative;
+    background: $white;
+    height: 0.2em;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
 
     &:before, &:after {
         content: '';
         right: 0;
         position: absolute;
+        background: $white;
+        height: 0.2em;
+        transition: all 0.2s ease-in-out;
+        width: 100%;
     }
 
     &:before {
