@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <Header v-if="$route.path !== '/login'" />
-    <transition name="expand">
-      <router-view/>
-    </transition>
+    <router-view/>
     <Footer v-if="$route.path !== '/login'" />
   </div>
 </template>

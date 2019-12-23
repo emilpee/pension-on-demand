@@ -85,16 +85,16 @@
         <loading-spinner v-show="loading" />
         <Button v-show="!loading" msg="Optimera med PD" @click.native="calculatePension" />
       </div>
-      <transition name="fade">
         <div v-show="showResponse" class="optimize__header title" :class="{ loading: loading }">
-          <span v-show="showResponse">Enligt vår analys kommer din första utbetalning att bli
+        <transition name="fade">
+          <span :key="response"> Enligt vår analys kommer din första utbetalning att bli
             <h2 :style="{ margin: '10px 0' }"> {{ response }} kr/mån </h2> 
             före skatt, om du går i pension vid {{ shownAge }} år.
           </span>
+        </transition>
           <loading-spinner v-show="loading" />
           <Button v-show="!loading" msg="Optimera igen" @click.native="calculatePension" />
         </div>
-      </transition>
     </section>
 
     </div>
@@ -130,7 +130,7 @@ export default {
       loading: false,
       showResponse: false,
       response: '', 
-      shownAge: ''
+      shownAge: '',
     }
   },
 
@@ -248,7 +248,12 @@ export default {
     userData() {
       return this.$store.state.userData;
     }
-  }
+  },
+
+  watch: {
+
+  },
+
 }
 </script>
 
@@ -382,7 +387,7 @@ export default {
       .optimize__header {
         display: flex;
         padding: 2rem 0;
-        min-height: 17.5rem; 
+        min-height: 15rem; 
       }
 
       .optimize__footer {
@@ -395,9 +400,7 @@ export default {
           margin-bottom: 1rem;
         }
 
-        .lds-ring {
-          margin: 0;
-        }
+
       }
 
       > a {
@@ -475,7 +478,7 @@ export default {
 
 
       .optimize__header {
-        min-height: 13.5rem;
+        height: 100%;
       }
 
       &__intro {
@@ -486,7 +489,6 @@ export default {
       }
 
       .doughnut {
-
 
         &__labels {
           flex-direction: row;

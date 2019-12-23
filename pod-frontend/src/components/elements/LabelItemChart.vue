@@ -4,8 +4,8 @@ import Chart from 'chart.js';
 
 Chart.defaults.scale.gridLines.drawOnChartArea = false;
 Chart.defaults.scale.gridLines.color = '#000';
-Chart.defaults.global.animation.duration = 500;
-Chart.defaults.global.animation.easing = 'easeOutBack';
+Chart.defaults.global.animation.duration = 400;
+Chart.defaults.global.animation.easing = 'easeOutCirc';
 
 // TODO - hur uppdatera utan reload?
 export default {

@@ -1,4 +1,5 @@
 <template>
+
     <nav class="burger" :class="{ darkBg: position && !showMenu }" >
         <div class="burger__container">
             <input v-model="toggle" true-value="yes" false-value="no" id="responsive-menu" type="checkbox">
@@ -6,19 +7,22 @@
                 <span id="menu-icon"></span>
             </label>
             <div v-show="showMenu" id="overlay"></div>
-            <ul v-show="showMenu">
-                <li>
-                    <router-link @click.native="toggleMenu" to="/">Start</router-link>
-                </li>
-                <li>
-                    <router-link @click.native="toggleMenu" to="/settings">Mina tillgångar</router-link>
-                </li>
-                <li>
-                    <router-link @click.native="signOut" to="/">Logga ut</router-link>
-                </li>
-            </ul>
+            <transition name="smooth-fade">
+                <ul v-show="showMenu">
+                    <li>
+                        <router-link @click.native="toggleMenu" to="/">Start</router-link>
+                    </li>
+                    <li>
+                        <router-link @click.native="toggleMenu" to="/settings">Mina tillgångar</router-link>
+                    </li>
+                    <li>
+                        <router-link @click.native="signOut" to="/">Logga ut</router-link>
+                    </li>
+                </ul>
+            </transition>
         </div>
     </nav>
+
 </template>
 
 <script>

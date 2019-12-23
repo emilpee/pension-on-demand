@@ -7,16 +7,18 @@
       <span>Nu kan du hantera din framtid själv, inga fler besök hos pensionsrådgivare.</span>
     </section>
 
-    <SettingsItem :setting="salary" />
+    <SettingsItem v-if="userData.salary" :setting="salary" />
     <SettingsItem v-for="data in settingsData" :key="data.id" :setting="data" /> 
 
     <section class="settings__message">
-        <p v-text="message"></p>
-        <loading-spinner v-show="loading" />
+        <transition name="fade">
+            <p :key="message" v-text="message"></p>
+        </transition>
+            <loading-spinner v-show="loading" />
     </section>
 
     <section class="settings__button">
-        <Button msg="Spara" @click.native="updateSettingsData" />
+            <Button msg="Spara" @click.native="updateSettingsData" />
     </section>
 
     </div>
@@ -57,8 +59,8 @@ export default {
     },
     methods: {
         getUserInfo() {
+            this.loading = true;
             this.$store.dispatch('getUserData', this.personalNr).then(doc => {
-
                 // Set DB data
                 this.userData = doc.data();
                 this.$store.commit('setUserData', this.userData);  
@@ -71,7 +73,9 @@ export default {
                 this.salary.value = this.userData.salary.value;  
                 this.salary.procent = this.userData.salary.procent;  
                 this.$store.commit('setSalary', this.salary);      
+                this.loading = false;
             })
+         
         },
 
         updateSettingsData() {
@@ -115,6 +119,7 @@ export default {
     &__message {
         min-height: 2rem;
         @extend %center-content;
+        padding: 1rem 0;
         > p {
             margin: 0;
         }

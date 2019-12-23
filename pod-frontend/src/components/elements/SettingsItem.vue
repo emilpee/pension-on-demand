@@ -1,5 +1,5 @@
 <template>
-  <section class="settings__item">
+  <section v-if="$parent.userData.choices" class="settings__item">
     <h3>{{ setting.title }}</h3>
     <div v-if="!setting.hasOwnProperty('id')" class="form">
         <div class="form__item">
@@ -24,15 +24,15 @@
         </div>
         <div class="form__item">
             <label> {{ setting.labelOne }} </label>
-            <div class="form__iteminput">
-                <input type="text" pattern="\d*" maxlength="10" v-model="choice.value" @focus="$parent.message = ''" placeholder="SEK">
+            <form class="form__iteminput">
+                <input type="text" required pattern="\d*" maxlength="10" v-model="choice.value" @focus="$parent.message = ''" placeholder="SEK">
                 <span>kr</span>
-            </div>
+            </form>
         </div>
         <div class="form__item">
             <label> {{ setting.labelTwo }} </label>
             <div class="form__iteminput">
-                <input type="text" pattern="\d*" maxlength="4" v-model="choice.procent" @focus="$parent.message = ''" placeholder="0">
+                <input type="text" required pattern="\d*" maxlength="4" v-model="choice.procent" @focus="$parent.message = ''" placeholder="0">
                 <span>procent</span> 
             </div>
         </div>
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+
 
 export default {
     props: {
@@ -76,6 +77,7 @@ export default {
         display:inherit;
         flex-direction: column;
         background: $light;
+        justify-content: center;
         padding: 2rem;
 
         &__item {
@@ -89,7 +91,7 @@ export default {
 
                 > input {
                     font-size: 1.25em;
-                    min-width: 15rem;
+                    width: 80%;
                     padding: 1rem;
                     border: 1px solid $black;
                 }

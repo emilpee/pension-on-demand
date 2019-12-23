@@ -1,18 +1,21 @@
 <template>
 <div>
-    <div @click="showDetails($attrs.index)">
+    <div :key="$attrs.index" @click="showDetails($attrs.index)">
         <span class="debt__item">{{ label.type }}</span>
         <p class="debt__data"> {{ label.value }}</p> 
         <div class="debt__lights">
             <traffic-lights :label="label" />
         </div>
     </div>
+
     <div> 
-        <div class="label__details" v-if="i === $attrs.index && choices">
+
+        <div :key="i" class="label__details" v-if="i === $attrs.index && choices">
             <LabelItemChart :chartData="barData" />
         </div>
+
     </div>
-    
+
 </div>
 </template>
 
