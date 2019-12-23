@@ -2,18 +2,18 @@
   <section class="settings__item">
     <h3>{{ setting.title }}</h3>
     <div v-if="!setting.hasOwnProperty('id')" class="form">
-          <div class="form__item">
+        <div class="form__item">
             <label> {{ setting.labelOne }} </label>
-            <div class="form__iteminput">
+            <div class="form__iteminput salary">
                 <input type="text" pattern="\d*" maxlength="10" v-model="setting.value" @focus="$parent.message = ''" placeholder="SEK">
-                <span>kr</span>
+                <span class="salary__item">kr/mån</span>
             </div>
         </div>
         <div class="form__item">
             <label> {{ setting.labelTwo }} </label>
-            <div class="form__iteminput">
-                <input type="text" pattern="\d*" maxlength="4" v-model="setting.procent" @focus="$parent.message = ''" placeholder="procent"> 
-                <span>procent</span>
+            <div class="form__iteminput salary">
+                <input type="text" pattern="\d*" maxlength="4" v-model="setting.procent" @focus="$parent.message = ''" placeholder="0"> 
+                <span class="salary__item">procent</span>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
         <div class="form__item">
             <label> {{ setting.labelTwo }} </label>
             <div class="form__iteminput">
-                <input type="text" pattern="\d*" maxlength="4" v-model="choice.procent" @focus="$parent.message = ''" placeholder="procent">
+                <input type="text" pattern="\d*" maxlength="4" v-model="choice.procent" @focus="$parent.message = ''" placeholder="0">
                 <span>procent</span> 
             </div>
         </div>
@@ -50,14 +50,13 @@ export default {
     computed: {
         choices() {
             return this.$store.state.choices;
-        },
+        }
     },
     mounted() {
        this.filterChoices();
     },
     methods: {
         filterChoices(setting) {
-            // TODO - lägg in i getters
             if (setting) {
                 return this.choices.filter(choice => choice.parent === setting.title)
             }
@@ -85,7 +84,7 @@ export default {
             justify-content: center;
             margin: 1rem;
 
-            &input {
+            &input { 
                 position: relative;
 
                 > input {
@@ -112,10 +111,19 @@ export default {
 
     @include breakpoints(medium) {
 
-        .settings__item {
-            display: flex;
+        .form {
             flex-direction: column;
-            margin: 2rem 0;
+
+            &__iteminput {
+                > input {
+                    width: 100%;
+                }
+                > span {
+                    top: 28%;
+                    right: -1rem;
+                }
+            }
+
         }
 
     }
@@ -129,17 +137,27 @@ export default {
                 margin: 0 1rem;
                 text-align: left;
 
+            .salary {
+                position: relative;
+
+                &__item {
+                    right: 1.5rem;
+                }
+            }
+
+
             &input {
                 position: relative;
                 min-width: 20rem;
 
                 > input {
                     font-size: 1.25em;
+                    width: 90%;
                 }
 
                 > span {
                     top: 30%;
-                    right: 3.5rem;
+                    right: .75rem;
                 }
             }
 

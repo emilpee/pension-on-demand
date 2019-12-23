@@ -85,14 +85,16 @@
         <loading-spinner v-show="loading" />
         <Button v-show="!loading" msg="Optimera med PD" @click.native="calculatePension" />
       </div>
-      <div v-show="showResponse" class="optimize__header title" :class="{ loading: loading }">
-        <span v-show="showResponse">Enligt vår analys kommer din första utbetalning att bli
-          <h2 :style="{ margin: '10px 0' }"> {{ response }} kr/mån </h2> 
-          före skatt, om du går i pension vid {{ shownAge }} år.
-        </span>
-        <loading-spinner v-show="loading" />
-        <Button v-show="!loading" msg="Optimera igen" @click.native="calculatePension" />
-      </div>
+      <transition name="fade">
+        <div v-show="showResponse" class="optimize__header title" :class="{ loading: loading }">
+          <span v-show="showResponse">Enligt vår analys kommer din första utbetalning att bli
+            <h2 :style="{ margin: '10px 0' }"> {{ response }} kr/mån </h2> 
+            före skatt, om du går i pension vid {{ shownAge }} år.
+          </span>
+          <loading-spinner v-show="loading" />
+          <Button v-show="!loading" msg="Optimera igen" @click.native="calculatePension" />
+        </div>
+      </transition>
     </section>
 
     </div>
@@ -255,14 +257,14 @@ export default {
 
   .container {
     background: $white;
-    padding: 0 1.25rem;
+    padding: 0 ($containerPadding / 4);
 
     @include breakpoints(medium) {
-      padding: 0 3rem;
+      padding: 0 ($containerPadding / 2);
     }
 
     @include breakpoints(large) {
-      padding: 0 8rem;
+      padding: 0 $containerPadding;
     }
 
   }
@@ -271,9 +273,11 @@ export default {
     
     > * {
       color: rgba($gray, .3);
+      
       > h2 {
         color: inherit;
-      } 
+      }
+       
     }
 
   }
@@ -458,6 +462,14 @@ export default {
 
     }
 
+    @include breakpoints(medium) {
+
+      &__intro {
+        @extend %column;
+      }
+      
+    }
+
     @include breakpoints(large) {
       flex-direction: row;
 
@@ -467,6 +479,7 @@ export default {
       }
 
       &__intro {
+        flex-direction: row;
         .text {
           text-align: left;
         }

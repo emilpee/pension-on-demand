@@ -12,6 +12,7 @@
 
     <section class="settings__message">
         <p v-text="message"></p>
+        <loading-spinner v-show="loading" />
     </section>
 
     <section class="settings__button">
@@ -23,7 +24,7 @@
 </template>
 
 <script>
-import { SettingsItem, Button } from '../components/';
+import { SettingsItem, Button, LoadingSpinner } from '../components/';
 import data from '../data/data.json';
 
 export default {
@@ -34,7 +35,8 @@ export default {
             message: '',
             settingsData: data[0].settingsData,
             salary: data[0].salary,
-            choices: data[0].choices
+            choices: data[0].choices,
+            loading: false
         }
     },
 
@@ -51,7 +53,7 @@ export default {
     },
 
     components: {
-        SettingsItem, Button
+        SettingsItem, Button, LoadingSpinner
     },
     methods: {
         getUserInfo() {
@@ -73,8 +75,10 @@ export default {
         },
 
         updateSettingsData() {
+            this.loading = true;
             this.$store.dispatch('updateUserData', { salary: this.salary, choices: this.choices }).then(() => {
                 this.message = 'Dina inställningar sparades!'
+                this.loading = false;
             })
             
         } 
@@ -118,16 +122,15 @@ export default {
 
     &__button {
         @extend %center-content;
-        margin: 2rem 0;
+        padding: 2rem 0;
 
         > a {
-            width: 80%;
+            width: 15rem;
             text-align: center;
         }
     }
 
     @include breakpoints(large) {
-        padding: 0 1.25rem;
 
         &__button {
             > a {

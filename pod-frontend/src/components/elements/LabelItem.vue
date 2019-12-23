@@ -64,16 +64,26 @@ export default {
 <style lang="scss">
 @import '../../scss/';
 
-    #doughnut-chart {
-        margin: 0 auto;
-        width: 90% !important;
-        height: 90% !important;
 
-        @include breakpoints(large) {
-            width: 100%;
-            height: 100%;
-        }
+/* always present */
+.expand {
+  transition: all .3s ease;
+  height: 30px;
+  padding: 10px;
+  background-color: #eee;
+  overflow: hidden;
+}
+/* .expand-enter defines the starting state for entering */
+/* .expand-leave defines the ending state for leaving */
+.expand-enter, .expand-leave {
+  height: 0;
+  padding: 0 10px;
+  opacity: 0;
+}
 
+
+    #bar-chart {
+        width: 98% !important;
     }
 
 
