@@ -82,15 +82,16 @@
       <div v-show="!showResponse" class="optimize__header title" :class="{ loading: loading }">
         <h2>Se hur mycket pension du kan få för ett sparande på {{ privateSavings }} kr/mån.</h2>
         <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span> 
+        <loading-spinner v-show="loading" />
+        <Button v-show="!loading" msg="Optimera med PD" @click.native="calculatePension" />
       </div>
-      <div class="optimize__footer" :class="{ loading: loading }">
+      <div v-show="showResponse" class="optimize__header title" :class="{ loading: loading }">
         <span v-show="showResponse">Enligt vår analys kommer din första utbetalning att bli
-          <h2 :style="{ margin: '10px' }"> {{ response }} kr/mån </h2> 
+          <h2 :style="{ margin: '10px 0' }"> {{ response }} kr/mån </h2> 
           före skatt, om du går i pension vid {{ shownAge }} år.
         </span>
         <loading-spinner v-show="loading" />
-        <Button v-show="!loading && !showResponse" msg="Optimera med PD" @click.native="calculatePension" />
-        <Button v-show="!loading && showResponse" msg="Optimera igen" @click.native="calculatePension" />
+        <Button v-show="!loading" msg="Optimera igen" @click.native="calculatePension" />
       </div>
     </section>
 
@@ -254,8 +255,11 @@ export default {
 
   .container {
     background: $white;
-    overflow: hidden;
     padding: 0 1.25rem;
+
+    @include breakpoints(medium) {
+      padding: 0 3rem;
+    }
 
     @include breakpoints(large) {
       padding: 0 8rem;
@@ -293,6 +297,10 @@ export default {
       display: flex;
       padding-bottom: 1rem;
 
+      > span {
+        margin-bottom: 1rem;
+      }
+
       > h2 {
         margin: .5rem 0;
       }
@@ -309,10 +317,6 @@ export default {
 
       .text {
         text-align: center;
-      }
-
-      @include breakpoints(large) {
-        flex-direction: row;
       }
 
       > div {
@@ -371,13 +375,24 @@ export default {
         @extend %column;
       }
 
+      .optimize__header {
+        display: flex;
+        padding: 2rem 0;
+        min-height: 17.5rem; 
+      }
+
       .optimize__footer {
-        padding: 1rem 0 0 0;
-        min-height: 6rem;
+        padding: 1rem 0;
         @extend %column;
+        min-height: 6rem;
         align-items: center;
+
         > span {
           margin-bottom: 1rem;
+        }
+
+        .lds-ring {
+          margin: 0;
         }
       }
 
@@ -445,6 +460,11 @@ export default {
 
     @include breakpoints(large) {
       flex-direction: row;
+
+
+      .optimize__header {
+        min-height: 13.5rem;
+      }
 
       &__intro {
         .text {

@@ -33,11 +33,11 @@ export default {
     return {
       tabs: [
         {
-          title: 'På den här enheten',
+          title: 'BankID på den här datorn',
           isActive: true
         },
         {
-          title: 'På annan enhet',
+          title: 'Mobilt BankID',
           isActive: false
         }
       ], 

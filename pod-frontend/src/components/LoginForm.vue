@@ -29,7 +29,7 @@ export default {
 
     data() {
         return {
-            personNr: '197512165668',
+            personNr: '196406073731',
             orderRef: '',
             loading: false,
             interval: '',
@@ -52,7 +52,6 @@ export default {
                 this.$store.dispatch('signInWithBankID', { autostart: true, ssn: '199309246214' }).then(res => {
                     let url = `bankid://?autostarttoken=${res.data.autoStartToken}&redirect=${encodeURI(document.location)}`;
                     document.location = url;
-                    console.log(url);
                     this.orderRef = res.data.orderRef;
                     this.loading = true;
                     this.checkStatus();
@@ -62,7 +61,7 @@ export default {
                 this.$store.dispatch('signInWithBankID', { ssn: this.personNr }).then(res => {
                     this.loading = true;
                     let url = `https://app.bankid.com/?autostarttoken=${res.data.autoStartToken}&redirect=null`;
-                    console.log(url);
+                    document.location = url;
                     this.orderRef = res.data.orderRef;
                     this.checkStatus();
                 })
