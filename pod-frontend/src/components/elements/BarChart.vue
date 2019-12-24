@@ -56,6 +56,13 @@ export default {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.yLabel.toFixed().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+                        }
+                    }
+                },
                 scales: {
                     xAxes: [
                         { 
@@ -92,12 +99,10 @@ export default {
 
             settingsArray.map(item => { 
                 item.forEach(data => {
- 
                     let value = Number(data.value);
                     let percent = Number(data.procent);
                     totalArray.push(Number((percent * 100) / value));
-                    percentArray.push(percent);
-                    
+                    percentArray.push(percent);  
                 })
             })
 
@@ -140,8 +145,7 @@ export default {
             this.barData.datasets[1].data = assetsArray;
             this.barData.datasets[2].data = pensionsArray1;
             this.barData.datasets[3].data = pensionsArray2;
-            
-        }
+        },
     },
 
     watch: {

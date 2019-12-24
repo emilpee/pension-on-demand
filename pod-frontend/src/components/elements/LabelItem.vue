@@ -2,7 +2,7 @@
 <div>
     <div :key="$attrs.index" @click="showDetails($attrs.index)">
         <span class="debt__item">{{ label.type }}</span>
-        <p class="debt__data"> {{ label.value }}</p> 
+        <p class="debt__data"> {{ formatNumbers(label.value) }}</p> 
         <div class="debt__lights">
             <traffic-lights :label="label" />
         </div>
@@ -49,6 +49,9 @@ export default {
         showDetails(i) {
             this.i !== i ? this.i = i : this.i = -1;
         },
+        formatNumbers(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
     },
     computed: {
         filteredChoices() {

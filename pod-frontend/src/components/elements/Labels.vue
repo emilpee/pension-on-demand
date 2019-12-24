@@ -48,21 +48,17 @@ export default {
 
             this.$store.commit('setSettingItems', { estates, vehicles, other } );
 
-            estates = estates.reduce((acc, obj) => acc + Number(obj.value), 0);
-            vehicles = vehicles.reduce((acc, obj) => acc + Number(obj.value), 0);
-            other = other.reduce((acc, obj) => acc + Number(obj.value), 0);
-
             incomes.filter(income => {
                 if (income.type === "Fastigheter") {
-                    return income.value = estates;
+                    return income.value = estates.reduce((acc, obj) => acc + Number(obj.value), 0);
                 } else if (income.type === "Fordon") {
-                    return income.value = vehicles;
+                    return income.value = vehicles.reduce((acc, obj) => acc + Number(obj.value), 0);
                 } else {
-                    return income.value = other;
+                    return income.value = other.reduce((acc, obj) => acc + Number(obj.value), 0);
                 }
             })
 
-        }
+        },
     },
     watch: {
         userData: function() {

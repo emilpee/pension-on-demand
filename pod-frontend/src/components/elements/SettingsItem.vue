@@ -5,7 +5,7 @@
         <div class="form__item">
             <label> {{ setting.labelOne }} </label>
             <div class="form__iteminput salary">
-                <input type="text" value="setting.value" @input="formatValue(setting)" maxlength="10" v-model="setting.value" @focus="$parent.message = ''" placeholder="SEK">
+                <input type="text" @input="formatValue(setting)" maxlength="10" v-model="setting.value" @focus="$parent.message = '';" placeholder="SEK">
                 <span class="salary__item">kr/mån</span>
             </div>
         </div>
@@ -51,7 +51,7 @@ export default {
     computed: {
         choices() {
             return this.$store.state.choices;
-        }
+        },
     },
     mounted() {
        this.filterChoices();
@@ -67,8 +67,10 @@ export default {
         },
         formatPercent(item) {
             item.procent = item.procent.replace(/[^0-9.-]/g,"");
+        },
+        test() {
+            return this.setting.value = this.setting.value.replace((/\B(?=(\d{3})+(?!\d))/g, " "));
         }
-
     }
 }
 </script>

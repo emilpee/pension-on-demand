@@ -2,7 +2,7 @@
   <div class="slider">
       <div class="slider__text">
         <span>{{ data.title }}</span>
-        <label for="item">{{ inputValue }}</label>
+        <label for="item">{{ formatNumbers(inputValue) }}</label>
       </div>
       <div class="slider__input">
         <input ref="input" @input="updateSlider()" class="slider__item" type="range" :id="data.id" :min="data.minValue" :max="data.maxValue" name="item"/> 
@@ -65,6 +65,9 @@ export default {
             ].join(''),
             input.style.borderRadius = '9999rem';
         },
+        formatNumbers(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
     },
     
 }

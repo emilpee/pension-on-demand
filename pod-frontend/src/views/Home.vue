@@ -29,22 +29,22 @@
           <div class="doughnut__chartlabels">
             <div class="doughnut__chartlabel">
               <p>Tillgångar</p>
-              <p v-text="totalAssets.toString()"></p>
+              <p v-text="formatNumbers(totalAssets)"></p>
             </div>
             <div class="doughnut__chartlabel">
               <p>Skulder</p>
-              <p v-text="totalDebts.toString()"></p>
+              <p v-text="formatNumbers(totalDebts)"></p>
             </div>
           </div>
 
           <div class="doughnut__charttext">
             <p>Tillgångar</p>
-            <p v-text="totalAssets.toString()"></p>
+            <p v-text="formatNumbers(totalAssets)"></p>
           </div>
           <doughnut-chart v-if="totalAssets" :chartsData="doughnutData" :pensionData="[totalAssets, totalDebts]" /> 
           <div class="doughnut__charttext">
             <p>Skulder</p>
-            <p v-text="totalDebts.toString()"></p>
+            <p v-text="formatNumbers(totalDebts)"></p>
           </div>
         </div>
 
@@ -80,7 +80,7 @@
 
     <section class="home__optimize">
       <div v-show="!showResponse" class="optimize__header title" :class="{ loading: loading }">
-        <h2>Se hur mycket pension du kan få för ett sparande på {{ privateSavings }} kr/mån.</h2>
+        <h2>Se hur mycket pension du kan få för ett sparande på {{ formatNumbers(privateSavings) }} kr/mån.</h2>
         <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span> 
         <loading-spinner v-show="loading" />
         <Button v-show="!loading" msg="Optimera med PD" @click.native="calculatePension" />
@@ -88,7 +88,7 @@
         <div v-show="showResponse" class="optimize__header title" :class="{ loading: loading }">
         <transition name="fade">
           <span :key="response"> Enligt vår analys kommer din första utbetalning att bli
-            <h2 :style="{ margin: '10px 0' }"> {{ response }} kr/mån </h2> 
+            <h2 :style="{ margin: '10px 0' }"> {{ formatNumbers(response) }} kr/mån </h2> 
             före skatt, om du går i pension vid {{ shownAge }} år.
           </span>
         </transition>
@@ -176,13 +176,16 @@ export default {
         let numOfMonths = (80 - 65) * 12;
         let newTotal = total / numOfMonths;
 
-        this.response = Number(newTotal).toFixed();
+        this.response = Number(newTotal).toFixed().toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
         this.loading = !this.loading;
         this.showResponse = true;
 
       }, 2000)
  
+    },
+    formatNumbers(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
   }, 
 

@@ -41,7 +41,6 @@ export default {
     methods: {
         toggleMenu() {
             this.showMenu = !this.showMenu;
-            console.log(this.showMenu);
         },
         handleScroll() {
             this.position = window.pageYOffset > 162;
