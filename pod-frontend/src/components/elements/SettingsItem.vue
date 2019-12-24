@@ -5,14 +5,14 @@
         <div class="form__item">
             <label> {{ setting.labelOne }} </label>
             <div class="form__iteminput salary">
-                <input type="text" pattern="\d*" maxlength="10" v-model="setting.value" @focus="$parent.message = ''" placeholder="SEK">
+                <input type="text" value="setting.value" @input="formatValue(setting)" maxlength="10" v-model="setting.value" @focus="$parent.message = ''" placeholder="SEK">
                 <span class="salary__item">kr/mån</span>
             </div>
         </div>
         <div class="form__item">
             <label> {{ setting.labelTwo }} </label>
             <div class="form__iteminput salary">
-                <input type="text" pattern="\d*" maxlength="4" v-model="setting.procent" @focus="$parent.message = ''" placeholder="0"> 
+                <input type="text" @input="formatPercent(setting)" maxlength="4" v-model="setting.procent" @focus="$parent.message = ''" placeholder="0"> 
                 <span class="salary__item">procent</span>
             </div>
         </div>
@@ -25,14 +25,14 @@
         <div class="form__item">
             <label> {{ setting.labelOne }} </label>
             <form class="form__iteminput">
-                <input type="text" required pattern="\d*" maxlength="10" v-model="choice.value" @focus="$parent.message = ''" placeholder="SEK">
+                <input type="text" @input="formatValue(choice)" maxlength="10" v-model="choice.value" @focus="$parent.message = ''" placeholder="SEK">
                 <span>kr</span>
             </form>
         </div>
         <div class="form__item">
             <label> {{ setting.labelTwo }} </label>
             <div class="form__iteminput">
-                <input type="text" required pattern="\d*" maxlength="4" v-model="choice.procent" @focus="$parent.message = ''" placeholder="0">
+                <input type="text" @input="formatPercent(choice)" maxlength="4" v-model="choice.procent" @focus="$parent.message = ''" placeholder="0">
                 <span>procent</span> 
             </div>
         </div>
@@ -61,7 +61,14 @@ export default {
             if (setting) {
                 return this.choices.filter(choice => choice.parent === setting.title)
             }
+        },
+        formatValue(item) {
+            item.value = item.value.replace(/[^0-9]/g,"");
+        },
+        formatPercent(item) {
+            item.procent = item.procent.replace(/[^0-9.-]/g,"");
         }
+
     }
 }
 </script>
@@ -98,7 +105,7 @@ export default {
 
                 > span {
                     position: absolute;
-                    top: 25%;
+                    top: 30%;
                     right: 1rem;
                 }
 
@@ -158,7 +165,6 @@ export default {
                 }
 
                 > span {
-                    top: 30%;
                     right: .75rem;
                 }
             }

@@ -145,6 +145,10 @@ export default {
             justify-content: center;
             margin-top: -2rem !important;
             padding: 0;
+
+            @include breakpoints(small) {
+                text-align: center;
+            }
             
             > li {
                 margin: 2rem 0;
