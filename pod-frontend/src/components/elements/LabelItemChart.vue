@@ -46,7 +46,8 @@ export default {
                             lineWidth: 0
                         },
                         ticks: {
-                            display: false
+                            display: false,
+                            min: 1
                         },
                         angleLines: {
                             display: false
@@ -66,7 +67,7 @@ export default {
                     callbacks: {
                         label: function(tooltipItem) {
                             return tooltipItem.yLabel.toFixed().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-                        }
+                        },
                     }
                 },
             })
@@ -79,6 +80,9 @@ export default {
 
     watch: {
         choices: function() {
+            this.renderBarChart();
+        },
+        barData: function() {
             this.renderBarChart();
         }
     }

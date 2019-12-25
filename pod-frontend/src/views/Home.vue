@@ -4,7 +4,7 @@
 
     <section class="home__intro">
       <div class="text">
-        <h1>Välkommen {{ user.givenName }}</h1> 
+        <h1>Välkommen <br> {{ user.givenName }}</h1> 
         <h2>Alla kan få en bra pension, hur mycket vill du ha i pension?</h2> 
       </div>
 

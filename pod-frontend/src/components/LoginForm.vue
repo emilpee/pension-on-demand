@@ -61,7 +61,10 @@ export default {
                 this.$store.dispatch('signInWithBankID', { ssn: this.personNr }).then(res => {
                     this.loading = true;
                     let url = `https://app.bankid.com/?autostarttoken=${res.data.autoStartToken}&redirect=null`;
-                    document.location = url;
+                    // If on mobile, open application.
+                    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                        document.location = url;
+                    }
                     this.orderRef = res.data.orderRef;
                     this.checkStatus();
                 })
@@ -106,7 +109,7 @@ export default {
                         }
 
                         if (hintCode === "outstandingTransaction") {
-                            this.msg = "Försöker starta BankID-appen.";
+                            this.msg = "Försöker starta BankID-appen...";
                         }
 
                         // User successfully signed the application
