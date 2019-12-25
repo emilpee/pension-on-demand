@@ -68,9 +68,10 @@ export default {
         formatPercent(item) {
             item.procent = item.procent.replace(/[^0-9.-]/g,"");
         },
-        test() {
-            return this.setting.value = this.setting.value.replace((/\B(?=(\d{3})+(?!\d))/g, " "));
-        }
+        // TODO - kolla hur formatera.
+        // test() {
+        //     return this.setting.value = this.setting.value.replace((/\B(?=(\d{3})+(?!\d))/g, " "));
+        // }
     }
 }
 </script>

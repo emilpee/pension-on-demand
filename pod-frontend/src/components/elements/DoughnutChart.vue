@@ -32,13 +32,6 @@ export default {
                 legend: {
                     display: false
                 },
-                tooltips: {
-                    callbacks: {
-                        label: function(tooltipItem) {
-                            return tooltipItem.yLabel.toFixed().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-                        }
-                    }
-                },
             }
         }
     },

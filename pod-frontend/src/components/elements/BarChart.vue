@@ -3,7 +3,6 @@ import { Bar, mixins } from 'vue-chartjs';
 import Chart from 'chart.js';
 
 Chart.defaults.scale.gridLines.drawOnChartArea = false;
-Chart.defaults.scale.gridLines.color = '#000';
 
 const { reactiveProp } = mixins;
 
@@ -60,7 +59,7 @@ export default {
                     callbacks: {
                         label: function(tooltipItem) {
                             return tooltipItem.yLabel.toFixed().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-                        }
+                        },
                     }
                 },
                 scales: {
@@ -68,11 +67,13 @@ export default {
                         { 
                             stacked: true
                         },
+
                     ],
                     yAxes: [
                         {
                             stacked: true
-                        }
+                        },
+                
                     ]
                 },
             }
@@ -146,7 +147,9 @@ export default {
             this.barData.datasets[2].data = pensionsArray1;
             this.barData.datasets[3].data = pensionsArray2;
         },
+
     },
+                            
 
     watch: {
         settingItems() {

@@ -41,7 +41,8 @@
             <p>Tillgångar</p>
             <p v-text="formatNumbers(totalAssets)"></p>
           </div>
-          <doughnut-chart v-if="totalAssets" :chartsData="doughnutData" :pensionData="[totalAssets, totalDebts]" /> 
+          <loading-spinner v-show="loading" />
+          <doughnut-chart v-show="!loading" v-if="totalAssets" :chartsData="doughnutData" :pensionData="[totalAssets, totalDebts]" /> 
           <div class="doughnut__charttext">
             <p>Skulder</p>
             <p v-text="formatNumbers(totalDebts)"></p>
@@ -251,10 +252,6 @@ export default {
     userData() {
       return this.$store.state.userData;
     }
-  },
-
-  watch: {
-
   },
 
 }
@@ -505,6 +502,12 @@ export default {
             flex-direction: column;
             display: flex;
             margin: 0 3rem;
+            min-width: 10rem;
+            text-align: left;
+
+            &:nth-child(2) {
+              text-align: right;
+            }
           }
 
           &labels {

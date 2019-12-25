@@ -133,12 +133,10 @@ export default {
 
 #doughnut-chart {
     margin: 0 auto;
-    width: 90% !important;
-    height: 90% !important;
 
     @include breakpoints(large) {
-        width: 100%;
-        height: 100%;
+        min-width: 20rem;
+
     }
 
 }
