@@ -37,17 +37,17 @@ export default {
                     },
                     {
                         data: [],
-                        label: "Tillgångar",
+                        label: "Allmän pension",
                         backgroundColor: this.chartData.colors[1]
                     },
                     {
                         data: [],
-                        label: "Allmän pension",
+                        label: "Tjänstepension",
                         backgroundColor: this.chartData.colors[2]
                     },
                     {
                         data: [],
-                        label: "Tjänstepension",
+                        label: "Tillgångar",
                         backgroundColor: this.chartData.colors[3]
                     }
                 ],
@@ -143,14 +143,24 @@ export default {
                 assetsArray.push(Number((total += (total * avgPercent)) / (totalYears * 12)).toFixed()); 
             }
 
+            var totalPension = pensionsArray1.map((num, index) => {
+                return Number(num) + Number(pensionsArray2[index]);
+            })
+
+
+            var totalSum = assetsArray.map((num, index) => {
+                return Number(num) + totalPension[index];
+            });
+
+
             pensionsArray1[0] = '';
             pensionsArray2[0] = '';
-            assetsArray[0] = '';
+            totalSum[0] = '';
 
             this.barData.datasets[0].data = [this.salary.value];
-            this.barData.datasets[1].data = assetsArray;
-            this.barData.datasets[2].data = pensionsArray1;
-            this.barData.datasets[3].data = pensionsArray2;
+            this.barData.datasets[1].data = pensionsArray1;
+            this.barData.datasets[2].data = pensionsArray2;
+            this.barData.datasets[3].data = totalSum;
         },
 
     },
