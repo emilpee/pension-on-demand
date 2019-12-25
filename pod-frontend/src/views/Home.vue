@@ -124,7 +124,7 @@ export default {
         colors: [ "#0F7354", "#C04D4D"]
       },
       barData: {
-        colors: ['#fab', '#a9f', '#b4f', '#a3b'],
+        colors: ['#fab', '#a3b', '#b4f', '#a9f'],
         years: []
       },
       jsonData: jsonData[0],
@@ -199,7 +199,6 @@ export default {
         this.$store.commit('setPensionData', doc.data().pension);
       })
 
-      // TODO - skapa ålderslogik.
       if (this.userAge < 55) {
         this.barData.years.push('', 55, 60, 65, 70, 75, 80);
       } else if (this.userAge > 55 && this.userAge < 60) {
@@ -262,11 +261,7 @@ export default {
 
   .container {
     background: $white;
-    padding: 0 ($containerPadding / 4);
-
-    @include breakpoints(medium) {
-      padding: 0 ($containerPadding / 2);
-    }
+    padding: 0 ($containerPadding / 2);
 
     @include breakpoints(large) {
       padding: 0 $containerPadding;

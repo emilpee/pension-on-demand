@@ -5,7 +5,7 @@
         <div class="form__item">
             <label> {{ setting.labelOne }} </label>
             <div class="form__iteminput salary">
-                <input type="text" @input="formatValue(setting)" maxlength="10" v-model="setting.value" @focus="$parent.message = '';" placeholder="SEK">
+                <input type="text" @input="formatValue(setting)" @blur="formatNumber(setting)" maxlength="10" v-model="setting.value" @focus="$parent.message = '';" placeholder="SEK">
                 <span class="salary__item">kr/mån</span>
             </div>
         </div>
@@ -25,7 +25,7 @@
         <div class="form__item">
             <label> {{ setting.labelOne }} </label>
             <form class="form__iteminput">
-                <input type="text" @input="formatValue(choice)" maxlength="10" v-model="choice.value" @focus="$parent.message = ''" placeholder="SEK">
+                <input type="text" @input="formatValue(choice)" @blur="formatNumber(choice)" maxlength="10" v-model="choice.value" @focus="$parent.message = ''" placeholder="SEK">
                 <span>kr</span>
             </form>
         </div>
@@ -68,10 +68,10 @@ export default {
         formatPercent(item) {
             item.procent = item.procent.replace(/[^0-9.-]/g,"");
         },
-        // TODO - kolla hur formatera.
-        // test() {
-        //     return this.setting.value = this.setting.value.replace((/\B(?=(\d{3})+(?!\d))/g, " "));
-        // }
+        // TODO - kolla hur formatera vid load.
+        formatNumber(item) {
+            return item.value = item.value.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
     }
 }
 </script>
