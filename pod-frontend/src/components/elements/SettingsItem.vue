@@ -5,14 +5,14 @@
         <div class="form__item">
             <label> {{ setting.labelOne }} </label>
             <div class="form__iteminput salary">
-                <input type="text" @input="formatValue(setting)" @blur="formatNumber(setting)" maxlength="10" v-model="setting.value" @focus="$parent.message = '';" placeholder="SEK">
+                <input type="text" @input="formatValue(setting)" @blur="formatNumber(setting)" maxlength="10" v-model="setting.value" @focus="$parent.message = ''" placeholder="SEK">
                 <span class="salary__item">kr/mån</span>
             </div>
         </div>
         <div class="form__item">
             <label> {{ setting.labelTwo }} </label>
             <div class="form__iteminput salary">
-                <input type="text" @input="formatPercent(setting)" maxlength="4" v-model="setting.procent" @focus="$parent.message = ''" placeholder="0"> 
+                <input type="text" @input="formatPercent(setting)" maxlength="4" v-model.number="setting.percent" @focus="$parent.message = ''" placeholder="0"> 
                 <span class="salary__item">procent</span>
             </div>
         </div>
@@ -32,7 +32,7 @@
         <div class="form__item">
             <label> {{ setting.labelTwo }} </label>
             <div class="form__iteminput">
-                <input type="text" @input="formatPercent(choice)" maxlength="4" v-model="choice.procent" @focus="$parent.message = ''" placeholder="0">
+                <input type="text" @input="formatPercent(choice)" maxlength="4" v-model.number="choice.percent" @focus="$parent.message = ''" placeholder="0">
                 <span>procent</span> 
             </div>
         </div>
@@ -54,23 +54,30 @@ export default {
         },
     },
     mounted() {
-       this.filterChoices();
+        this.filterChoices();
+        if (this.setting.title === "Inkomster") {
+            this.setting.value = this.setting.value.toString();
+            this.formatNumber(this.setting);
+        }
     },
     methods: {
         filterChoices(setting) {
             if (setting) {
-                return this.choices.filter(choice => choice.parent === setting.title)
+                return this.choices.filter(choice => {
+                    this.formatNumber(choice);
+                    return choice.parent === setting.title;
+                })
+                    
             }
         },
         formatValue(item) {
             item.value = item.value.replace(/[^0-9]/g,"");
         },
         formatPercent(item) {
-            item.procent = item.procent.replace(/[^0-9.-]/g,"");
+            item.percent = item.percent.replace(/[^0-9.-]/g,"");
         },
-        // TODO - kolla hur formatera vid load.
         formatNumber(item) {
-            return item.value = item.value.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+            item.value = item.value.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         }
     }
 }
@@ -84,7 +91,7 @@ export default {
     margin: 2rem 0;
 
     .form {
-        display:inherit;
+        display: inherit;
         flex-direction: column;
         background: $light;
         justify-content: center;

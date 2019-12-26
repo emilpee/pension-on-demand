@@ -6,7 +6,7 @@
                 "title": "Fastigheter",
                 "value": 0,
                 "labelOne": "Fastighetsvärdering",
-                "procent": 0,
+                "percent": 0,
                 "labelTwo": "Beräknad årlig värdeökning"
             },
             {
@@ -14,7 +14,7 @@
                 "title": "Fordon",
                 "labelOne": "Fordonsvärdering",
                 "value": 0,
-                "procent": 0,
+                "percent": 0,
                 "labelTwo": "Beräknad årlig värdeförändring"
             },
             {
@@ -22,14 +22,14 @@
                 "title": "Övrigt",
                 "labelOne": "Värdering",
                 "value": 0,
-                "procent": 0,
+                "percent": 0,
                 "labelTwo": "Beräknad årlig värdeförändring"
             }
         ],
         "salary": {
             "title": "Inkomster",
             "value": 0,
-            "procent": 0,
+            "percent": 0,
             "labelOne": "Månadslön",
             "labelTwo": "Beräknad årlig löneökning"
         },
@@ -95,14 +95,14 @@
         "inflation": 0.02,
         "risks": [0.03, 0.06, 0.09],
         "choices": [
-            {"type": "Villa", "value": 0, "procent": 0, "parent": "Fastigheter"},
-            {"type": "Lägenhet", "value": 0, "procent": 0, "parent": "Fastigheter"},
-            {"type": "Stuga", "value": 0, "procent": 0, "parent": "Fastigheter"},
-            {"type": "Bil", "value": 0, "procent": 0, "parent": "Fordon"},
-            {"type": "Motorcykel", "value": 0, "procent": 0, "parent": "Fordon"},
-            {"type": "Båt", "value": 0, "procent": 0,"parent": "Fordon"},
-            {"type": "Konst", "value": 0, "procent": 0, "parent": "Övrigt"},
-            {"type": "Värdeföremål", "value": 0, "procent": 0, "parent": "Övrigt"}
+            {"type": "Villa", "value": 0, "percent": 0, "parent": "Fastigheter"},
+            {"type": "Lägenhet", "value": 0, "percent": 0, "parent": "Fastigheter"},
+            {"type": "Stuga", "value": 0, "percent": 0, "parent": "Fastigheter"},
+            {"type": "Bil", "value": 0, "percent": 0, "parent": "Fordon"},
+            {"type": "Motorcykel", "value": 0, "percent": 0, "parent": "Fordon"},
+            {"type": "Båt", "value": 0, "percent": 0,"parent": "Fordon"},
+            {"type": "Konst", "value": 0, "percent": 0, "parent": "Övrigt"},
+            {"type": "Värdeföremål", "value": 0, "percent": 0, "parent": "Övrigt"}
         ]
     }
 ]

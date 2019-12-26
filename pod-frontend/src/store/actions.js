@@ -24,9 +24,15 @@ export default {
         let ref = db.collection("pensiondata").doc(state.personalNr);
 
         ref.get().then(() => {
+            data.choices.forEach(item => item.value = item.value.replace(/\s/g, ""));
+            if (isNaN(data.salary.value)) {
+                data.salary.value = data.salary.value.replace(/\s/g, "");
+            }
+
             batch.update(ref, data);
             batch.commit();
         })
+       
     }
 }
 

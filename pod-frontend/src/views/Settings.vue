@@ -67,11 +67,11 @@ export default {
 
                 for (let i = 0; i < this.choices.length; i++) {
                     this.choices[i].value = this.userData.choices[i].value;
-                    this.choices[i].procent = this.userData.choices[i].procent;
+                    this.choices[i].percent = this.userData.choices[i].percent;
                 }
 
-                this.salary.value = this.userData.salary.value;  
-                this.salary.procent = this.userData.salary.procent;  
+                this.salary.value = Number(this.userData.salary.value);  
+                this.salary.percent = Number(this.userData.salary.percent);  
                 this.$store.commit('setSalary', this.salary);      
                 this.loading = false;
             })
@@ -81,18 +81,13 @@ export default {
         updateSettingsData() {
             this.loading = true;
             this.$store.dispatch('updateUserData', { salary: this.salary, choices: this.choices }).then(() => {
-                this.message = 'Dina inställningar sparades!'
+                this.message = 'Dina inställningar sparades!';
                 this.loading = false;
             })
             
         } 
                 
-        },
-    watch: {
-        salary: function() {
-            console.log(this.salary);
         }
-    }
 }
 
 </script>

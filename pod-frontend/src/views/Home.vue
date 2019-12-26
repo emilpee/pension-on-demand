@@ -4,7 +4,7 @@
 
     <section class="home__intro">
       <div class="text">
-        <h1>Välkommen <br> {{ user.givenName }}</h1> 
+        <h1>Välkommen <br class="break"> {{ user.givenName }}</h1> 
         <h2>Alla kan få en bra pension, hur mycket vill du ha i pension?</h2> 
       </div>
 
@@ -17,7 +17,7 @@
       </div>
     </section>
 
-    <section class="home__doughnut" v-if="userData !== undefined">
+    <section class="home__doughnut" v-if="userData">
 
       <div class="doughnut">
         <div class="doughnut__header title">
@@ -160,7 +160,7 @@ export default {
 
         let currentPension = this.pensionValues.reduce((acc, obj) => acc + obj);
         let salary =  Number(this.salary.value)
-        let percent = Number(this.salary.procent);
+        let percent = Number(this.salary.percent);
 
         // Räkna ut pension baserat på nuvarande pension, lön med årlig ökning, samt hur många år till pensionen.
         let totalSalary = ((salary * 12) * years) + (salary * (percent / 100));
@@ -480,6 +480,10 @@ export default {
         flex-direction: row;
         .text {
           text-align: left;
+          flex-direction: row;
+        }
+        .break {
+          display: none;
         }
       }
 

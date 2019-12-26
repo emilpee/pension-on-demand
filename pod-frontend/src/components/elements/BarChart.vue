@@ -57,8 +57,8 @@ export default {
                 maintainAspectRatio: false,
                 tooltips: {
                     callbacks: {
-                        label: function(tooltipItem) {
-                            return tooltipItem.yLabel.toFixed().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+                        label: function(tooltipItem, data) {
+                            return data.datasets[tooltipItem.datasetIndex].label + ': ' + tooltipItem.yLabel.toFixed().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
                         },
                     }
                 },
@@ -71,8 +71,18 @@ export default {
                     ],
                     yAxes: [
                         {
-                            stacked: true
+                            stacked: true,
+                            ticks: {
+                                userCallback: (value) => {
+                                    value = value.toString();
+                                    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
+                                    return value;
+                                }
+                            }
+                        
                         },
+                        
                     ]
                 },
             }
@@ -100,14 +110,14 @@ export default {
             settingsArray.map(item => { 
                 item.forEach(data => {
                     let value = Number(data.value);
-                    let percent = Math.abs(data.procent);
+                    let percent = Math.abs(data.percent);
                     percent /= 100;
                     totalArray.push(Number((percent * 100) / value));
                     percentArray.push(percent);  
                 })
             })
 
-            // Räkna ut medelvärde för procent
+            // Räkna ut medelvärde för percent
             let totalPercent = 0;
             for (var percent in percentArray) {
                 totalPercent += percentArray[percent];
@@ -121,8 +131,6 @@ export default {
             const maxAge = this.chartData.years[this.chartData.years.length - 1];
             const userAge = this.$store.state.userAge;
             let totalYears = maxAge - userAge;
-
-            console.log(avgPercent);
 
             // Räkna ut pension
             for (let i = 0; i < this.chartData.years.length; i++) {
@@ -147,11 +155,9 @@ export default {
                 return Number(num) + Number(pensionsArray2[index]);
             })
 
-
             var totalSum = assetsArray.map((num, index) => {
                 return Number(num) + totalPension[index];
             });
-
 
             pensionsArray1[0] = '';
             pensionsArray2[0] = '';

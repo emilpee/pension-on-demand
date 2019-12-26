@@ -97,7 +97,8 @@ export default {
       @extend %column;
       align-items: center; 
       justify-content: space-between;
-      flex: 2;
+      // TODO - fixa hoppen.
+      flex: 3;
   }
 
   &__form {
