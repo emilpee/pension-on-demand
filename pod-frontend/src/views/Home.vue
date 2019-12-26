@@ -80,22 +80,22 @@
 
 
     <section class="home__optimize">
-      <div v-show="!showResponse" class="optimize__header title" :class="{ loading: loading }">
-        <h2>Se hur mycket pension du kan få för ett sparande på {{ formatNumbers(privateSavings) }} kr/mån.</h2>
-        <span>Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span> 
-        <loading-spinner v-show="loading" />
-        <Button v-show="!loading" msg="Optimera med PD" @click.native="calculatePension" />
-      </div>
-        <div v-show="showResponse" class="optimize__header title" :class="{ loading: loading }">
-        <transition name="fade">
-          <span :key="response"> Enligt vår analys kommer din första utbetalning att bli
+      <div class="optimize__header" :class="{ loading: loading }">
+          <h2 v-show="!showResponse">Se hur mycket pension du kan få för ett sparande på {{ formatNumbers(privateSavings) }} kr/mån.</h2>
+          <span v-show="!showResponse">Fortsätt till nästa steg för att optimera din framtida pensionsplan.</span> 
+        <transition name="fade" :style="{ height: '100%' }">
+          <span v-show="showResponse" :key="response"> Enligt vår analys kommer din första utbetalning att bli
             <h2 :style="{ margin: '10px 0' }"> {{ formatNumbers(response) }} kr/mån </h2> 
             före skatt, om du går i pension vid {{ shownAge }} år.
           </span>
         </transition>
-          <loading-spinner v-show="loading" />
-          <Button v-show="!loading" msg="Optimera igen" @click.native="calculatePension" />
-        </div>
+      </div>
+
+      <div class="optimize__footer">
+        <loading-spinner v-show="loading" />
+        <Button v-show="!loading && !showResponse" msg="Optimera med PD" @click.native="calculatePension" />
+        <Button v-show="!loading && showResponse" msg="Optimera igen" @click.native="calculatePension" />
+      </div>
     </section>
 
     </div>
@@ -142,9 +142,8 @@ export default {
   methods: {
     calculatePension() {
 
-      this.loading = true;
+        this.loading = true;
 
-      setTimeout(() => {
         const age = this.userAge;
         const savings = this.privateSavings;
         const pensionAge = this.pensionAge; 
@@ -177,12 +176,14 @@ export default {
         let numOfMonths = (80 - 65) * 12;
         let newTotal = total / numOfMonths;
 
+      setTimeout(() => {
+        this.showResponse = false;
         this.response = Number(newTotal).toFixed().toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
         this.loading = !this.loading;
         this.showResponse = true;
 
-      }, 2000)
+      }, 1500)
  
     },
     formatNumbers(x) {
@@ -372,7 +373,6 @@ export default {
 
     &__optimize {
       @extend %column;
-      padding: 1rem;
       text-align: center;
 
       .title {
@@ -380,22 +380,17 @@ export default {
       }
 
       .optimize__header {
-        display: flex;
-        padding: 2rem 0;
-        min-height: 15rem; 
+        @extend %column;
+        min-height: 16.5rem;
+        justify-content: center;
       }
 
       .optimize__footer {
         padding: 1rem 0;
         @extend %column;
-        min-height: 6rem;
+        min-height: 5rem;
         align-items: center;
-
-        > span {
-          margin-bottom: 1rem;
-        }
-
-
+        justify-content: flex-start;
       }
 
       > a {
@@ -465,6 +460,10 @@ export default {
       &__intro {
         @extend %column;
       }
+
+      .optimize__header {
+        min-height: 14rem;
+      }
       
     }
 
@@ -474,6 +473,7 @@ export default {
 
       .optimize__header {
         height: 100%;
+        min-height: 11rem;
       }
 
       &__intro {

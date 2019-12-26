@@ -1,21 +1,27 @@
   // Optimizing transition
   .fade-enter-active {
-    transition: all .4s ease-in;
+    transition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    -o-transition: all .3s linear;
   }
 
   .fade-leave-to {
     opacity: 0;
-    transform: scale(1.5);
+    transform: scale(1);
   }
   
   .fade-enter {
     opacity: 0;
-    transform: scale(.75);
+    transform: scale(.85);
   }
 
   // Mobile menu transition
   .smooth-fade-enter-active {
     transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -o-transition: all .3s ease;
   }
   .smooth-fade-leave-active {
     transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0) ease-out;
@@ -23,4 +29,3 @@
   .smooth-fade-enter, .smooth-fade-leave-to {
     opacity: 0;
   }
-
