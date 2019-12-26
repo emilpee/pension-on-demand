@@ -108,7 +108,7 @@ export default {
 
                 > input {
                     font-size: 1.25em;
-                    width: 80%;
+                    width: 95%;
                     padding: 1rem;
                     border: 1px solid $black;
                 }
@@ -116,7 +116,7 @@ export default {
                 > span {
                     position: absolute;
                     top: 30%;
-                    right: 1rem;
+                    right: .2rem;
                 }
 
             }
@@ -131,20 +131,39 @@ export default {
     @include breakpoints(medium) {
 
         .form {
+            display: flex;
             flex-direction: column;
+
+            &__item {
+                @extend %column;
+                justify-content: center;
+                margin: 1rem 0 !important;
+            }
 
             &__iteminput {
                 > input {
-                    width: 100%;
+                    width: 95%;
                 }
                 > span {
                     top: 28%;
-                    right: -1rem;
+                    right: 1rem;
                 }
             }
 
         }
 
+    }
+
+    @include breakpoints(largeFix) {
+        .form {
+            flex-direction: column !important;
+
+            &__iteminput {
+                > input {
+                    min-width: 100%;
+                }
+            }
+        }
     }
 
     @include breakpoints(large) {
@@ -153,7 +172,7 @@ export default {
             flex-direction: row;
 
             &__item {
-                margin: 0 1rem;
+                margin: 1rem;
                 text-align: left;
 
             .salary {

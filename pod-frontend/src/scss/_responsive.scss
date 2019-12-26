@@ -17,4 +17,10 @@
           @content; 
       }
     }
+
+    @else if $screen == largeFix {
+      @media (min-width: 802px) and (max-width: 930px) {
+        @content;
+      }
+    }
 }

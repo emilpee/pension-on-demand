@@ -106,7 +106,7 @@ export default {
 
         ~ p {
             flex: 3;
-            text-align: center;
+            text-align: right;
         }
 
         ~ div {
@@ -116,11 +116,21 @@ export default {
     
     }
 
+    @include breakpoints(medium) {
+        .debt__item, .asset__item {
+            flex: 7;
+        }
+    }
+
     @include breakpoints(large) {
 
         .debt__item, .asset__item {
             flex: 6; 
             margin: 0 .75rem;
+
+            ~ p {
+               padding-right: 1rem; 
+            }
         }
 
         &__header {
