@@ -1,6 +1,7 @@
 <template>
   <header class="header">
-    <div class="header__mobile">
+
+      <div class="header__mobile">
           <MobileMenu />
       </div>
 
@@ -15,7 +16,8 @@
       <div class="header__profile">
           <Profile /> 
       </div>
-      
+
+      <img src="http://erikdkennedy.com/r-r-r-random/divider-triangle.png" class="header__bg" />
   </header>
 </template>
 
@@ -38,8 +40,18 @@ export default {
     background: $headerGradient;
     @extend %center-content;
     flex-direction: column;
-    min-height: 12.5rem;
+    height: 12.5rem;
     position: relative;
+
+    &__bg {
+        border: none;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 15%;
+    }
 
     &__logo {
         display: flex;
@@ -62,6 +74,7 @@ export default {
         > a {
             color: $light;
             text-decoration: none;
+            text-align: center;
             text-transform: uppercase;
             letter-spacing: $letterSpacing * 8;
             font-family: $mainText;
@@ -84,6 +97,7 @@ export default {
     }
 
     @include breakpoints(large) {
+        height: 15rem;
         flex-direction: row;
         justify-content: space-between;
 
@@ -102,6 +116,10 @@ export default {
 
         &__nav {
             display: flex;
+            > a {
+                height: 3rem;
+
+            }
         }
 
         &__logo {

@@ -1,8 +1,8 @@
 <template>
   <aside class="user">
-      <i class="fas fa-user"></i>
+      <i class="fas fa-user" :style="{ fontSize: '1.25em' }"></i>
       <span>{{ user.name }}</span>
-      <i class="fas fa-chevron-circle-down"></i>
+      <i class="fas fa-chevron-circle-down" :style="{ fontSize: '1.25em' }"></i>
       <div class="user__dropdown">
         <router-link to="/settings">Mina tillgångar</router-link>
         <router-link to="/login" @click.native="signOut">Logga ut</router-link>
@@ -38,16 +38,18 @@ export default {
     border-radius: $rounded;
     display: flex;
     justify-content: space-between;
+    text-align: center;
     padding: 1rem;
-    max-width: 20rem;
+    margin: 0 auto;
     position: relative;
 
     > span {
+        color: $green;
         font-family: $mainText;
         font-size: 1.375em;
-        color: $green;
         font-weight: 700;
         letter-spacing: $letterSpacing * 4;
+        margin: 0 1rem;
     }
 
     &__dropdown {
@@ -61,9 +63,9 @@ export default {
         
         a {
             color: $green;
+            display: flex;
             font-size: 1.25em;
             font-family: $mainText;
-            display: flex;
             margin: .75rem 0;
             padding: 1rem .5rem;
 
@@ -86,11 +88,12 @@ export default {
 
     @include breakpoints(large) {
         margin-right: 2rem;
+        margin-top: -1rem;
 
         > span {
             padding: 0 1rem;
         }
-    }
+    }   
 
 }
 
