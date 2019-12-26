@@ -82,7 +82,7 @@ export default {
     background: $light;
 
     .slider {
-        padding: 1rem 3rem; 
+        padding: 1rem; 
         margin: .5rem 0;
 
         &__text {
@@ -127,6 +127,12 @@ export default {
 
     &__button {
         margin: 1.5rem auto;
+    }
+
+    @include breakpoints(large) {
+        .slider {
+            padding: 1rem 3rem;  
+        }
     }
 
 }

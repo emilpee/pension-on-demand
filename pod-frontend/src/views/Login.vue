@@ -65,7 +65,8 @@ export default {
   @extend %column;
   height: 100%;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 .5rem;
+  overflow: auto;
 
   &__logo {
     margin: 0 auto;
@@ -88,8 +89,12 @@ export default {
   }
 
   &__text {
-    display: flex;
     align-items: center;
+    display: flex;
+    > a {
+      margin-bottom: .5rem;
+      padding: 1rem;
+    }
   }
 
 
@@ -98,7 +103,7 @@ export default {
       align-items: center; 
       justify-content: space-between;
       // TODO - fixa hoppen.
-      flex: 3;
+      flex: 1;
   }
 
   &__form {
@@ -106,38 +111,34 @@ export default {
     @extend %center-content;
     flex-direction: column;
     flex: 1;
-    padding: 1rem .5rem;
-    margin-bottom: 1rem;
     min-height: 16rem;
-    
-    &input {
-      flex-direction: column;
-      flex: 1;
-      margin: 0;
-      min-height: 8.2rem;
-      @extend %center-content;
+  }
 
-      > input {
-        background: #efefef url('../assets/img/bankid.png') no-repeat top 12px right 1rem;
-        background-size: 2.75rem;
-        border-radius: $borderRadius;
-        border: 1px solid $borderColor;
-        padding: 1rem; 
-        font-size: 1em;
-        letter-spacing: $letterSpacing * 2;
-        height: 2rem;
-        min-width: 20rem;
-        margin: 1rem 0;
-  
-        &::placeholder {
-          font-family: $btnText;
-          font-size: 1.5em;
-          color: #43425D;
-        }
-  
+  &__forminput {
+    flex-direction: column;
+    flex: 1;
+    margin: 0;
+    @extend %center-content;
+
+    > input {
+      background: #efefef url('../assets/img/bankid.png') no-repeat top 12px right 1rem;
+      background-size: 2.75rem;
+      border-radius: $borderRadius;
+      border: 1px solid $borderColor;
+      padding: 1rem; 
+      font-size: 1em;
+      letter-spacing: $letterSpacing * 2;
+      height: 2rem;
+      margin: 1rem 0;
+      min-width: 16rem;
+
+      &::placeholder {
+        font-family: $btnText;
+        font-size: 1.5em;
+        color: #43425D;
       }
-    }
 
+    }
   }
 
   @include breakpoints(large) {
@@ -147,6 +148,7 @@ export default {
 
     &__text {
       min-height: 6rem;
+      padding-bottom: 0;
     }
 
     &__tabs {
@@ -155,7 +157,16 @@ export default {
 
     &__form {
       padding: .5rem 2.5rem 0 2.5rem;
+    }
 
+    &_forminput {
+      padding: 1rem .5rem;
+      margin-bottom: 1rem;
+      min-height: 8.2rem;
+
+      > input {
+        min-width: 20rem;
+      }
     }
 
   }

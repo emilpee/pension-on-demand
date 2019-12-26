@@ -88,8 +88,7 @@ export default {
     &__asset, &__debt {
         background: $light;
         border: 4px solid rgba($gray, .04);
-        display: flex;
-        flex-direction: column;
+        @extend %column;
         align-items: center;
         margin: .5rem 0;
         width: 100%;
@@ -102,7 +101,7 @@ export default {
     }
 
     .debt__item, .asset__item {
-        flex: 6;
+        flex: 4; 
         margin: 0 .75rem;
 
         ~ p {
@@ -119,6 +118,11 @@ export default {
 
     @include breakpoints(large) {
 
+        .debt__item, .asset__item {
+            flex: 6; 
+            margin: 0 .75rem;
+        }
+
         &__header {
             display: none;
         }
@@ -134,9 +138,15 @@ export default {
 #doughnut-chart {
     margin: 0 auto;
 
+    @include breakpoints(small) {
+        min-width: 15rem;
+        min-height: 15rem;
+        width: 60% !important;
+        height: 60% !important;
+    }
+
     @include breakpoints(large) {
         min-width: 20rem;
-
     }
 
 }

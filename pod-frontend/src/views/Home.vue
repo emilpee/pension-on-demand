@@ -262,7 +262,7 @@ export default {
 
   .container {
     background: $white;
-    padding: 0 ($containerPadding / 2);
+    padding: 0 ($containerPadding / 3);
 
     @include breakpoints(large) {
       padding: 0 $containerPadding;
