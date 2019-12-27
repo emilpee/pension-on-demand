@@ -39,6 +39,7 @@ export default {
     methods: {
         getTotal() {
             // TODO - hitta snyggare lösning.
+            // TODO - lägg till ytterligare hint till användaren.
             let incomes = this.userData.income;
             let choices = this.choices;
 
@@ -74,6 +75,7 @@ export default {
 
 .label {
     @extend %column;
+    // TODO - bara cursor pointer om det finns diagram.
     cursor: pointer;
     flex: 1;
 

@@ -56,7 +56,7 @@ export default {
         background: inherit;
         box-shadow: 3px 2px 5px $borderColor;
         display: none;
-        top: 4rem;
+        top: 3.5rem;
         right: 1.05rem;
         position: absolute;
         z-index: 1;
@@ -77,24 +77,21 @@ export default {
         }
     }
 
-
     &:hover {
         cursor: pointer;
         
         .user__dropdown {
             display: block;
         }
-
     }
 
     @include breakpoints(large) {
-        margin-right: 2rem;
-        margin-top: -1rem;
+        margin-right: 2rem; 
 
         > span {
             font-size: 1.25em;
             min-width: 14.5rem;
-            padding: .5rem 0;
+            padding: .2rem 0;
         }
     }   
 

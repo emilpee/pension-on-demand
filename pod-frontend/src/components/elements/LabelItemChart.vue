@@ -17,26 +17,29 @@ export default {
     },
 
     computed: {
-        barData() {
-            return this.chartData;
-        },
         choices() {
             return this.$store.state.choices;
-        }
+        },
+        userData() {
+            return this.$store.state.userData;
+        },
+        settingItems() {
+            return this.$store.state.settingItems;
+        },
     },
 
-    methods: {
-        renderBarChart() {
-            this.renderChart({      
-                labels: this.barData.labels,
+    data() {
+        return {
+            barData: {
+                labels: this.chartData.labels,
                 datasets: [
                     {
-                        data: this.barData.data,
-                        backgroundColor: this.barData.colors
+                        data: this.chartData.data,
+                        backgroundColor: this.chartData.colors
                     }
                 ]
             },
-            {
+            options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
@@ -70,20 +73,35 @@ export default {
                         },
                     }
                 },
-            })
-        },
+            }
+
+        }
     },
 
     mounted() {
-        this.renderBarChart();
+        this.renderChart(this.barData, this.options);
     },
 
     watch: {
         choices: function() {
-            this.renderBarChart();
+            console.log('öhöhöö');
+            this._chart.destroy();
+            //this.renderChart(this.data, this.options);
+            this.renderChart(this.barData, this.options);
         },
         barData: function() {
-            this.renderBarChart();
+            console.log('uppdaterat!');
+            //this.renderChart(this.data, this.options);
+            this.renderChart(this.barData, this.options);
+        },
+        chartData: function() {
+            console.log('uppdaterat!');
+            //this.renderChart(this.data, this.options);
+            this.renderChart(this.chartData, this.options);
+        },
+        settingItems() {
+            console.log('fläsk');
+            this.renderChart(this.barData, this.options)
         }
     }
 

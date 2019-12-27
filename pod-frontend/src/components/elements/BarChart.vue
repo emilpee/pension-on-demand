@@ -171,7 +171,6 @@ export default {
 
     },
                             
-
     watch: {
         settingItems() {
             this.calculateAssets();

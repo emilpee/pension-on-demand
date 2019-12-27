@@ -35,7 +35,6 @@ export default {
             this.inputValue = input.value;
 
             // Save input values to state 
-            // TODO - loopa igenom
             input.id === "1" ? this.$store.commit('setPrivateSavings', input.value) : null;
             input.id === "2" ? this.$store.commit('setPensionAge', input.value) : null;
             input.id === "3" ? this.$store.commit('setRisk', input.value) : null;
