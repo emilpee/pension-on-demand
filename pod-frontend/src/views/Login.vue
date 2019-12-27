@@ -101,8 +101,6 @@ export default {
   &__loading {
       @extend %column;
       align-items: center; 
-      justify-content: space-between;
-      // TODO - fixa hoppen.
       flex: 1;
   }
 
@@ -111,7 +109,6 @@ export default {
     @extend %center-content;
     flex-direction: column;
     flex: 1;
-    min-height: 16rem;
   }
 
   &__forminput {
@@ -144,22 +141,21 @@ export default {
   @include breakpoints(large) {
     border-radius: $borderRadius;
     height: auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem 1.5rem 1.5rem;
 
     &__text {
-      min-height: 6rem;
       padding-bottom: 0;
+    }
+
+    &__loading {
+      min-height: 9.4rem;
     }
 
     &__tabs {
       flex-direction: row;
     }
 
-    &__form {
-      padding: .5rem 2.5rem 0 2.5rem;
-    }
-
-    &_forminput {
+    &__forminput {
       padding: 1rem .5rem;
       margin-bottom: 1rem;
       min-height: 8.2rem;

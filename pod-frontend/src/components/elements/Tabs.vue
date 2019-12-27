@@ -16,7 +16,7 @@ export default {
   methods: {
     changeView() {
       let tabs = this.$parent.tabs;
-
+      
       if (!this.tab.isActive) {
         for (let i = 0; i < tabs.length; i++) {
           tabs[i].isActive = !tabs[i].isActive;

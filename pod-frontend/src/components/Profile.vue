@@ -54,12 +54,13 @@ export default {
 
     &__dropdown {
         background: inherit;
-        display: none;
-        position: absolute;
-        margin-top: 6rem;
-        right: 1rem;    
-        z-index: 1;
         box-shadow: 3px 2px 5px $borderColor;
+        display: none;
+        top: 4rem;
+        right: 1.05rem;
+        position: absolute;
+        z-index: 1;
+        min-width: 12rem;
         
         a {
             color: $green;
@@ -91,7 +92,9 @@ export default {
         margin-top: -1rem;
 
         > span {
-            padding: 0 1rem;
+            font-size: 1.25em;
+            min-width: 14.5rem;
+            padding: .5rem 0;
         }
     }   
 

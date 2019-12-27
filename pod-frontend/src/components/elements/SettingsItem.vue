@@ -55,28 +55,33 @@ export default {
     },
     mounted() {
         this.filterChoices();
+
         if (this.setting.title === "Inkomster") {
             this.setting.value = this.setting.value.toString();
             this.formatNumber(this.setting);
+        }
+        if (this.choices !== undefined) {
+            this.choices.map(choice => this.formatNumber(choice));
         }
     },
     methods: {
         filterChoices(setting) {
             if (setting) {
                 return this.choices.filter(choice => {
-                    this.formatNumber(choice);
                     return choice.parent === setting.title;
                 })
-                    
             }
         },
         formatValue(item) {
+            item.value = item.value.toString();
             item.value = item.value.replace(/[^0-9]/g,"");
         },
         formatPercent(item) {
+            item.percent = item.percent.toString();
             item.percent = item.percent.replace(/[^0-9.-]/g,"");
         },
         formatNumber(item) {
+            item.value = item.value.toString();
             item.value = item.value.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         }
     }

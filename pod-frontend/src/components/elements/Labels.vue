@@ -151,8 +151,7 @@ export default {
     @include breakpoints(small) {
         min-width: 15rem;
         min-height: 15rem;
-        width: 60% !important;
-        height: 60% !important;
+        width: 90% !important;
     }
 
     @include breakpoints(large) {
