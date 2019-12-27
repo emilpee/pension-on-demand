@@ -5,7 +5,7 @@
         <div class="login__forminput" v-show="!loading">
             <span :style="{ margin: 0 }" class="error-message">{{ error }}</span>
             <img src="../../src/assets/img/bankid.png" alt="BankID logo" v-if="tabs[0].isActive" /> 
-            <input type="text" placeholder="Personnummer" v-model="personNr" v-else />
+            <input type="text" placeholder="Personnummer" @focus="error = ''" v-model="personNr" v-else />
         </div>
 
         <div class="login__loading" v-show="loading">
@@ -34,7 +34,8 @@ export default {
             loading: false,
             interval: '',
             msg: '',
-            error: ''
+            error: '',
+            cancel: false
         }
     },
     
@@ -73,7 +74,9 @@ export default {
             },
          
         cancelSignIn() {
-            // TODO - kolla hur avbryta.
+            this.$store.dispatch('signInWithBankID', { cancel: this.orderRef }).then(res => {
+                res.data ? this.cancel = true : this.cancel;
+            });
             this.loading = false;
             this.interval = '';
         }, 
@@ -96,14 +99,13 @@ export default {
             if (status === "pending") {
                 this.msg = "Starta BankID-appen...";
 
-
                 let interval = setInterval(() => {
                     this.$store.dispatch('checkStatus', { status: this.orderRef }).then(resp => {
                         console.log(resp);
                         let hintCode = resp.data.hintCode
                         let data = resp.data;
                         let status = data.status;
-
+                    
                         if (hintCode === "userSign") {
                             this.msg = "Skriv in din säkerhetskod i BankID-appen och välj Legitimera eller Skriv under.";
                         }
@@ -111,6 +113,9 @@ export default {
                         if (hintCode === "outstandingTransaction") {
                             this.msg = "Försöker starta BankID-appen...";
                         }
+
+                        // User cancels the request
+                        this.cancel === true ? status = "failed" : status;
 
                         // User successfully signed the application
                         if (status === "complete") {
@@ -229,7 +234,6 @@ export default {
                         }
 
                         if (status === "failed") {
-
                             let error = data.hintCode;
 
                             switch(error) {
@@ -255,7 +259,7 @@ export default {
                                     this.error = "BankID-appen verkar inte finnas i din dator eller telefon. Installera den och hämta ett BankID hos din internetbank.";
                                     break;
                                 default:
-                                    this.error = "Något gick fel. Var god försök igen.";
+                                    this.cancel === true ? this.error = "Åtgärd avbruten." : this.error = "Något gick fel. Var god försök igen.";
                             }
 
                             clearInterval(interval);
