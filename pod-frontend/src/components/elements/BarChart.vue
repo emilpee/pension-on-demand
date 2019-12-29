@@ -155,8 +155,10 @@ export default {
                 return Number(num) + Number(pensionsArray2[index]);
             })
 
+            let inflation = 0.02;
+
             var totalSum = assetsArray.map((num, index) => {
-                return Number(num) + totalPension[index];
+                return (Number(num) + (Number(num) * inflation)) + totalPension[index];
             });
 
             pensionsArray1[0] = '';
