@@ -330,9 +330,10 @@ export default {
       }
 
       .symbols {
-        background: $light;
+        background: $light; 
         @extend %column;
         align-items: center;
+        padding: .5rem;
 
         &__header {
           @extend %column;

@@ -49,7 +49,6 @@ export default {
         bottom: 0;
         left: 0;
         right: 0;
-        width: 100%;
         height: 15%;
     }
 
@@ -96,6 +95,12 @@ export default {
         display: flex;
     }
 
+    @include breakpoints(medium) {
+        &__bg {
+            width: 100%;
+        }
+    }
+
     @include breakpoints(large) {
         height: 15rem;
         flex-direction: row;
@@ -103,6 +108,10 @@ export default {
 
         &__logo {
             justify-content: flex-end;
+        }
+
+        &__bg {
+            width: 100%;
         }
 
         &__profile {

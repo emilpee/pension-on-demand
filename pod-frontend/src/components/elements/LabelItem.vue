@@ -1,9 +1,9 @@
 <template>
 <div>
-    <div :key="$attrs.index" @click="showDetails($attrs.index)">
+    <div :key="$attrs.index" :class="{ details: $attrs.hasLabel }" @click="showDetails($attrs.index)">
         <span class="debt__item">{{ label.type }}</span>
         <p class="debt__data"> {{ formatNumbers(label.value) }}</p>
-        <span v-if="$attrs.hasLabel" :class="{ showChart: $attrs.index === i, hideChart: $attrs.index !== i }">
+        <span v-if="$attrs.hasLabel && label.value > 0" :class="{ showChart: $attrs.index === i, hideChart: $attrs.index !== i }">
             <i class="fas fa-chevron-right"></i>
         </span>
         <div class="debt__lights">
@@ -12,7 +12,7 @@
     </div>
 
     <div> 
-        <div :key="i" class="label__details" v-if="i === $attrs.index && choices">
+        <div :key="i" class="label__details" v-if="i === $attrs.index && choices && label.value > 0">
             <LabelItemChart :chartData="barData" />
         </div>
     </div>
@@ -91,15 +91,28 @@ export default {
     
 }
 
-
 .showChart {
     transition: transform .2s linear;
     transform: rotate(90deg);
 }
 
 .hideChart {
-    transition: transform .15s ease-in;
+    transition: transform .1s ease-in;
     transform: rotate(0deg);
+}
+
+.showChart, .hideChart {
+    cursor: pointer;
+}
+
+.details {
+    cursor: pointer;
+}
+
+@include breakpoints(small) {
+    .showChart, .hideChart {
+        margin: 0 .5rem;
+    }
 }
 
 </style>

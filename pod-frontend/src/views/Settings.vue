@@ -12,7 +12,10 @@
 
     <section class="settings__message">
         <transition name="fade">
-            <p :key="message" v-text="message"></p>
+            <p :key="message" v-show="message !== ''"> 
+                {{ message }} <br>
+                <router-link to="/">Tillbaka till start</router-link>
+            </p>
         </transition>
             <loading-spinner v-show="loading" />
     </section>
@@ -112,10 +115,11 @@ export default {
     }
 
     &__message {
-        min-height: 2rem;
+        min-height: 3.5rem;
         @extend %center-content;
         padding: 1rem 0;
         > p {
+            text-align: center;
             margin: 0;
         }
     }
