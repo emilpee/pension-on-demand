@@ -2,20 +2,20 @@
 <div>
     <div :key="$attrs.index" @click="showDetails($attrs.index)">
         <span class="debt__item">{{ label.type }}</span>
-        <p class="debt__data"> {{ formatNumbers(label.value) }}</p> 
+        <p class="debt__data"> {{ formatNumbers(label.value) }}</p>
+        <span v-if="$attrs.hasLabel" :class="{ showChart: $attrs.index === i, hideChart: $attrs.index !== i }">
+            <i class="fas fa-chevron-right"></i>
+        </span>
         <div class="debt__lights">
             <traffic-lights :label="label" />
         </div>
     </div>
 
     <div> 
-
         <div :key="i" class="label__details" v-if="i === $attrs.index && choices">
             <LabelItemChart :chartData="barData" />
         </div>
-
     </div>
-
 </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
     },
     props: {
         label: Object,
-        choices: Array
+        choices: Array,
     },
     mounted() {
         this.mapChoices();
@@ -53,7 +53,7 @@ export default {
                 this.barData.labels = this.filteredChoices.map(choice => choice.type);
                 this.barData.data = this.filteredChoices.map(choice => choice.value);
             }
-        }
+        },
     },
     computed: {
         filteredChoices() {
@@ -68,6 +68,9 @@ export default {
     watch: {
         choices: function() {
             this.mapChoices();
+        },
+        clickedLabel: function() {
+            this.clickedLabel = !this.clickedLabel;
         }
     }
 
@@ -79,15 +82,24 @@ export default {
 
 
 
-    #bar-chart {
+#bar-chart {
+    width: 98% !important;
 
-        width: 98% !important;
-
-        @include breakpoints(large) {
-            max-height: 40rem !important;
-        }
-        
+    @include breakpoints(large) {
+        max-height: 40rem !important;
     }
+    
+}
 
+
+.showChart {
+    transition: transform .2s linear;
+    transform: rotate(90deg);
+}
+
+.hideChart {
+    transition: transform .15s ease-in;
+    transform: rotate(0deg);
+}
 
 </style>

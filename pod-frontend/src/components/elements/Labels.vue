@@ -4,7 +4,7 @@
         <div class="label">
             <h2 class="label__header">Tillgångar</h2>
             <LabelItem class="label__asset" v-for="(label, index) in userData.pension" :label="label" :index="index" :key="index+'pension'" />
-            <LabelItem class="label__asset" v-for="(label, index) in userData.income" :label="label" :index="index" :choices="userData.choices" :key="index+'income'" />
+            <LabelItem class="label__asset" v-for="(label, index) in userData.income" :label="label" :hasLabel="hasLabel" :index="index" :choices="userData.choices" :key="index+'income'" />
         </div>
         <div class="label">
             <h2 class="label__header">Skulder</h2>
@@ -22,7 +22,8 @@ import jsonData from '../../data/data.json';
 export default {
     data() {
         return {
-            data: jsonData[0]
+            data: jsonData[0],
+            hasLabel: true
         }
     },
     components: {
