@@ -68,9 +68,6 @@ export default {
     watch: {
         choices: function() {
             this.mapChoices();
-        },
-        clickedLabel: function() {
-            this.clickedLabel = !this.clickedLabel;
         }
     }
 
@@ -114,5 +111,12 @@ export default {
         margin: 0 .5rem;
     }
 }
+@include breakpoints(medium) {
+    .showChart, .hideChart {
+        margin: 0 .5rem;
+    }
+}
+
+
 
 </style>

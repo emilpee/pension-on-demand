@@ -8,7 +8,7 @@ export default {
             type: Object,
             default: null
         },
-        pensionData: {
+        totalData: {
             type: Array,
             default: null
         }
@@ -19,7 +19,7 @@ export default {
                 labels: this.chartsData.labels,
                 datasets: [
                     {
-                        data: this.pensionData,
+                        data: this.totalData,
                         backgroundColor: this.chartsData.colors
                     }
                 ],
@@ -34,7 +34,7 @@ export default {
                 },
                 tooltips: {
                     callbacks: {
-                  label: function(tooltipItem, data) {         
+                        label: function(tooltipItem, data) {         
                             return  data.labels[tooltipItem.index] +': '+data.datasets[0].data[tooltipItem.index].toFixed().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + '';
                         }
                     }
@@ -46,6 +46,15 @@ export default {
     mounted() {
         this.renderChart(this.chartData, this.options)
     },
+
+    watch: {
+        totalData: {
+            handler() {
+                this.renderChart(this.chartData, this.options)
+            },
+            deep: true
+        }
+    }
 
 }
 
