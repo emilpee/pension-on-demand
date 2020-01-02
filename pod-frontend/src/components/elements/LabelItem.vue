@@ -39,11 +39,7 @@ export default {
         choices: Array
     },
     mounted() {
-        if (this.choices !== undefined) {
-            this.barData.labels = this.filteredChoices.map(choice => choice.type);
-            this.barData.data = this.filteredChoices.map(choice => choice.value);
-        }
-    
+        this.mapChoices();
     },
     methods: {
         showDetails(i) {
@@ -51,6 +47,12 @@ export default {
         },
         formatNumbers(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        },
+        mapChoices() {
+            if (this.choices !== undefined) {
+                this.barData.labels = this.filteredChoices.map(choice => choice.type);
+                this.barData.data = this.filteredChoices.map(choice => choice.value);
+            }
         }
     },
     computed: {
@@ -64,8 +66,8 @@ export default {
         TrafficLights, LabelItemChart
     },
     watch: {
-        barData: function() {
-            console.log('gadf');
+        choices: function() {
+            this.mapChoices();
         }
     }
 
@@ -78,7 +80,13 @@ export default {
 
 
     #bar-chart {
+
         width: 98% !important;
+
+        @include breakpoints(large) {
+            max-height: 40rem !important;
+        }
+        
     }
 
 

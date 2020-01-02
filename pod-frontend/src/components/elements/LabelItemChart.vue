@@ -6,7 +6,6 @@ Chart.defaults.scale.gridLines.drawOnChartArea = false;
 Chart.defaults.global.animation.duration = 400;
 Chart.defaults.global.animation.easing = 'easeOutCirc';
 
-// TODO - hur uppdatera utan reload?
 export default {
     extends: Bar,
     props: {
@@ -14,18 +13,6 @@ export default {
             type: Object,
             default: null
         }
-    },
-
-    computed: {
-        choices() {
-            return this.$store.state.choices;
-        },
-        userData() {
-            return this.$store.state.userData;
-        },
-        settingItems() {
-            return this.$store.state.settingItems;
-        },
     },
 
     data() {
@@ -81,29 +68,6 @@ export default {
     mounted() {
         this.renderChart(this.barData, this.options);
     },
-
-    watch: {
-        choices: function() {
-            console.log('öhöhöö');
-            this._chart.destroy();
-            //this.renderChart(this.data, this.options);
-            this.renderChart(this.barData, this.options);
-        },
-        barData: function() {
-            console.log('uppdaterat!');
-            //this.renderChart(this.data, this.options);
-            this.renderChart(this.barData, this.options);
-        },
-        chartData: function() {
-            console.log('uppdaterat!');
-            //this.renderChart(this.data, this.options);
-            this.renderChart(this.chartData, this.options);
-        },
-        settingItems() {
-            console.log('fläsk');
-            this.renderChart(this.barData, this.options)
-        }
-    }
 
     
 }
