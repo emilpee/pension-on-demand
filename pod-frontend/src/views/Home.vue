@@ -198,13 +198,14 @@ export default {
         this.$store.commit('setUserAge', doc.data().user.age);
         this.$store.commit('setSalary', doc.data().salary);
         this.$store.commit('setPensionData', doc.data().pension);
-      console.log(doc.data().user);
       })
+
+      console.log(this.userAge);
 
 
       if (this.userAge < 55) {
         this.barData.years.push('', 55, 60, 65, 70, 75, 80);
-      } else if (this.userAge > 55 && this.userAge < 60) {
+      } else if (this.userAge >= 55 && this.userAge < 60) {
         this.barData.years.push('', 60, 65, 70, 75, 80);
       } else {
          this.barData.years.push('', 65, 70, 75, 80);

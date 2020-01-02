@@ -101,7 +101,6 @@ export default {
 
                 let interval = setInterval(() => {
                     this.$store.dispatch('checkStatus', { status: this.orderRef }).then(resp => {
-                        console.log(resp);
                         let hintCode = resp.data.hintCode
                         let data = resp.data;
                         let status = data.status;
@@ -168,28 +167,6 @@ export default {
                                             {
                                                 type: "Övrigt",
                                                 value: 0,
-                                            }
-                                        ],
-                                        "debts": [
-                                            {
-                                                "type": "Bostadslån", 
-                                                "value": 0, 
-                                                "interest": 0
-                                            },
-                                            {
-                                                "type": "Billån",
-                                                "value": 0, 
-                                                "interest": 0
-                                            },
-                                            {
-                                                "type": "Båtlån",
-                                                "value": 0,
-                                                "interest": 0
-                                            },
-                                            {
-                                                "type": "Blancolån",
-                                                "value": 0,
-                                                "interest": 0
                                             }
                                         ],
                                         choices: [

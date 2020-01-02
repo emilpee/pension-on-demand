@@ -22,7 +22,7 @@ export default {
         },
         salary() {
             return this.$store.state.salary;
-        }
+        },
     },
 
     data() {
@@ -102,6 +102,8 @@ export default {
             let pensionData = this.$store.state.pensionData;
             let settingItems = this.settingItems;
             let total = this.$store.state.totalAssets;
+            let salary = this.$store.state.salary.value;
+            let debts = this.$store.state.totalDebts;
   
             const settingsArray = Object.keys(settingItems).map(i => settingItems[i])
             const pensionArray = Object.keys(pensionData).map(i => pensionData[i])
@@ -117,7 +119,7 @@ export default {
                 })
             })
 
-            // Räkna ut medelvärde för percent
+            // Räkna ut medelvärde för procent
             let totalPercent = 0;
             for (var percent in percentArray) {
                 totalPercent += percentArray[percent];
@@ -128,15 +130,17 @@ export default {
             let occupational = this.$store.state.occupationalPension;
 
             // Räkna ut antal år
-            const maxAge = this.chartData.years[this.chartData.years.length - 1];
             const userAge = this.$store.state.userAge;
-            let totalYears = maxAge - userAge;
+            let totalYears = 65 - userAge;
+
+            // Räkna ut lön
+            salary = ((salary * 12) + (salary * (percent / 100)));
 
             // Räkna ut pension
             for (let i = 0; i < this.chartData.years.length; i++) {
                 if (pensionArray[0]) {
-                pensionsArray1.push(Number((pensionArray[0].value += (pensionArray[0].value * general)) /  totalYears).toFixed());
-                pensionsArray2.push(Number((pensionArray[1].value += (pensionArray[1].value * occupational)) / totalYears).toFixed());
+                pensionsArray1.push(Number((pensionArray[0].value += ((salary * general))) / (totalYears * 12)).toFixed());
+                pensionsArray2.push(Number((pensionArray[1].value += ((salary * occupational))) / (totalYears * 12)).toFixed());
                     if (this.chartData.years[i] === 65) {
                         let lastItem1 = pensionsArray1[pensionsArray1.length - 1];
                         let lastItem2 = pensionsArray2[pensionsArray2.length - 1];
@@ -147,8 +151,10 @@ export default {
             }
 
             // Räkna ut tillgångar
+            total -= debts;
             for (let i = 0; i < this.chartData.years.length; i++) {
                 assetsArray.push(Number((total += (total * avgPercent)) / (totalYears * 12)).toFixed()); 
+                console.log(assetsArray[i]);
             }
 
             var totalPension = pensionsArray1.map((num, index) => {
@@ -158,7 +164,7 @@ export default {
             let inflation = 0.02;
 
             var totalSum = assetsArray.map((num, index) => {
-                return (Number(num) + (Number(num) * inflation)) + totalPension[index];
+                return ((Number(num) + (Number(num) * inflation)) + totalPension[index]);
             });
 
             pensionsArray1[0] = '';

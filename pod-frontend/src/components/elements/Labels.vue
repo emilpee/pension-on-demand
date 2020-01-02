@@ -8,7 +8,7 @@
         </div>
         <div class="label">
             <h2 class="label__header">Skulder</h2>
-            <LabelItem class="label__debt" v-for="(label, index) in userData.debts" :label="label" :index="index" :key="index+'debts'" />
+            <LabelItem class="label__debt" v-for="(label, index) in data.debts" :label="label" :index="index" :key="index+'debts'" />
         </div>
 
     </main>
