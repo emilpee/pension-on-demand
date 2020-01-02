@@ -126,9 +126,12 @@ export default {
                             const personalNr = data.user.personalNumber.substr(0,8);
                             let today = new Date();
                             let currentDate = today.getDate(); 
+                            let currentMonth = today.getMonth() + 1;
+     
                             currentDate < 10 ? currentDate = '0' + currentDate : currentDate;
+                            currentMonth < 10 ? currentMonth = '0' + currentMonth : currentMonth;
                             
-                            let date = today.getFullYear()+''+(today.getMonth()+1)+''+currentDate;
+                            let date = today.getFullYear()+''+currentMonth+''+currentDate;
 
                             let currentAge = date - personalNr;
 
@@ -136,93 +139,116 @@ export default {
                                     
                                 if (!doc.exists) {
                                     fbData.set({
-                                    user: {
-                                        name: data.user.name,
-                                        personalNr: data.user.personalNumber,
-                                        age: currentAge.toString().substr(0,2)
-                                    },
-                                    pension: [
-                                        {
-                                            type: "Allmän pension",
-                                            title: "Pension",
-                                            value: 0
+                                        user: {
+                                            name: data.user.name,
+                                            personalNr: data.user.personalNumber,
+                                            age: currentAge.toString().substr(0,2)
                                         },
-                                        {
-                                            type: "Tjänstepension",
-                                            title: "Pension",
-                                            value: 0
+                                        pension: [
+                                            {
+                                                type: "Allmän pension",
+                                                title: "Pension",
+                                                value: 0
+                                            },
+                                            {
+                                                type: "Tjänstepension",
+                                                title: "Pension",
+                                                value: 0
+                                            }
+                                        ],
+                                        income: [
+                                            {
+                                                type: "Fastigheter",
+                                                value: 0,
+                                            },
+                                            {
+                                                type: "Fordon",
+                                                value: 0,
+                                            },
+                                            {
+                                                type: "Övrigt",
+                                                value: 0,
+                                            }
+                                        ],
+                                        "debts": [
+                                            {
+                                                "type": "Bostadslån", 
+                                                "value": 0, 
+                                                "interest": 0
+                                            },
+                                            {
+                                                "type": "Billån",
+                                                "value": 0, 
+                                                "interest": 0
+                                            },
+                                            {
+                                                "type": "Båtlån",
+                                                "value": 0,
+                                                "interest": 0
+                                            },
+                                            {
+                                                "type": "Blancolån",
+                                                "value": 0,
+                                                "interest": 0
+                                            }
+                                        ],
+                                        choices: [
+                                            {
+                                                type: "Villa",
+                                                value: 0,
+                                                percent: 3.8,
+                                                parent: "Fastigheter"
+                                            },
+                                            {
+                                                type: "Lägenhet",
+                                                value: 0,
+                                                percent: 4.3,
+                                                parent: "Fastigheter"
+                                            },
+                                            {
+                                                type: "Stuga",
+                                                value: 0,
+                                                percent: 3,
+                                                parent: "Fastigheter"
+                                            },
+                                            {
+                                                type: "Bil",
+                                                value: 0,
+                                                percent: -8,
+                                                parent: "Fordon"
+                                            },
+                                            {
+                                                type: "Motorcykel",
+                                                value: 0,
+                                                percent: -8,
+                                                parent: "Fordon"
+                                            },
+                                            {
+                                                type: "Båt",
+                                                value: 0,
+                                                percent: -3,
+                                                parent: "Fordon"
+                                            },
+                                            {
+                                                type: "Konst",
+                                                value: 0,
+                                                percent: 1,
+                                                parent: "Övrigt"
+                                            },
+                                            {
+                                                type: "Värdeföremål",
+                                                value: 0,
+                                                percent: 0.5,
+                                                parent: "Övrigt"
+                                            }
+                                                
+                                        ],
+                                        salary: {
+                                            type: "Lön",
+                                            value: 0,
+                                            percent: 1
                                         }
-                                    ],
-                                    income: [
-                                        {
-                                            type: "Fastigheter",
-                                            value: 0,
-                                        },
-                                        {
-                                            type: "Fordon",
-                                            value: 0,
-                                        },
-                                        {
-                                            type: "Övrigt",
-                                            value: 0,
-                                        }
-                                    ],
-                                    choices: [
-                                        {
-                                            type: "Villa",
-                                            value: 0,
-                                            percent: 3.8,
-                                            parent: "Fastigheter"
-                                        },
-                                        {
-                                            type: "Lägenhet",
-                                            value: 0,
-                                            percent: 4.3,
-                                            parent: "Fastigheter"
-                                        },
-                                        {
-                                            type: "Stuga",
-                                            value: 0,
-                                            percent: 3,
-                                            parent: "Fastigheter"
-                                        },
-                                        {
-                                            type: "Bil",
-                                            value: 0,
-                                            percent: -8,
-                                            parent: "Fordon"
-                                        },
-                                        {
-                                            type: "Motorcykel",
-                                            value: 0,
-                                            percent: -8,
-                                            parent: "Fordon"
-                                        },
-                                        {
-                                            type: "Båt",
-                                            value: 0,
-                                            percent: -3,
-                                            parent: "Fordon"
-                                        },
-                                        {
-                                            type: "Konst",
-                                            value: 0,
-                                            percent: 1,
-                                            parent: "Övrigt"
-                                        },
-                                        {
-                                            type: "Värdeföremål",
-                                            value: 0,
-                                            percent: 0.5,
-                                            parent: "Övrigt"
-                                        }
-                                            
-                                    ],
-                                    salary: {
-                                        type: "Lön",
-                                        value: 0,
-                                        percent: 1
-                                    }}, { merge: true });
+                                    }, { merge: true });
                                 }
                             })
 
