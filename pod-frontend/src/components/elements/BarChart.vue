@@ -154,7 +154,6 @@ export default {
             total -= debts;
             for (let i = 0; i < this.chartData.years.length; i++) {
                 assetsArray.push(Number((total += (total * avgPercent)) / (totalYears * 12)).toFixed()); 
-                console.log(assetsArray[i]);
             }
 
             var totalPension = pensionsArray1.map((num, index) => {

@@ -50,7 +50,7 @@ export default {
     methods: {
         signIn() {
             if (this.tabs[0].isActive) {
-                this.$store.dispatch('signInWithBankID', { autostart: true, ssn: '199309246214' }).then(res => {
+                this.$store.dispatch('signInWithBankID', { autostart: true }).then(res => {
                     let url = `bankid://?autostarttoken=${res.data.autoStartToken}&redirect=${encodeURI(document.location)}`;
                     document.location = url;
                     this.orderRef = res.data.orderRef;

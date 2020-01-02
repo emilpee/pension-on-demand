@@ -200,9 +200,6 @@ export default {
         this.$store.commit('setPensionData', doc.data().pension);
       })
 
-      console.log(this.userAge);
-
-
       if (this.userAge < 55) {
         this.barData.years.push('', 55, 60, 65, 70, 75, 80);
       } else if (this.userAge >= 55 && this.userAge < 60) {
