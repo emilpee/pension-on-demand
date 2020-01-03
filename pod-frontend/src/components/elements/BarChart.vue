@@ -151,7 +151,8 @@ export default {
             }
 
             // Räkna ut tillgångar
-            total -= debts;
+            total -= (debts + (debts * avgPercent));
+            console.log(total);
             for (let i = 0; i < this.chartData.years.length; i++) {
                 assetsArray.push(Number((total += (total * avgPercent)) / (totalYears * 12)).toFixed()); 
             }

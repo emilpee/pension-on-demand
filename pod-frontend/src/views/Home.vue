@@ -42,7 +42,7 @@
             <p v-text="formatNumbers(totalAssets)"></p>
           </div>
           <loading-spinner v-show="loading" />
-          <doughnut-chart v-show="!loading" v-if="totalAssets" :chartsData="doughnutData" :totalData="[totalAssets, totalDebts]" /> 
+          <doughnut-chart v-show="!loading" :chartData="doughnutData" /> 
           <div class="doughnut__charttext">
             <p>Skulder</p>
             <p v-text="formatNumbers(totalDebts)"></p>
@@ -86,7 +86,7 @@
         <transition name="fade" :style="{ height: '100%' }">
           <span v-show="showResponse" :key="response"> Enligt vår analys kommer din första utbetalning att bli
             <h2 :style="{ margin: '10px 0' }"> {{ formatNumbers(response) }} kr/mån </h2> 
-            före skatt, om du går i pension vid {{ shownAge }} år.
+            om du går i pension vid {{ shownAge }} år.
           </span>
         </transition>
       </div>
@@ -121,7 +121,8 @@ export default {
     return {
       doughnutData: {
         labels: ['Tillgångar', 'Skulder'],
-        colors: [ "#0F7354", "#C04D4D"]
+        colors: [ "#0F7354", "#C04D4D"],
+        data: []
       },
       barData: {
         colors: ['#fab', '#a3b', '#b4f', '#a9f'],
@@ -188,6 +189,9 @@ export default {
     },
     formatNumbers(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    },
+    getTotal() {
+      this.doughnutData.data.push(this.totalAssets, this.totalDebts);
     }
   }, 
 
@@ -198,7 +202,8 @@ export default {
         this.$store.commit('setUserAge', doc.data().user.age);
         this.$store.commit('setSalary', doc.data().salary);
         this.$store.commit('setPensionData', doc.data().pension);
-      })
+        this.getTotal();
+      })  
 
       if (this.userAge < 55) {
         this.barData.years.push('', 55, 60, 65, 70, 75, 80);
@@ -254,11 +259,6 @@ export default {
     }
   }, 
 
-  watch: {
-    totalAssets: function() {
-      return this.$store.state.totalAssets;
-    }
-  }
 
 }
 </script>

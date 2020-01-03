@@ -1,26 +1,30 @@
 <script>
-import { Doughnut } from 'vue-chartjs';
+import { Doughnut, mixins } from 'vue-chartjs';
+
+const { reactiveProp } = mixins;
 
 export default {
     extends: Doughnut,
-    props: {
-        chartsData: {
-            type: Object,
-            default: null
+    mixins: [reactiveProp],
+    computed: {
+        settingItems() {
+            return this.$store.state.settingItems;
         },
-        totalData: {
-            type: Array,
+    },
+    props: {
+        chartData: {
+            type: Object,
             default: null
         }
     },
     data() {
         return {
-            chartData: {
-                labels: this.chartsData.labels,
+            doughnutData: {
+                labels: this.chartData.labels,
                 datasets: [
                     {
-                        data: this.totalData,
-                        backgroundColor: this.chartsData.colors
+                        data: this.chartData.data,
+                        backgroundColor: this.chartData.colors
                     }
                 ],
             },
@@ -44,13 +48,14 @@ export default {
     },
 
     mounted() {
-        this.renderChart(this.chartData, this.options)
+        this.renderChart(this.doughnutData, this.options)
     },
 
     watch: {
-        totalData: {
+        chartData: {
             handler() {
-                this.renderChart(this.chartData, this.options)
+                console.log('hoho');
+                this.renderChart(this.doughnutData, this.options)
             },
             deep: true
         }
