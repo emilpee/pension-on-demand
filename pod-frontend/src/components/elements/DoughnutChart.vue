@@ -54,7 +54,6 @@ export default {
     watch: {
         chartData: {
             handler() {
-                console.log('hoho');
                 this.renderChart(this.doughnutData, this.options)
             },
             deep: true

@@ -200,18 +200,21 @@ export default {
         this.$store.commit('setUserData', doc.data());  
         this.$store.commit('setChoices', doc.data().choices);
         this.$store.commit('setUserAge', doc.data().user.age);
+
+        let userAge = doc.data().user.age;
+
+        if (userAge < 55) {
+          this.barData.years.push('', 55, 60, 65, 70, 75, 80);
+        } else if (userAge >= 55 && userAge < 60) {
+          this.barData.years.push('', 60, 65, 70, 75, 80);
+        } else {
+          this.barData.years.push('', 65, 70, 75, 80);
+        }
+
         this.$store.commit('setSalary', doc.data().salary);
         this.$store.commit('setPensionData', doc.data().pension);
         this.getTotal();
       })  
-
-      if (this.userAge < 55) {
-        this.barData.years.push('', 55, 60, 65, 70, 75, 80);
-      } else if (this.userAge >= 55 && this.userAge < 60) {
-        this.barData.years.push('', 60, 65, 70, 75, 80);
-      } else {
-         this.barData.years.push('', 65, 70, 75, 80);
-      }
   },
 
   computed: {
